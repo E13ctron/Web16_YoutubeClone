@@ -3,6 +3,7 @@ import firebase from 'firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import app from '../firebase'
 import { auth } from '../firebase'
+import { Redirect } from 'react-router-dom'
 // import userEvent from '@testing-library/user-event'
 
 class GoogleSignIn extends React.Component {
@@ -14,6 +15,7 @@ class GoogleSignIn extends React.Component {
             signInSuccess: () => false
         }
     }
+    
 
     componentDidMount = () => {
 
@@ -28,7 +30,7 @@ class GoogleSignIn extends React.Component {
             <div>
                 {this.state.isSignedIn ? (<>
                     {/* <div>Signed In</div> */}
-                    <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
+                    <Redirect to="/" />
                     {/* <h1>Welcome {firebase.auth().currentUser.displayName}</h1> */}
                 </>
                 ) :
