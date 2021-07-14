@@ -15,7 +15,7 @@ export default function ForgotPassword() {
                             <Form.Control type="email" ref={emailRef} required />
                         </Form.Group>
                         <Button className="w-100" style={{ margin: "10px" }} type="submit">
-                            Sign Up
+                            Reset Password
                             </Button>
                     </Form>
                 </Card.Body>
