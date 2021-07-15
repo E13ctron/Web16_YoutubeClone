@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+/* This is for header component */
+/* .hp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+.hp-left-header {
+  display: flex;
+}
+.hp-mid-header {
+  display: flex;
+  align-items: center;
+}
+.hp-right-header {
+  display: flex;
+  /* padding: 2px; */
+  /* align-items: center;
+}
+.yt-logo {
+  height: 25px;
+  object-fit: contain;
+  /* align-items: center; */
+  /* margin-left: 10px;
+} */ 
