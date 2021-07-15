@@ -1,8 +1,6 @@
 import React from 'react'
 import firebase from 'firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
-import app from '../firebase'
-import { auth } from '../firebase'
 import { Redirect } from 'react-router-dom'
 // import userEvent from '@testing-library/user-event'
 
