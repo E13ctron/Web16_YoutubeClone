@@ -17,11 +17,11 @@ function App() {
         <Router>
           <AuthProvider>
             <Switch>
-              <Route exact path="/uploadvideo" component={VideoUploadPage} />
+              <PrivateRoute exact path="/uploadvideo" component={VideoUploadPage} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forgotpassword" component={ForgotPassword} />
-              <Route exact path="/" component={HomePage} />
+              <PrivateRoute exact path="/" component={HomePage} />
             </Switch>
           </AuthProvider>
         </Router>
