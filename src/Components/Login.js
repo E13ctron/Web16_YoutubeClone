@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import GoogleSignIn from "./GoogleSignIn";
 import { useAuth } from "../contexts/AuthContext"
-import { Card, Form, Button, Alert } from 'react-bootstrap'
+import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
        
@@ -27,7 +27,10 @@ export default function Login() {
                 
     }
     return (
-        <div>
+        <Container className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
+        <div style={{textAlign: "center"}}>
             <>
                 <Card>
                     <Card.Body>
@@ -47,12 +50,15 @@ export default function Login() {
                             </Button>
                             <div>Don't have an account?</div>
                             <div> <a href="./signup" style={{ textAlign: "center" }}>Sign Up</a></div>
+                            <div>Forgot Password ? </div>
+                            <div> <a href="./forgotpassword" style={{ textAlign: "center" }}>Reset Password</a></div>
                         </Form>
                     </Card.Body>
                 </Card>
                  </>
             <GoogleSignIn/>
         </div>
+        </Container>
     )
 }
         

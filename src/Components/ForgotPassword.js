@@ -1,5 +1,5 @@
 import React, { useRef, useState} from 'react'
-import { Card, Form, Button, Alert } from 'react-bootstrap'
+import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
 import { Link , useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 
@@ -23,7 +23,9 @@ export default function ForgotPassword() {
         setLoading(false)
     }
     return (
-     
+        <Container className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
         <>
             <Card>
                 <Card.Body>
@@ -42,6 +44,7 @@ export default function ForgotPassword() {
                 </Card.Body>
             </Card>
         </>
+        </Container>
       
     );
 }

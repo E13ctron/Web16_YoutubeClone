@@ -5,7 +5,7 @@ import Signup from "./Components/Signup"
 import ForgotPassword from "./Components/ForgotPassword"
 
 import { AuthProvider } from "./contexts/AuthContext"
-import { Container } from "react-bootstrap"
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HomePage from './Components/HomePage';
 import PrivateRoute from "./Components/PrivateRoute";
@@ -13,9 +13,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 function App() {
   return (
 
-    <Container className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
+    
       <div>
         <Router>
           <AuthProvider>
@@ -28,7 +26,7 @@ function App() {
           </AuthProvider>
         </Router>
       </div>
-    </Container>
+    
 
   )
 
