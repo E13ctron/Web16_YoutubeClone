@@ -13,7 +13,6 @@ import { useAuth } from "../../contexts/AuthContext"
 export default function Header() {
   const { signout } = useAuth()
   const history = useHistory()
-  const 
   async function signOut(){
     await signout()
     history.push("/")
