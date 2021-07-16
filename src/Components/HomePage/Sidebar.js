@@ -10,7 +10,8 @@ import FeedbackIcon from '@material-ui/icons/Feedback';
 import "./Sidebar.css"
 export default function Sidebar() {
     return(
-        <div className="hp-sidebar">
+
+<      <div className="hp-sidebar">
             <SidebarComponent Icon={HomeIcon} title="Home"/>
             <SidebarComponent Icon={ExploreIcon} title="Explore"/>
             <SidebarComponent Icon={FavoriteIcon} title="Liked"/>
@@ -18,6 +19,7 @@ export default function Sidebar() {
             <div className="sidebar-empty"></div>
             <SidebarComponent Icon={SettingsIcon} title="Settings"/>
             <SidebarComponent Icon={FeedbackIcon} title="Send Feedback"/>
+
         </div>
     )
 }

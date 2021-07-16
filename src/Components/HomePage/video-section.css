@@ -1,0 +1,9 @@
+.video-section{
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.video-section > h2 {
+    margin-left: 5px;
+    margin-bottom: 20px;
+}
