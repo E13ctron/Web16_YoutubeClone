@@ -17,6 +17,9 @@ export default function Header() {
     await signout()
     history.push("/")
   }
+  function openUploadVideo(){
+    history.push("/uploadvideo")
+  }
   return (
     <div className="hp-header">
       <div className="hp-left-header">
@@ -32,7 +35,7 @@ export default function Header() {
         <SearchIcon className="searchicon"/>
       </div>
       <div className="hp-right-header">
-        <VideoCallIcon className="hp-right-header-icon"/>
+        <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon"/>
         <NotificationsIcon className="hp-right-header-icon"/>
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon"/>
         <Avatar
