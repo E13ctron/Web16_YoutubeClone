@@ -1,0 +1,6 @@
+.hp-videosection{
+    display: flex;
+    flex: 0.83;
+    border: 2px solid red;
+    object-fit: contain;
+}
