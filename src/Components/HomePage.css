@@ -1,0 +1,11 @@
+.hp-main{
+    display: flex;
+    width: 100%;
+}
+/* .hp-sidebar{
+    flex: 0.2;
+}
+.hp-videosection{
+    flex: 0.8;
+    border: 2px solid red;
+} */

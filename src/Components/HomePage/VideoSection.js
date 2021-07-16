@@ -1,14 +1,12 @@
 import React from "react";
 // import SidebarComponent from "./SidebarComponent";
+import "./VideoSection.css"
 
 
 export default function VideoSection() {
     return(
-        <div>
-            {/* <SidebarComponent title="Home"/>
-            <SidebarComponent title=""/>
-            <SidebarComponent title=""/> */}
-            this is maincontent
+        <div className="hp-videosection">
+            <h1> this is maincontent. </h1>
         </div>
     )
 }
