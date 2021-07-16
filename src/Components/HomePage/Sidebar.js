@@ -11,7 +11,7 @@ import "./Sidebar.css"
 export default function Sidebar() {
     return(
 
-<      <div className="hp-sidebar">
+      <div className="hp-sidebar">
             <SidebarComponent Icon={HomeIcon} title="Home"/>
             <SidebarComponent Icon={ExploreIcon} title="Explore"/>
             <SidebarComponent Icon={FavoriteIcon} title="Liked"/>

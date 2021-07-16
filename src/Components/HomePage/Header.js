@@ -6,9 +6,18 @@ import SearchIcon from "@material-ui/icons/Search";
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import Avatar from "@material-ui/core/Avatar";
 import './Header.css';
+import { useHistory } from 'react-router-dom'
+import { useAuth } from "../../contexts/AuthContext"
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
 
 export default function Header() {
+  const { signout } = useAuth()
+  const history = useHistory()
+  const 
+  async function signOut(){
+    await signout()
+    history.push("/")
+  }
   return (
     <div className="hp-header">
       <div className="hp-left-header">
@@ -26,7 +35,7 @@ export default function Header() {
       <div className="hp-right-header">
         <VideoCallIcon className="hp-right-header-icon"/>
         <NotificationsIcon className="hp-right-header-icon"/>
-        <MeetingRoomIcon className="hp-right-header-icon"/>
+        <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon"/>
         <Avatar
           alt=""
           src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"

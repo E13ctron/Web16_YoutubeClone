@@ -6,7 +6,7 @@ import Header from "./HomePage/Header"
 import Sidebar from './HomePage/Sidebar'
 import VideoSection from './HomePage/VideoSection'
 import "./HomePage.css"
-import VideoSection from "./HomePage/VideoSection";
+
 import "./HomePage/Homepage.css";
 
 export default function HomePage() {
