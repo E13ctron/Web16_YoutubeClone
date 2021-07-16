@@ -6,9 +6,10 @@ import SidebarComponent from "./SidebarComponent";
 export default function Sidebar() {
     return(
         <div>
-            <SidebarComponent title="Home"/>
+            {/* <SidebarComponent title="Home"/>
             <SidebarComponent title=""/>
-            <SidebarComponent title=""/>
+            <SidebarComponent title=""/> */}
+            this is sidebar.
         </div>
     )
 }

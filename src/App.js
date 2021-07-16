@@ -13,9 +13,9 @@ import PrivateRoute from "./Components/PrivateRoute";
 function App() {
   return (
 
-    <Container className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
+    // <Container className="d-flex align-items-center justify-content-center"
+    //   style={{ minHeight: "100vh" }}
+    
       <div>
         <Router>
           <AuthProvider>
@@ -24,11 +24,12 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/forgotpassword" component={ForgotPassword} />
+              <Route exact path="/homepage" component={HomePage} />
             </Switch>
           </AuthProvider>
         </Router>
       </div>
-    </Container>
+    // </Container>
 
   )
 
