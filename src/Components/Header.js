@@ -7,7 +7,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import Avatar from "@material-ui/core/Avatar";
 import './Header.css';
 import { useHistory } from 'react-router-dom'
-import { useAuth } from "../../contexts/AuthContext"
+import { useAuth } from "../contexts/AuthContext"
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
 
 export default function Header() {

@@ -1,14 +1,17 @@
 import React from 'react'
-import Header from './VideoUploadPage/Header'
-import Sidebar from './VideoUploadPage/Sidebar'
+import Header from './Header'
+import Sidebar from './Sidebar/Sidebar'
 import VideoUploadSection from './VideoUploadPage/VideoUploadSection'
+import "./videouploadpage.css"
 
 function VideoUploadPage() {
     return (
         <div>
             <Header />
-            <Sidebar />
-            <VideoUploadSection />
+            <div className="videouploadpage_body">
+                <Sidebar />
+                <VideoUploadSection />
+            </div>
         </div>
     )
 }
