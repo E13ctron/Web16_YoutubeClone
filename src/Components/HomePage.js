@@ -2,7 +2,6 @@ import React from 'react'
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import Header from "./Header"
-
 import Sidebar from './Sidebar/Sidebar'
 import VideoSection from './HomePage/VideoSection'
 import "./HomePage.css"
