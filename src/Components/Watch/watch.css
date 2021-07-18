@@ -1,0 +1,99 @@
+.watch{
+    display: flex;
+    justify-content: center;
+    margin-top:20px;
+    width: 100vw;
+    align-items: center;
+}
+
+.watch__wrap{
+    display: flex;
+}
+
+.watch__left{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px; 
+    margin-left: 20px; 
+}
+
+.watch__video{
+    width:66vw;
+    outline: none;
+}
+
+.watch__leftBtn{
+    margin-top:10px ;
+    border-bottom: 1px solid #292929;
+}
+.watch__title{
+    font-weight: 400;
+    line-height: 2.4rem;
+    font-size: 18px ;
+}
+
+.watch__videoInfo{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.watch__likeBtnContainer{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    margin-right: 15px;
+}
+
+
+.watch__icon{
+    margin-right: 5px;
+    font-size: 28px !important;
+}
+
+.color--gray{
+    color: #909090;
+}
+
+.watch__likeBtnContainer > p{
+    columns: #aaa;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.watch__likeDislikes{
+   display: flex;   
+   background-color: #606060;
+   height: 2px;
+   overflow: hidden;
+   margin-top: 10px;
+   position: relative;
+}
+
+.watch__videoInfoRight{
+    display: flex;
+    align-items: baseline;
+}
+.watch__likeWrap{
+    display: flex;
+    align-items: center;
+}
+
+.share-icon{
+    transform: rotate(180deg) rotateX(180deg);
+    font-size: 30px !important;
+}
+
+.play-addIcon{
+    font-size: 28px !important;
+}
+
+.watch__right{
+    max-height: 100%;
+    overflow: hidden;
+}
+
+
+
+
