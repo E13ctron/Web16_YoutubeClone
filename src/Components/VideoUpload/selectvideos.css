@@ -58,3 +58,7 @@
     font-size: 14px;
     text-transform: uppercase;
 }
+
+.custom-file-input:active{
+    outline: 0;
+}
