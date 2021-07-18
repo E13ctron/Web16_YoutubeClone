@@ -1,6 +1,4 @@
 import React from 'react'
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
 import Header from "./Header"
 
 import Sidebar from './Sidebar/Sidebar'
@@ -10,12 +8,6 @@ import "./HomePage.css"
 import "./HomePage/Homepage.css";
 
 export default function HomePage() {
-    const { currentUser, signout } = useAuth()
-    const history = useHistory()
-    function signOut(){
-        signout();
-        history.push("/login")
-    }
     
     return (
         <div>

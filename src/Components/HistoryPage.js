@@ -10,6 +10,7 @@ function HistoryPage() {
             <Header />
             <div className="history_page_body">
                 <Sidebar />
+                <Body />
             </div>
         </div>
     )
