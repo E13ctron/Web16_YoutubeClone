@@ -1,11 +1,14 @@
 import React from 'react';
 import Avatar from "@material-ui/core/Avatar"
 import "./VideoCard.css"
-
+import {useHistory} from "react-router-dom"
 function VideoCard({ image, title, channel, views, timestamp, channelimage}) {
+   const history = useHistory()
+   const handleVideoLink = () =>history.push("/watch")
+
     return (
         <div className="videocard">
-            <img className="videocard_image" src={image} alt="" />
+            <img onClick={handleVideoLink} className="videocard_image" src={image} alt="" />
             <div className="videoCard_info">
                 <Avatar
                     className="videoCard_avatar"
