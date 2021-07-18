@@ -62,3 +62,9 @@
 .custom-file-input:active{
     outline: 0;
 }
+
+.add-thumbanil::before {
+    content: "Select thumbanil";
+    margin: 0;
+    margin-top: 10px;
+  }
