@@ -3,6 +3,8 @@ import Header from "../Header"
 import "./watch.css"
 import videoURL from "../../assets/videos/video.mp4"
 import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
+import { Avatar , Button } from '@material-ui/core'
+
 
 const watch = () => {
     return (
@@ -13,7 +15,7 @@ const watch = () => {
             <div className="watch">
                 <div className="watch__wrap">
                     <div className="watch__left">
-                        <video className="watch__video" autoPlay controls>
+                        <video className="watch__video" controls>
                             <source src={videoURL} type="video/mp4" />
                         </video>
                         <div className="watch__leftBtn">
@@ -51,11 +53,32 @@ const watch = () => {
                                         <MoreHoriz className="watch__icon play-addicon" />
                                         {/* <p>SAVE</p> */}
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
+                        <div className="watch__details">
+                            <div className="watch__detailsContainer">
+                              <div className="videothumb__details watch_avatarWrap">
+                                 <Avatar />
+                                    <div className="videothumb__channel">
+                                        <h1 className="videothumb_title">
+                                            Captain Tony
+                                        </h1>
+                                        <p className="videothumb__text watch__subCount">2M Subscribers</p>
+                                        
+                                    </div>
+                              </div>
+                              <Button className="watch__subBtn" color="primary" variant="contained">
+                                  SUBSCRIBE
+                              </Button>
+                            </div>
+                            <div className="watch__description">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nisi a labore obcaecati, officia eveniet, praesentium corporis ipsum nobis sed unde quae omnis neque consequuntur cumque. Eum reprehenderit, alias laboriosam ducimus voluptates commodi sapiente blanditiis temporibus repellendus quod similique id.</p>
+                                <p className="watch__showmore">SHOW MORE</p>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
