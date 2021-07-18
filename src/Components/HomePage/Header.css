@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: space-between;
     margin: 10px;
-    cursor: pointer;
   }
   .hp-left-header {
     display: flex;
