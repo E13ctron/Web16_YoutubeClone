@@ -4,17 +4,19 @@ import "./VideoCard.css"
 import {useHistory} from "react-router-dom"
 function VideoCard({ image, title, channel, views, timestamp, channelimage}) {
    const history = useHistory()
-   const handleVideoLink = () =>history.push("/watch")
-
+   const handleVideoClick = () =>history.push("/watch")
+   const handleAvatarClick = () =>history.push("/PreviewChannel")
+   
     return (
         <div className="videocard">
-            <img onClick={handleVideoLink} className="videocard_image" src={image} alt="" />
+            <img onClick={handleVideoClick} className="videocard_image" src={image} alt="" />
             <div className="videoCard_info">
-                <Avatar
+                {/* <Avatar
                     className="videoCard_avatar"
                     alt={channel}
                     src={channelimage}
-                    />
+                    /> */}
+                    <Avatar onClick={handleAvatarClick}/>
                 <div className="video_text">
                     <h4>{title}</h4>
                     <p>{channel}</p>
