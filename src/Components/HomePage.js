@@ -7,6 +7,7 @@ import VideoSection from './HomePage/VideoSection'
 import "./HomePage.css"
 
 import "./HomePage/Homepage.css";
+import SelectVideo from './VideoUpload/SelectVideo'
 
 export default function HomePage() {
     const { currentUser, signout } = useAuth()
@@ -24,6 +25,7 @@ export default function HomePage() {
                <Sidebar />
                <div className="video-section">
                     <VideoSection />
+                    <SelectVideo />
                </div>
 
            </div>

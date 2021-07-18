@@ -11,14 +11,14 @@ import { useAuth } from "../contexts/AuthContext"
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
 
 export default function Header() {
-  const { signout } = useAuth()
+  const { signout , setVideoUploadOpen } = useAuth()
   const history = useHistory()
   async function signOut(){
     await signout()
     history.push("/")
   }
   function openUploadVideo(){
-    history.push("/uploadvideo")
+    setVideoUploadOpen(true)
   }
   return (
     <div className="hp-header">

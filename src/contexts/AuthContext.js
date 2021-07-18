@@ -11,7 +11,7 @@ export function useAuth() {
 export function AuthProvider({children}){
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
-
+    const [videoUploadOpen, setVideoUploadOpen] = useState(false)
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
     }
@@ -37,7 +37,9 @@ export function AuthProvider({children}){
         currentUser,
         signout,
         resetPassword,
-        login
+        login,
+        videoUploadOpen,
+        setVideoUploadOpen
     }
     return(
         <AuthContext.Provider value={value}>

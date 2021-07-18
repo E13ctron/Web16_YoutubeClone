@@ -3,7 +3,6 @@ import './App.css';
 import Login from "./Components/Login"
 import Signup from "./Components/Signup"
 import ForgotPassword from "./Components/ForgotPassword"
-import VideoUploadPage from "./Components/VideoUploadPage"
 import HistoryPage from "./Components/HistoryPage"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
@@ -18,7 +17,6 @@ function App() {
           <AuthProvider>
             <Switch>
               
-              <Route exact path="/uploadvideo" component={ VideoUploadPage } />
               <Route exact path="/signup" component={ Signup } />
               <Route exact path="/forgotpassword" component={ ForgotPassword } />
               <Route exact path="/login" component={ Login } />
