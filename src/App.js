@@ -9,7 +9,7 @@ import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HomePage from './Components/HomePage';
 import PrivateRoute from "./Components/PrivateRoute";
-
+import Watch from "./Components/Watch/watch"
 function App() {
   return (
 
@@ -25,6 +25,7 @@ function App() {
               <PrivateRoute exact path="/" component={ HomePage } />
               <Route exact path="/Home" component={ HomePage } />
               <Route exact path="/History" component={ HistoryPage } />
+              <Route exact path="/watch" component={ Watch } />
             </Switch>
           </AuthProvider>
         </Router>
