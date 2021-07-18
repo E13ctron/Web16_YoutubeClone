@@ -74,7 +74,7 @@ const watch = () => {
                             </div>
                             <div className="watch__description">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nisi a labore obcaecati, officia eveniet, praesentium corporis ipsum nobis sed unde quae omnis neque consequuntur cumque. Eum reprehenderit, alias laboriosam ducimus voluptates commodi sapiente blanditiis temporibus repellendus quod similique id.</p>
-                                <p className="watch__showmore">SHOW MORE</p>
+                                <p className="watch__showMore">SHOW MORE</p>
                             </div>
                         </div>
 
