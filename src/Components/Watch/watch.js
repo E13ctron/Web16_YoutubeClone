@@ -15,7 +15,7 @@ const watch = () => {
             <div className="watch">
                 <div className="watch__wrap">
                     <div className="watch__left">
-                        <video className="watch__video" controls>
+                        <video className="watch__video" autoplay controls>
                             <source src={videoURL} type="video/mp4" />
                         </video>
                         <div className="watch__leftBtn">
@@ -77,8 +77,6 @@ const watch = () => {
                                 <p className="watch__showMore">SHOW MORE</p>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
