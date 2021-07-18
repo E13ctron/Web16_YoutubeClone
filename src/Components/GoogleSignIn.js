@@ -28,7 +28,7 @@ class GoogleSignIn extends React.Component {
             <div>
                 {this.state.isSignedIn ? (<>
                     {/* <div>Signed In</div> */}
-                    <Redirect to="/Home" />
+                    <Redirect to="/" />
                     {/* <h1>Welcome {firebase.auth().currentUser.displayName}</h1> */}
                 </>
                 ) :
