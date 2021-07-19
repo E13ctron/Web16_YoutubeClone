@@ -3,7 +3,7 @@ import Header from "../Header"
 import "./watch.css"
 import videoURL from "../../assets/videos/video.mp4"
 import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
-import { Avatar , Button } from '@material-ui/core'
+import { Avatar, Button } from '@material-ui/core'
 
 
 const watch = () => {
@@ -58,19 +58,19 @@ const watch = () => {
                         </div>
                         <div className="watch__details">
                             <div className="watch__detailsContainer">
-                              <div className="videothumb__details watch_avatarWrap">
-                                 <Avatar />
+                                <div className="videothumb__details watch_avatarWrap">
+                                    <Avatar />
                                     <div className="videothumb__channel">
                                         <h1 className="videothumb_title">
                                             Captain Tony
                                         </h1>
                                         <p className="videothumb__text watch__subCount">2M Subscribers</p>
-                                        
+
                                     </div>
-                              </div>
-                              <Button className="watch__subBtn" color="primary" variant="contained">
-                                  SUBSCRIBE
-                              </Button>
+                                </div>
+                                <Button className="watch__subBtn" color="primary" variant="contained">
+                                    SUBSCRIBE
+                                </Button>
                             </div>
                             <div className="watch__description">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nisi a labore obcaecati, officia eveniet, praesentium corporis ipsum nobis sed unde quae omnis neque consequuntur cumque. Eum reprehenderit, alias laboriosam ducimus voluptates commodi sapiente blanditiis temporibus repellendus quod similique id.</p>
