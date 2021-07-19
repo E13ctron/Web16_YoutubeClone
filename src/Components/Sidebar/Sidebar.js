@@ -18,7 +18,6 @@ export default function Sidebar() {
 
       <div className="hp-sidebar">
             <SidebarComponent Icon={HomeIcon} title="Home"/>
-            <SidebarComponent Icon={ExploreIcon} title="Explore"/>
             <SidebarComponent Icon={FavoriteIcon} title="Liked"/>
             <SidebarComponent Icon={HistoryIcon} title="History" />
             <div className="sidebar-empty"></div>
