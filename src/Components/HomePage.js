@@ -15,7 +15,9 @@ export default function HomePage() {
 
            <div className="home_page">
                <Sidebar />
-               <div className="video-section">
+
+               {/* id="content" is used for toggling  */}
+               <div className="video-section" id="content">
                     <VideoSection />
                </div>
 

@@ -3,6 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     flex: 0.83;
+    margin-top: 20px;
 }
 .video-section > h2 {
     margin-left: 5px;

@@ -2,6 +2,7 @@
     flex: 0.17;
     /* display: flex; */
     /* flex-direction: column; */
+    transition: all 0.4s
 }
 
 .sidebar-row{
@@ -38,3 +39,8 @@
     border-top: 1px solid gray;
     margin-top: 20px;
 }
+
+/* styles for toggling */
+#sidebar.active {
+    margin-left: -19rem;
+  }
