@@ -4,6 +4,7 @@ import "./watch.css"
 import videoURL from "../../assets/videos/video.mp4"
 import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
 import { Avatar, Button } from '@material-ui/core'
+import VideoSmall from '../WatchRight/VideoSmall'
 
 
 const watch = () => {
@@ -77,6 +78,17 @@ const watch = () => {
                                 <p className="watch__showMore">SHOW MORE</p>
                             </div>
                         </div>
+                    </div>
+                    <div className="watch-right">
+                        <VideoSmall/>
+                        <VideoSmall/>
+                        <VideoSmall/>
+                        <VideoSmall/>
+                        <VideoSmall/>
+                        <VideoSmall/>
+                        <VideoSmall/>
+                        <VideoSmall/>
+                        <VideoSmall/>
                     </div>
                 </div>
             </div>
