@@ -31,7 +31,7 @@ export default function Header() {
         />
       </div>
       <div className="hp-mid-header">
-        <input type="text" />
+        <input type="text" placeholder=" Search"/>
         <SearchIcon className="searchicon"/>
       </div>
       <div className="hp-right-header">

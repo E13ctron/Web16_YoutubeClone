@@ -1,0 +1,45 @@
+.watch-right-thumb{
+    display: flex;
+    width: 30vw;
+    height: 90px;
+    
+    margin-top: 10px;
+}
+.watch-right-thumb:first-of-type{
+    margin-top: 0px;
+}
+.wr-thumb-img{
+    overflow: hidden;
+    width: 10vw;
+    cursor: pointer;
+}
+.thumbimg{
+    width: inherit;
+    height: 90px;
+    border-radius: 2px;
+}
+
+.wr-thumb-right{
+    margin-right: 15px;
+    max-width: 220px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.wr-thumb-right-title{
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.01;
+}
+.wr-thumb-right-text{
+    margin-top: 5px !important;
+    /* align-self: ; */
+}
+.wr-thumb-channel-name{
+    font-size: 14px !important;
+    color: gray;
+    font-weight: 400;
+}
+.wr-thumb-info{
+    font-size: 13px !important;
+    color: gray;
+}

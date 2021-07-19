@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     margin-top:20px;
-    width: 100vw;
+    width: 100%;
     align-items: center;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .watch__video{
-    width:66vw;
+    width: 66vw;
     outline: none;
 }
 
@@ -184,5 +184,8 @@
     margin-bottom: 0;
 }
 
-
+.watch-right{
+    display: flex;
+    flex-direction: column;
+}
 
