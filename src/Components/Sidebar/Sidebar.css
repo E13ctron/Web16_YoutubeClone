@@ -38,3 +38,8 @@
     border-top: 1px solid gray;
     margin-top: 20px;
 }
+
+/* styles for toggling */
+#sidebar.active {
+    margin-left: -19rem;
+  }

@@ -16,7 +16,9 @@ export default function Sidebar() {
 
     return(
 
-      <div className="hp-sidebar">
+
+        //id is used for toggling
+      <div className="hp-sidebar" id="sidebar">
             <SidebarComponent Icon={HomeIcon} title="Home"/>
             <SidebarComponent Icon={ExploreIcon} title="Explore"/>
             <SidebarComponent Icon={FavoriteIcon} title="Liked"/>
