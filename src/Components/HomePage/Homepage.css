@@ -5,9 +5,40 @@
     margin-left: 20px;
 }
 
-/* style for toggling sidebar  */
+/* styles for toggling sidebar  */
 #content.active{
     width: 100%;
     margin: 0;
-    margin-left: 5rem;
+    margin-left: 8rem;
+}
+
+/* will update media queries later again with use of videocard.css//ayush/toggleNav-note*/
+@media (max-width:1151px){
+    #content.active{
+        width: 100%;
+        margin: 0;
+        margin-left: 16rem;
+        
+    }
+}
+@media (max-width:954px){
+    #content.active{
+        width: 100%;
+        margin: 0;
+        margin-left: 22rem;
+    }
+}
+@media (max-width:740px){
+    #content.active{
+        width: 100%;
+        margin: 0;
+        margin-left: 14rem;
+    }
+}
+@media (max-width:606px){
+    #content.active{
+        width: 100%;
+        margin: 0;
+        margin-left: 20rem;
+    }
 }
