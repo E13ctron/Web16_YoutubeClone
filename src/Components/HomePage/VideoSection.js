@@ -6,9 +6,7 @@ import VideoCard from './VideoCard'
 function VideoSection() {
     return (
         <div>
-            <h2>Recommended</h2>
             <div className="video-section">
-
                 <VideoCard
                     title="Video Title"
                     views="views"
