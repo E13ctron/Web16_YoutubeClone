@@ -22,6 +22,7 @@ function App() {
               <Route exact path="/login" component={ Login } />
               <PrivateRoute exact path="/Home" component={ HomePage } />
               <Route exact path="/History" component={ HistoryPage } />
+              <PrivateRoute exact path="/" component={ HomePage} />
 
             </Switch>
           </AuthProvider>
