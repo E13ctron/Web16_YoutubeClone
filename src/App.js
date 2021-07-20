@@ -5,6 +5,7 @@ import Signup from "./Components/Signup"
 import ForgotPassword from "./Components/ForgotPassword"
 import VideoUploadPage from "./Components/VideoUploadPage"
 import HistoryPage from "./Components/HistoryPage"
+import LikedVideo from "./Components/Sidebar/LikedVideo"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HomePage from './Components/HomePage';
@@ -12,9 +13,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import Watch from "./Components/Watch/watch"
 function App() {
   return (
-
-    
-      <div>
+     <div>
         <Router>
           <AuthProvider>
             <Switch>
@@ -24,6 +23,7 @@ function App() {
               <Route exact path="/forgotpassword" component={ ForgotPassword } />
               <PrivateRoute exact path="/" component={ HomePage } />
               <PrivateRoute exact path="/Home" component={ HomePage } />
+              <PrivateRoute exact path="/Liked" component={ LikedVideo } />
               <PrivateRoute exact path="/History" component={ HistoryPage } />
               <PrivateRoute exact path="/watch" component={ Watch } />
             </Switch>
