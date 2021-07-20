@@ -4,11 +4,11 @@ import Login from "./Components/Login"
 import Signup from "./Components/Signup"
 import ForgotPassword from "./Components/ForgotPassword"
 import VideoUploadPage from "./Components/VideoUploadPage"
-import HistoryPage from "./Components/HistoryPage"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HomePage from './Components/HomePage';
 import PrivateRoute from "./Components/PrivateRoute";
+import HistoryPage from "./Components/HistoryPage/HistoryPage"
 
 function App() {
   return (
