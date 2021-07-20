@@ -20,7 +20,7 @@ export default function Signup() {
             const size = emailRef.current.value.length
             if(size > 10){
                 let address = emailRef.current.value.slice(size-10,size)
-                if(address == "iiti.ac.in"){
+                if(address === "iiti.ac.in"){
                     await signup(emailRef.current.value,passwordRef.current.value)
                     history.push("/Home")
                 }
