@@ -3,7 +3,6 @@ import React from "react";
 
 import SidebarComponent from "./SidebarComponent";
 import HomeIcon from '@material-ui/icons/Home';
-import ExploreIcon from '@material-ui/icons/Explore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HistoryIcon from '@material-ui/icons/History';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -20,7 +19,6 @@ export default function Sidebar() {
         //id is used for toggling
       <div className="hp-sidebar" id="sidebar">
             <SidebarComponent Icon={HomeIcon} title="Home"/>
-            <SidebarComponent Icon={ExploreIcon} title="Explore"/>
             <SidebarComponent Icon={FavoriteIcon} title="Liked"/>
             <SidebarComponent Icon={HistoryIcon} title="History" />
             <div className="sidebar-empty"></div>

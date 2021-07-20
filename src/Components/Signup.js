@@ -17,8 +17,22 @@ export default function Signup() {
            try{
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
-            history.push("/")
+            const size = emailRef.current.value.length
+            if(size > 10){
+                let address = emailRef.current.value.slice(size-10,size)
+                if(address === "iiti.ac.in"){
+                    await signup(emailRef.current.value,passwordRef.current.value)
+                    history.push("/Home")
+                }
+                else{
+                    setError('Please enter an IITI email id')
+                }
+            }
+            else{
+                setError('Please enter an IITI email id')
+            }
+            // await signup(emailRef.current.value, passwordRef.current.value)
+            // history.push("/")
            } catch {
                setError("Failed to create an account")
                
