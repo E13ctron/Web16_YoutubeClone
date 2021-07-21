@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../Header'
-import Sidebar from './Sidebar'
+import Header from '../Header/Header'
+import Sidebar from '../Sidebar/Sidebar'
 import VideoCard from '../HomePage/VideoCard'
 import './LikedVideo.css'
 export default function LikedVideo() {

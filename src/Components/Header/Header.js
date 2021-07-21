@@ -7,7 +7,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import Avatar from "@material-ui/core/Avatar";
 import './Header.css';
 import { useHistory } from 'react-router-dom'
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext"
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
 
 export default function Header() {
@@ -16,9 +16,6 @@ export default function Header() {
   async function signOut(){
     await signout()
     history.push("/")
-  }
-  function openUploadVideo(){
-    history.push("/uploadvideo")
   }
   return (
     <div className="hp-header">
@@ -35,7 +32,7 @@ export default function Header() {
         <SearchIcon className="searchicon"/>
       </div>
       <div className="hp-right-header">
-        <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon"/>
+        <VideoCallIcon className="hp-right-header-icon"/>
         <NotificationsIcon className="hp-right-header-icon"/>
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon"/>
         <Avatar
