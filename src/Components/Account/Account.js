@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../Header'
-import AccountSection from './AccountSection'
+import Profile from './Profile'
 import Sidebar from './Sidebar'
 import "./Account.css"
 
@@ -10,7 +10,7 @@ export default function Account() {
            <Header />
            <div className="account">
                <Sidebar />
-               <AccountSection />
+               <Profile />
            </div>
         </div>
     )
