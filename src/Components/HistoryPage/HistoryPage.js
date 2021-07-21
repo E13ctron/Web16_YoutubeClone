@@ -1,8 +1,8 @@
 import React from 'react'
-import Body from './HistoryPage/Body'
-import Header from './Header'
+import Body from './Body'
+import Header from '../Header/Header'
 import './historypage.css'
-import Sidebar from './Sidebar/Sidebar'
+import Sidebar from '../Sidebar/Sidebar'
 
 function HistoryPage() {
     return (

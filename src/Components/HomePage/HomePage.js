@@ -1,11 +1,8 @@
 import React from 'react'
-import Header from "./Header"
-
-import Sidebar from './Sidebar/Sidebar'
-import VideoSection from './HomePage/VideoSection'
-import "./HomePage.css"
-
-import "./HomePage/Homepage.css";
+import Header from "../Header/Header"
+import Sidebar from '../Sidebar/Sidebar'
+import VideoSection from './VideoSection'
+import "./Homepage.css";
 
 export default function HomePage() {
     

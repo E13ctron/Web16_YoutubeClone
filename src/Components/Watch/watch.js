@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from "../Header"
+import Header from "../Header/Header"
 import "./watch.css"
 import videoURL from "../../assets/videos/video.mp4"
 import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
