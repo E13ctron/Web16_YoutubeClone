@@ -5,6 +5,7 @@ import Signup from "./Components/Signup"
 import ForgotPassword from "./Components/ForgotPassword"
 import VideoUploadPage from "./Components/VideoUploadPage"
 import HistoryPage from "./Components/HistoryPage"
+import Account from "./Components/Account/Account"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HomePage from './Components/HomePage';
@@ -26,6 +27,7 @@ function App() {
               <PrivateRoute exact path="/Home" component={ HomePage } />
               <PrivateRoute exact path="/History" component={ HistoryPage } />
               <PrivateRoute exact path="/watch" component={ Watch } />
+              <PrivateRoute exact path="/Account" component={ Account } />
             </Switch>
           </AuthProvider>
         </Router>

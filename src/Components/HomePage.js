@@ -3,7 +3,6 @@ import Header from "./Header"
 
 import Sidebar from './Sidebar/Sidebar'
 import VideoSection from './HomePage/VideoSection'
-import "./HomePage.css"
 
 import "./HomePage/Homepage.css";
 
