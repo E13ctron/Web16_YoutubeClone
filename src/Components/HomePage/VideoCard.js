@@ -16,7 +16,7 @@ function VideoCard({ image, title, channel, views, timestamp, channelimage}) {
                     alt={channel}
                     src={channelimage}
                     /> */}
-                    <Avatar onClick={handleAvatarClick}/>
+                    <Avatar style={{cursor:"pointer"}} onClick={handleAvatarClick}/>
                 <div className="video_text">
                     <h4>{title}</h4>
                     <p>{channel}</p>
