@@ -4,6 +4,7 @@ import Sidebar from '../Sidebar/Sidebar'
 import "./PreviewChannel.css"
 import channel_art_photo from "../../assets/channel_art_photo.jpg"
 import { Avatar, Button } from '@material-ui/core'
+import VideoSmall from '../WatchRight/VideoSmall'
 
 
 const PreviewChannel = () => {
@@ -44,10 +45,19 @@ const PreviewChannel = () => {
                               <div className="channel_link">
                                   <p>ABOUT</p>
                               </div>
-
                             </div>
-
-                        
+                    </div>
+                    <div className="channel_content">
+                       <div className="channel_contentWrapper">
+                           <VideoSmall channelView={true}/>
+                           <VideoSmall channelView={true}/>
+                           <VideoSmall channelView={true}/>
+                           <VideoSmall channelView={true}/>
+                           <VideoSmall channelView={true}/>
+                           <VideoSmall channelView={true}/>
+                           {/* <VideoSmall channelView={true}/>
+                           <VideoSmall channelView={true}/> */}
+                           </div>
                     </div>
                     
                 </div>

@@ -36,7 +36,6 @@
 
 .channel_content{
     height: 100%;
-    background-color: #0f0f0f;
     overflow-y: auto;
 }
 
@@ -90,7 +89,8 @@
     display: flex;
     flex-wrap: wrap;
     margin-left: 140px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
+    padding-top: 0px;
 }
 
 .channel{
