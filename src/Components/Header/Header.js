@@ -17,6 +17,7 @@ import { Button, Popover } from "@material-ui/core";
 export default function Header() {
   const { signout } = useAuth();
   const history = useHistory();
+  const handleLogoClick = () => history.push("/")
   async function signOut() {
     await signout();
     history.push("/");
@@ -39,7 +40,7 @@ export default function Header() {
     <div className="hp-header">
       <div className="hp-left-header">
         <MenuIcon onClick={window["toggleSidebar"]} />
-        <img
+        <img onClick={handleLogoClick}
           className="yt-logo"
           src="https://upload.wikimedia.org/wikipedia/commons/9/90/Logo_of_YouTube_%282013-2015%29.svg"
           alt=""
