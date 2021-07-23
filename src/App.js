@@ -9,7 +9,7 @@ import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HomePage from './Components/HomePage/HomePage';
 import PrivateRoute from "./Components/PrivateRoute";
-import Watch from "./Components/Watch/Watch"
+import Watch from "./Components/Watch/watch"
 import PreviewChannel from './Components/PreviewChannel/PreviewChannel';
 function App() {
   return (
