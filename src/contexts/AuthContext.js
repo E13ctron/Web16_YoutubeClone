@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { auth, db } from "../firebase"
+import { db } from "../firebase"
 import { auth } from "../firebase"
 import { database } from '../firebase'
 
@@ -66,7 +66,8 @@ export function AuthProvider({children}){
         resetPassword,
         login,
         videoUploadOpen,
-        setVideoUploadOpen
+        setVideoUploadOpen,
+        currentUserData
     }
     return(
         <AuthContext.Provider value={value}>
