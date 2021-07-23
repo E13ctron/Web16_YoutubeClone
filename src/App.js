@@ -1,29 +1,29 @@
 import React from 'react';
 import './App.css';
-import Login from "./Components/Login"
-import Signup from "./Components/Signup"
-import ForgotPassword from "./Components/ForgotPassword"
-import HistoryPage from "./Components/HistoryPage"
+import Login from "./Components/Authentication/Login"
+import Signup from "./Components/Authentication/Signup"
+import ForgotPassword from "./Components/Authentication/ForgotPassword"
+import HistoryPage from "./Components/HistoryPage/HistoryPage"
+import LikedVideo from "./Components/LikedPage/LikedVideo"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import HomePage from './Components/HomePage';
+import HomePage from './Components/HomePage/HomePage';
 import PrivateRoute from "./Components/PrivateRoute";
-import { useAuth } from "./contexts/AuthContext"
-
+import Watch from "./Components/Watch/watch"
 function App() {
   return (
-      <div>
+     <div>
         <Router>
           <AuthProvider>
             <Switch>
-              
+              <Route exact path="/login" component={ Login } />
               <Route exact path="/signup" component={ Signup } />
               <Route exact path="/forgotpassword" component={ ForgotPassword } />
               <Route exact path="/login" component={ Login } />
               <PrivateRoute exact path="/Home" component={ HomePage } />
-              <Route exact path="/History" component={ HistoryPage } />
-              <PrivateRoute exact path="/" component={ HomePage} />
-
+              <PrivateRoute exact path="/Liked" component={ LikedVideo } />
+              <PrivateRoute exact path="/History" component={ HistoryPage } />
+              <PrivateRoute exact path="/watch" component={ Watch } />
             </Switch>
           </AuthProvider>
         </Router>

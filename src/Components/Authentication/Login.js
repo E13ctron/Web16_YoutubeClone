@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import GoogleSignIn from "./GoogleSignIn";
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext"
 import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 

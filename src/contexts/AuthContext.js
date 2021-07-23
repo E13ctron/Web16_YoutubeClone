@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { auth, db } from "../firebase"
+import { auth } from "../firebase"
+import { database } from '../firebase'
+
 
 const AuthContext = React.createContext()
 
@@ -15,6 +18,7 @@ export function AuthProvider({children}){
 
     const[videos, setvideos] = useState([])
 
+    const [currentUserData, setCurrentUserData] = useState()
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
         
@@ -31,8 +35,8 @@ export function AuthProvider({children}){
     }
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
-            setLoading(false)
             setCurrentUser(user)
+            setLoading(false)
         })
         return unsubscribe;
     }, [])
@@ -45,6 +49,15 @@ export function AuthProvider({children}){
 
     console.log(videos)
 
+    useEffect(() => {
+        if(currentUser){
+            database.users.doc(currentUser.uid.toString()).get().then((doc) => {
+                if(doc.exists){
+                    setCurrentUserData(doc.data())
+                }
+            })
+        }
+    })
     const value = {
         videos,
         signup,

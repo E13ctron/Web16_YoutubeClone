@@ -7,7 +7,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import Avatar from "@material-ui/core/Avatar";
 import './Header.css';
 import { useHistory } from 'react-router-dom'
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext"
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
 
 export default function Header() {
@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <div className="hp-header">
       <div className="hp-left-header">
-        <MenuIcon />
+        <MenuIcon onClick={window['toggleSidebar']}/>
         <img
           className="yt-logo"
           src="https://upload.wikimedia.org/wikipedia/commons/9/90/Logo_of_YouTube_%282013-2015%29.svg"
@@ -31,11 +31,11 @@ export default function Header() {
         />
       </div>
       <div className="hp-mid-header">
-        <input type="text" />
+        <input type="text" placeholder=" Search"/>
         <SearchIcon className="searchicon"/>
       </div>
       <div className="hp-right-header">
-        <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon"/>
+        <VideoCallIcon className="hp-right-header-icon"/>
         <NotificationsIcon className="hp-right-header-icon"/>
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon"/>
         <Avatar
