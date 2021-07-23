@@ -7,11 +7,11 @@ import { useHistory } from "react-router-dom";
 
 const VideoCard =({ video }) => {
     
-    const history = useHistory();
+    //const history = useHistory();
 
-    //const handleClickCard = () => history.push(`/watch/${video.id}`);
-    //const handleClickAvatar = () =>
-    history.push(`/PreviewChannel?name=${video.email}`);
+    // const handleClickCard = () => history.push(`/watch/${video.id}`);
+    // const handleClickAvatar = () =>
+    // history.push(`/PreviewChannel?name=${video.email}`);
 
     const newDate = moment.unix(video?.timestamp).format("YYYYMMDD, HH:MM:SS");
     
