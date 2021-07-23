@@ -19,7 +19,7 @@ export default function Sidebar() {
             <div className="sidebar-empty"></div>
             <SidebarComponent Icon={PersonIcon} title="Profile" />
             <SidebarComponent Icon={LockIcon} title="Update Password" />
-            <SidebarComponent Icon={VideoLibraryIcon} title="My Video" />           
+            <SidebarComponent Icon={VideoLibraryIcon} title="My Videos" />           
          
         </div>
     )

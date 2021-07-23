@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../Header/Header'
 import Sidebar from '../Sidebar'
 import VideoCard from '../../HomePage/VideoCard'
 import { useAuth } from '../../../contexts/AuthContext'
+import { database } from '../../../firebase'
+import './uploadedvideo.css'
+
+
 function UploadedVideos() {
-    const { currentUser } = useAuth();
+    const {currentUser} = useAuth()
+    useEffect(() => {
+        const VideoData = [];
+        database.videos.where("channelName","==", "Manisha Devi").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                VideoData.push(doc.data())
+            })
+        })
+        
+       console.log(VideoData)
+    })
     return (
         <div>
             <Header />
