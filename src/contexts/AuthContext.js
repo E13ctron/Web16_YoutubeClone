@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { auth } from "../firebase"
+import { auth, db } from "../firebase"
 
 const AuthContext = React.createContext()
 
@@ -12,8 +12,12 @@ export function AuthProvider({children}){
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
     const [videoUploadOpen, setVideoUploadOpen] = useState(false)
+
+    const[videos, setvideos] = useState([])
+
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
+        
     }
     function login(email, password){
         return(auth.signInWithEmailAndPassword(email, password))
@@ -32,6 +36,15 @@ export function AuthProvider({children}){
         })
         return unsubscribe;
     }, [])
+
+    useEffect(() => {
+        db.collection("Videos").onSnapshot((snapshot) => {
+            setvideos(snapshot.docs.map((doc) => doc.data()));
+        })
+    }, []);
+
+    console.log(videos)
+
     const value = {
         signup,
         currentUser,

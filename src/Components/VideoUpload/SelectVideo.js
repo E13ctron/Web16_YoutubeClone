@@ -49,6 +49,7 @@ function SelectVideo() {
                             <div className="input_div">
                                 <input onChange={handleVideoChange}
                                 type="file" className="custom-file-input" />
+
                             </div>
                             <div className="text_div">
                                 <p className="text">Drag and Drop Videos</p>

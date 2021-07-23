@@ -31,6 +31,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
     const[uploadedVideo, setUploadedVideo] = useState(false)
 
     const{currentUser} = useAuth();
+    //console.log('uid: ', currentUser.uid)
 
     const createID=()=> setID(uuidv4());
 
@@ -68,7 +69,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
           }
         );
       };
-      console.log('Thumbnail URL', urlThumbnail);
+      
 
     const handleUploadVideo = () => {
         const uploadVideo = storage.ref(`videos/${video.name}`).put(video);
@@ -98,7 +99,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
           );
         };
 
-    console.log('Video URL', urlVideo);
+   
 
     const handleSubmit = () => {
         createID();
@@ -106,6 +107,34 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
         handleUploadThumbnail();
     };
 
+    useEffect(() => {
+        if (uploadedThumbnail && uploadedVideo) {
+          db.collection("Videos")
+            .add({
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              id: id,
+              videoURL: urlVideo,
+              thumbnailURL: urlThumbnail,
+              title: title,
+              description: description,
+              channelName: currentUser.displayName,
+              email: currentUser.email,
+              UserID: currentUser.uid,
+            })
+            
+            .then(() => {
+              setProgress(0);
+              setVideo(null);
+              setTitle("");
+              setThumbnail("");
+              setUrlThumbnail("");
+              setUrlVideo("");
+              setDescription("");
+              closeVideoUpload();
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [uploadedThumbnail, uploadedVideo]);
     
 
     return (
