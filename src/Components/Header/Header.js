@@ -7,7 +7,7 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import Avatar from "@material-ui/core/Avatar";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import "./Header.css";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button, Popover } from "@material-ui/core";
 // import { makeStyles } from '@material-ui/core/styles';
@@ -87,7 +87,7 @@ export default function Header() {
                 <div className="email-address">devaagra2210@gmail.com</div>
               </div>
               <div className="po-manage-account">
-                <a href="" className="po-manage-account-link">Manage your Account</a>
+                <Link to="/Account"><div className="po-manage-account-link">Manage your Account</div></Link>
               </div>
             </div>
             </div>
@@ -101,7 +101,7 @@ export default function Header() {
                 </div>
               </div>
               <div className="signout-button">
-              <Button>Sign Out</Button>
+              <Button onClick={signOut} >Sign Out</Button>
               </div>
             </div>
           </div>
