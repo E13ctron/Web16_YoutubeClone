@@ -3,6 +3,7 @@ import GoogleSignIn from "./GoogleSignIn";
 import { useAuth } from "../../contexts/AuthContext"
 import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import "./styles.css"
 
        
 export default function Login() {
@@ -45,9 +46,9 @@ export default function Login() {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" ref={passwordRef} required />
                             </Form.Group>
-                            <Button disabled={loading} className="w-100" style={{ margin: "10px" }} type="submit">
+                            <Button disabled={loading} className="w-100 button" style={{ margin: "10px" }} type="submit">
                                 Sign In
-                            </Button>
+                            </Button >
                             <div>Don't have an account?</div>
                             <div> <a href="./signup" style={{ textAlign: "center" }}>Sign Up</a></div>
                             <div>Forgot Password ? </div>
