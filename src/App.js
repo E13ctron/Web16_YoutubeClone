@@ -12,6 +12,7 @@ import Watch from "./Components/Watch/watch"
 import UpdatePassword from './Components/Account/UpdatePassword/UpdatePassword';
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import UploadedVideos from './Components/Account/UploadedVideos/UploadedVideos';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <PrivateRoute exact path="/Account" component={ Profile } />
               <PrivateRoute exact path="/Profile" component={ Profile } />
               <PrivateRoute exact path="/Update Password" component={ UpdatePassword} />
+              <PrivateRoute exact path="/My Videos" component={UploadedVideos} />
             </Switch>
           </AuthProvider>
         </Router>

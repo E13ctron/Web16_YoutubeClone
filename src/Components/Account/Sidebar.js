@@ -4,6 +4,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import SidebarComponent from './SidebarComponent'
 import HomeIcon from '@material-ui/icons/Home';
 import LockIcon from '@material-ui/icons/Lock';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import "./Sidebar.css"
 
 export default function Sidebar() {
@@ -17,7 +18,8 @@ export default function Sidebar() {
             <SidebarComponent Icon={HomeIcon} title="Home" />
             <div className="sidebar-empty"></div>
             <SidebarComponent Icon={PersonIcon} title="Profile" />
-            <SidebarComponent Icon={LockIcon} title="Update Password" />            
+            <SidebarComponent Icon={LockIcon} title="Update Password" />
+            <SidebarComponent Icon={VideoLibraryIcon} title="My Video" />           
          
         </div>
     )
