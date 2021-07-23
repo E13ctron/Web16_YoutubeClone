@@ -21,7 +21,7 @@ function App() {
               <Route exact path="/login" component={ Login } />
               <Route exact path="/signup" component={ Signup } />
               <Route exact path="/forgotpassword" component={ ForgotPassword } />
-              <PrivateRoute exact path="/" component={ HomePage } />
+              <Route exact path="/login" component={ Login } />
               <PrivateRoute exact path="/Home" component={ HomePage } />
               <PrivateRoute exact path="/Liked" component={ LikedVideo } />
               <PrivateRoute exact path="/History" component={ HistoryPage } />

@@ -15,14 +15,17 @@ import { Button, Popover } from "@material-ui/core";
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
 
 export default function Header() {
-  const { signout } = useAuth();
-  const history = useHistory();
-  const handleLogoClick = () => history.push("/")
-  async function signOut() {
-    await signout();
-    history.push("/");
-  }
 
+  const { signout , setVideoUploadOpen } = useAuth()
+  const history = useHistory()
+  async function signOut(){
+    await signout()
+    history.push("/")
+  }
+  function openUploadVideo(){
+    setVideoUploadOpen(true)
+  }
+  const handleLogoClick = () => history.push("/")
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -51,7 +54,7 @@ export default function Header() {
         <SearchIcon className="searchicon" />
       </div>
       <div className="hp-right-header">
-        <VideoCallIcon className="hp-right-header-icon" />
+        <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon" />
         <NotificationsIcon className="hp-right-header-icon" />
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar
