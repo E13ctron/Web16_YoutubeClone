@@ -7,7 +7,7 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import Avatar from "@material-ui/core/Avatar";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import "./Header.css";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button, Popover } from "@material-ui/core";
 // import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +17,7 @@ import { Button, Popover } from "@material-ui/core";
 export default function Header() {
   const { signout } = useAuth();
   const history = useHistory();
+  const handleLogoClick = () => history.push("/")
   async function signOut() {
     await signout();
     history.push("/");
@@ -39,7 +40,7 @@ export default function Header() {
     <div className="hp-header">
       <div className="hp-left-header">
         <MenuIcon onClick={window["toggleSidebar"]} />
-        <img
+        <img onClick={handleLogoClick}
           className="yt-logo"
           src="https://upload.wikimedia.org/wikipedia/commons/9/90/Logo_of_YouTube_%282013-2015%29.svg"
           alt=""
@@ -86,7 +87,7 @@ export default function Header() {
                 <div className="email-address">devaagra2210@gmail.com</div>
               </div>
               <div className="po-manage-account">
-                <a href="" className="po-manage-account-link">Manage your Account</a>
+                <Link to="/Account"><div className="po-manage-account-link">Manage your Account</div></Link>
               </div>
             </div>
             </div>
@@ -100,7 +101,7 @@ export default function Header() {
                 </div>
               </div>
               <div className="signout-button">
-              <Button>Sign Out</Button>
+              <Button onClick={signOut} >Sign Out</Button>
               </div>
             </div>
           </div>

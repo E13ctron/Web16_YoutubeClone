@@ -5,9 +5,12 @@ import videoURL from "../../assets/videos/video.mp4"
 import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
 import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
+import { useHistory } from 'react-router-dom'
 
 
-const watch = () => {
+const Watch = () => {
+    const history = useHistory();
+    const handlePreviewChannel = () => history.push("/PreviewChannel")
     return (
         <>
             <div>
@@ -60,7 +63,7 @@ const watch = () => {
                         <div className="watch__details">
                             <div className="watch__detailsContainer">
                                 <div className="videothumb__details watch_avatarWrap">
-                                    <Avatar />
+                                    <Avatar style={{cursor:"pointer"}}  onClick={handlePreviewChannel} />
                                     <div className="videothumb__channel">
                                         <h1 className="videothumb_title">
                                             Captain Tony
@@ -97,4 +100,4 @@ const watch = () => {
     )
 }
 
-export default watch;
+export default Watch;
