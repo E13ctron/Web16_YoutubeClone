@@ -11,7 +11,7 @@ function UploadedVideos() {
     const {currentUser} = useAuth()
     useEffect(() => {
         const VideoData = [];
-        database.videos.where("channelName","==", "Manisha Devi").get().then((querySnapshot) => {
+        database.videos.where("UserID","==", currentUser.uid).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 VideoData.push(doc.data())
             })

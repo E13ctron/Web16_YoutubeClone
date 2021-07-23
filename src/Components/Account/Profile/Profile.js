@@ -22,6 +22,7 @@ function Profile() {
         if(currentUserData){
             if(currentUserData.name !== Name){
                 setLoading(true)
+                currentUser.displayName = Name
                 database.users.doc(currentUser.uid.toString).set({
                     name: Name
                 })
