@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -16,15 +16,23 @@ import { Button, Popover } from "@material-ui/core";
 
 export default function Header() {
 
-  const { signout , setVideoUploadOpen, videoUploadOpen } = useAuth()
+  const { signout , setVideoUploadOpen, videoUploadOpen, currentUser } = useAuth()
+  const [avatarUrl, setAvatarUrl] = useState()
   const history = useHistory()
+
+ useEffect(() => {
+  if(currentUser.photoURL){
+    setAvatarUrl(currentUser.photoURL.toString())
+    console.log(currentUser.photoURL)
+
+  }
+ },[currentUser]) 
   async function signOut(){
     await signout()
     history.push("/")
   }
   function openUploadVideo(){
     setVideoUploadOpen(true)
-    console.log("clicked")
     console.log(videoUploadOpen)
   }
   const handleLogoClick = () => history.push("/")
@@ -61,7 +69,7 @@ export default function Header() {
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar
           alt=""
-          src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+          src={avatarUrl}
           onClick={handleClick}
         />
         <Popover
@@ -82,14 +90,14 @@ export default function Header() {
             <div className="po-top">
             <div className="po-left">
               <div className="po-avatar">
-                <Avatar src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"/>
+                <Avatar src={avatarUrl}/>
               </div>
               <div className="po-empty"></div>
             </div>
             <div className="po-right">
               <div className="po-account-details">
-                <div className="username">Devansh Agrawal</div>
-                <div className="email-address">devaagra2210@gmail.com</div>
+                <div className="username">{currentUser.displayName}</div>
+                <div className="email-address">{currentUser.email}</div>
               </div>
               <div className="po-manage-account">
                 <Link to="/Account"><div className="po-manage-account-link">Manage your Account</div></Link>

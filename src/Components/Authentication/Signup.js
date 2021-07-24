@@ -8,7 +8,8 @@ export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
-    const { signup } = useAuth()
+    const nameRef = useRef()
+    const { signup, currentUser } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -23,6 +24,7 @@ export default function Signup() {
                 let address = emailRef.current.value.slice(size-10,size)
                 if(address === "iiti.ac.in"){
                     await signup(emailRef.current.value,passwordRef.current.value)
+                    currentUser.displayName = nameRef.current.value
                     history.push("/Home")
                 }
                 else{
@@ -32,8 +34,6 @@ export default function Signup() {
             else{
                 setError('Please enter an IITI email id')
             }
-            // await signup(emailRef.current.value, passwordRef.current.value)
-            // history.push("/")
            } catch {
                setError("Failed to create an account")
                
@@ -55,6 +55,10 @@ export default function Signup() {
                         <h2 className="text-center mb-4">Sign Up</h2>
                         {error && <Alert variant="danger">{ error }</Alert>}
                         <Form onSubmit={handleSubmit}>
+                        <Form.Group id="Name" style={{ margin: "10px" }}>
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" ref={nameRef} required />
+                            </Form.Group>
                             <Form.Group id="email" style={{ margin: "10px" }}>
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control type="email" ref={emailRef} required />
