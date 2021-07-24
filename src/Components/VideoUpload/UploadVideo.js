@@ -16,7 +16,6 @@ import firebase from "firebase";
 const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
 
     const[progress, setProgress] = useState(0);
-    const[progressThumbnail, setProgressThumbnail] = useState(0);
     const[title, setTitle] = useState("");
     const[description, setDescription] = useState("");
 
@@ -49,10 +48,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
         uploadThumbnail.on(
           "state_changed",
           (snapshot) => {
-            const progressPercent = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            setProgressThumbnail(progressPercent);
+           
           },
           (err) => {
             console.log(err);

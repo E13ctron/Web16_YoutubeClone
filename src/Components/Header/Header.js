@@ -16,7 +16,7 @@ import { Button, Popover } from "@material-ui/core";
 
 export default function Header() {
 
-  const { signout , setVideoUploadOpen } = useAuth()
+  const { signout , setVideoUploadOpen, videoUploadOpen } = useAuth()
   const history = useHistory()
   async function signOut(){
     await signout()
@@ -24,6 +24,8 @@ export default function Header() {
   }
   function openUploadVideo(){
     setVideoUploadOpen(true)
+    console.log("clicked")
+    console.log(videoUploadOpen)
   }
   const handleLogoClick = () => history.push("/")
   const [anchorEl, setAnchorEl] = React.useState(null);

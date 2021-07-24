@@ -68,7 +68,7 @@ export function AuthProvider({children}){
             setMyVideos(querySnapshot.docs.map((doc) => doc.data()));
         })
        }
-   })
+   },[currentUser])
     const value = {
         videos,
         signup,

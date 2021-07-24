@@ -29,7 +29,6 @@ function SelectVideo() {
     return (
         <div>
             <Dialog open={videoUploadOpen} keepMounted>
-
                 {video ? (
                     <UploadVideo video={video} setVideo={setVideo} closeVideoUpload={closeVideoUpload}/>
                 ):(
