@@ -11,6 +11,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import { useAuth } from "./contexts/AuthContext"
 
 function App() {
+
   return (
       <div>
         <Router>

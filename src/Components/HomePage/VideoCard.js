@@ -12,7 +12,7 @@ const VideoCard =({ video }) => {
     const handleClickAvatar = () =>
     history.push(`/PreviewChannel?name=${video.email}`);
 
-    const newDate = moment.unix(video?.timestamp).format("YYYYMMDD, HH:MM:SS");
+    const newDate = moment.unix(video?.timestamp?.seconds).format("YYYYMMDD, HH:MM:SS");
     
     console.log(newDate)
     const uploadedTime = moment(newDate, "YYYYMMDD, HH:MM:SS").fromNow()
