@@ -17,5 +17,7 @@ export const database = {
     videos: firestore.collection("Videos")
 }
 export const auth = app.auth()
+export const db = firebase.firestore();
+export const storage = firebase.storage();
 
 export default app;

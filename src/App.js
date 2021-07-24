@@ -13,6 +13,8 @@ import UpdatePassword from './Components/Account/UpdatePassword/UpdatePassword';
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import UploadedVideos from './Components/Account/UploadedVideos/UploadedVideos';
+import PreviewChannel from './Components/PreviewChannel/PreviewChannel';
+import Account from './Components/Settings/Account';
 
 function App() {
   return (
@@ -23,8 +25,9 @@ function App() {
               <Route exact path="/login" component={ Login } />
               <Route exact path="/signup" component={ Signup } />
               <Route exact path="/forgotpassword" component={ ForgotPassword } />
-              <PrivateRoute exact path="/" component={ HomePage } />
+              <Route exact path="/login" component={ Login } />
               <PrivateRoute exact path="/Home" component={ HomePage } />
+              <PrivateRoute exact path="/" component={ HomePage } />
               <PrivateRoute exact path="/Liked" component={ LikedVideo } />
               <PrivateRoute exact path="/History" component={ HistoryPage } />
               <PrivateRoute exact path="/watch" component={ Watch } />
@@ -32,6 +35,8 @@ function App() {
               <PrivateRoute exact path="/Profile" component={ Profile } />
               <PrivateRoute exact path="/Update Password" component={ UpdatePassword} />
               <PrivateRoute exact path="/My Videos" component={UploadedVideos} />
+              <PrivateRoute exact path="/PreviewChannel" component={ PreviewChannel } />
+              <PrivateRoute exact path="/Account" component={ Account } />
             </Switch>
           </AuthProvider>
         </Router>

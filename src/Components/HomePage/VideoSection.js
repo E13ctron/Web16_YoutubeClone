@@ -2,13 +2,21 @@
 import React from 'react';
 import "./video-section.css"
 import VideoCard from './VideoCard'
+import { useAuth } from '../../contexts/AuthContext'
 
-function VideoSection() {
+const VideoSection = () => {
+    const { videos } = useAuth();
     return (
         <div>
-            <div className="video-section">
-            </div>
+            <h2>Recommended</h2>
+
+        <div className="video-section">
+           {videos.map((video) => (
+               <VideoCard video={video} />
+           ))}
         </div>
+
+    </div>
     );
 }
 

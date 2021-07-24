@@ -39,3 +39,53 @@
   .hp-right-header-icon{
     margin-right: 10px;
   }
+
+
+/* Popover style */
+.account-popover{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px;
+}
+.po-top{
+  display: flex;
+}
+.po-left{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.po-right{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+.username{
+  font-weight: bold;
+}
+.po-manage-account{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.po-manage-account-link{
+  text-decoration: none;
+  
+}
+.po-down{
+  height: inherit;
+  background-color: rgb(238, 238, 238);
+}
+.add-account{
+  display: flex;
+  margin: 10px;
+  align-items: center;
+}
+.add-account-icon{
+  margin-right: 10px;
+}
+.signout-button{
+  width: fit-content;
+  margin: 45px auto;
+  background-color: rgb(201, 201, 201);
+}
