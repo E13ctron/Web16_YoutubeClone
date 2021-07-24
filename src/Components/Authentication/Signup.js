@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import "./styles.css"
 
 export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
-    const { currentUser, signup } = useAuth()
+    const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -17,8 +18,22 @@ export default function Signup() {
            try{
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
-            history.push("/Home")
+            const size = emailRef.current.value.length
+            if(size > 10){
+                let address = emailRef.current.value.slice(size-10,size)
+                if(address === "iiti.ac.in"){
+                    await signup(emailRef.current.value,passwordRef.current.value)
+                    history.push("/Home")
+                }
+                else{
+                    setError('Please enter an IITI email id')
+                }
+            }
+            else{
+                setError('Please enter an IITI email id')
+            }
+            // await signup(emailRef.current.value, passwordRef.current.value)
+            // history.push("/")
            } catch {
                setError("Failed to create an account")
                
@@ -52,7 +67,7 @@ export default function Signup() {
                                 <Form.Label>Confirm Password</Form.Label>
                                 <Form.Control type="password" ref={confirmPasswordRef} required />
                             </Form.Group>
-                            <Button disabled={loading} className="w-100" style={{ margin: "10px" }} type="submit">
+                            <Button disabled={loading} className="w-100 button" style={{ margin: "10px" }} type="submit">
                                 Sign Up
                             </Button>
                             <div>Already have an account?</div>

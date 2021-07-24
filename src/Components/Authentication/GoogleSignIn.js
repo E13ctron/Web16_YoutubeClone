@@ -2,7 +2,6 @@ import React from 'react'
 import firebase from 'firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import { Redirect } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
 // import userEvent from '@testing-library/user-event'
 
 class GoogleSignIn extends React.Component {

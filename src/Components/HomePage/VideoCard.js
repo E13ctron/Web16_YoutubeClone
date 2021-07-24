@@ -1,4 +1,5 @@
 import React from 'react';
+
 import moment from "moment";
 import Avatar from "@material-ui/core/Avatar";
 import "./VideoCard.css";
@@ -8,8 +9,8 @@ const VideoCard =({ video }) => {
     
     const history = useHistory();
 
-    const handleClickCard = () => history.push(`/watch/${video.id}`);
-    const handleClickAvatar = () =>
+    //const handleClickCard = () => history.push(`/watch/${video.id}`);
+    //const handleClickAvatar = () =>
     history.push(`/PreviewChannel?name=${video.email}`);
 
     const newDate = moment.unix(video?.timestamp?.seconds).format("YYYYMMDD, HH:MM:SS");
@@ -33,7 +34,6 @@ const VideoCard =({ video }) => {
                         <p className="videocard_text">123 views • {uploadedTime}</p>
                     </div>
                 </div>
-
             </div>
         </div>
     );

@@ -1,0 +1,91 @@
+.hp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+    cursor: pointer;
+  }
+  .hp-left-header {
+    display: flex;
+  }
+  .hp-mid-header {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 2px;
+    width: 40%;
+  }
+  .hp-right-header {
+    display: flex;
+    /* padding: 2px; */
+    align-items: center;
+    padding: 0px;
+  }
+  .yt-logo {
+    height: 25px;
+    object-fit: contain;
+    /* align-items: center; */
+    margin-left: 10px;
+  }
+  .hp-mid-header > input{
+    flex: 1;
+    border: none;
+    padding: 0px;
+  }
+  .searchicon{
+    flex: 0.1;
+    background-color: rgb(211, 206, 206);
+  }
+  .hp-right-header-icon{
+    margin-right: 10px;
+  }
+
+
+/* Popover style */
+.account-popover{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px;
+}
+.po-top{
+  display: flex;
+}
+.po-left{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.po-right{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+.username{
+  font-weight: bold;
+}
+.po-manage-account{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.po-manage-account-link{
+  text-decoration: none;
+  
+}
+.po-down{
+  height: inherit;
+  background-color: rgb(238, 238, 238);
+}
+.add-account{
+  display: flex;
+  margin: 10px;
+  align-items: center;
+}
+.add-account-icon{
+  margin-right: 10px;
+}
+.signout-button{
+  width: fit-content;
+  margin: 45px auto;
+  background-color: rgb(201, 201, 201);
+}
