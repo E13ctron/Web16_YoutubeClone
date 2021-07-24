@@ -182,4 +182,4 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
     )
 }
 
-export default UploadVideo
+export default UploadVideo;
