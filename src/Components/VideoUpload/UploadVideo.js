@@ -6,7 +6,7 @@ import {
     Divider,
     TextField,
   } from "@material-ui/core";
-import { Close } from '@material-ui/icons'
+import { Close, DriveEta } from '@material-ui/icons'
 import React, {useEffect, useState} from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import {v4 as uuidv4} from "uuid"
@@ -132,7 +132,17 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [uploadedThumbnail, uploadedVideo]);
     
-
+// async function deleteFile(){
+//   try {
+//  const response = await Drive.files.delete({
+//    fieldId: ' '
+//  });
+//  console.log(response.data, response.status)
+//   }
+//   catch(error){
+//     console.log(error.message)
+//   }
+// }
     return (
         <div>
             <div className="header">
