@@ -19,6 +19,7 @@ export function AuthProvider({children}){
     const[videos, setvideos] = useState([])
 
     const [currentUserData, setCurrentUserData] = useState()
+    const [myVideos, setMyVideos] = useState()
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
         
@@ -32,6 +33,9 @@ export function AuthProvider({children}){
     }
     function resetPassword(email){
         return auth.sendPasswordResetEmail(email)
+    }
+    function updatepassword(password){
+        return (currentUser.updatePassword(password))
     }
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -57,7 +61,14 @@ export function AuthProvider({children}){
                 }
             })
         }
-    })
+    })       
+   useEffect(() => {
+       if(currentUser){
+        database.videos.where("UserID","==",currentUser.uid.toString()).get().then((querySnapshot) => {
+            setMyVideos(querySnapshot.docs.map((doc) => doc.data()));
+        })
+       }
+   })
     const value = {
         videos,
         signup,
@@ -65,6 +76,8 @@ export function AuthProvider({children}){
         signout,
         resetPassword,
         login,
+        updatepassword,
+        myVideos,
         videoUploadOpen,
         setVideoUploadOpen,
         currentUserData

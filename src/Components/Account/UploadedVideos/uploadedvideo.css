@@ -1,0 +1,10 @@
+.body{
+    display: flex;
+}
+.uploadedvideo{
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0.83;
+    margin-top: 20px;
+}
