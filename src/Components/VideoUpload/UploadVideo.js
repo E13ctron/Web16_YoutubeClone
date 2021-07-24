@@ -42,7 +42,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
     
     const handleUploadThumbnail = () => {
         const uploadThumbnail = storage
-          .ref(`thumbnails/${thumbnail.name}`)
+          .ref(`thumbnails/${id}`)
           .put(thumbnail);
     
         uploadThumbnail.on(
@@ -56,7 +56,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
           () => {
             storage
               .ref("thumbnails")
-              .child(thumbnail.name)
+              .child(id)
               .getDownloadURL()
               .then((url) => {
                 setUrlThumbnail(url);
@@ -68,7 +68,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
       
 
     const handleUploadVideo = () => {
-        const uploadVideo = storage.ref(`videos/${video.name}`).put(video);
+        const uploadVideo = storage.ref(`videos/${id}`).put(video);
         
         uploadVideo.on(
             "state_changed",
@@ -84,7 +84,7 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
             () => {
               storage
                 .ref("videos")
-                .child(video.name)
+                .child(id)
                 .getDownloadURL()
                 .then((url) => {
                   setUrlVideo(url);
