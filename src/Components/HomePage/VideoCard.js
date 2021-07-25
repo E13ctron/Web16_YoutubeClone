@@ -12,10 +12,11 @@ const VideoCard =({ video }) => {
     const handleWatchVideo = () => history.push(`/watch/${video.id}`);
     const handlePreviewChannel = () =>
     history.push(`/PreviewChannel?name=${video.email}`);
+    // console.log(video.email);
 
     const newDate = moment.unix(video?.timestamp?.seconds).format("YYYYMMDD, HH:MM:SS");
     
-    console.log(newDate)
+    // console.log(newDate)
     const uploadedTime = moment(newDate, "YYYYMMDD, HH:MM:SS").fromNow()
 
     return (
