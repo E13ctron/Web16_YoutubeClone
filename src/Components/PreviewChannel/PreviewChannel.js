@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
 import "./PreviewChannel.css"
 import channel_art_photo from "../../assets/channel_art_photo.jpg"
 import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
+import { useAuth } from '../../contexts/AuthContext'
+import { useLocation } from 'react-router'
 
 
 const PreviewChannel = () => {
+    const currentLocation = useLocation();
+    // console.log(currentLocation);
+
+    const channel = new URLSearchParams(currentLocation.search).get("name");
+
+    // console.log(channel);
+
+    const [currentChannel,setCurrentChannel] = useState([]);
+    const {videos} = useAuth();
+
+    useEffect(() => {
+        setCurrentChannel(videos.filter((video) => video.email ===channel));
+    }, [channel, videos])
+
+
     return (
         <div>
             <Header />
@@ -49,14 +66,9 @@ const PreviewChannel = () => {
                     </div>
                     <div className="channel_content">
                        <div className="channel_contentWrapper">
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           {/* <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/> */}
+                           {currentChannel.map((video) =>{
+                               return <VideoSmall channelView video={video} key={video.id}/>
+                           })}
                            </div>
                     </div>
                     
