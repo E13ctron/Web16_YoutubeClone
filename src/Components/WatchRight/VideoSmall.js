@@ -11,14 +11,13 @@ const VideoSmall = ({channelView=false, video}) => {
     const handlePreviewChannel = () =>
     history.push(`/PreviewChannel?name=${video.email}`);
     
-    const newDate = moment.unix(video?.timestamp?.seconds).format("YYYYMMDD, HH:MM:SS");
-    const uploadedTime = moment(newDate, "YYYYMMDD, HH:MM:SS").fromNow()
+    const newDate = moment.unix(video?.timestamp?.seconds).format("YYYYMMDD, HH:mm:ss");
+    const uploadedTime = moment(newDate, "YYYYMMDD, HH:mm:ss").fromNow()
 
     return (
         <div className={`watch-right-thumb ${channelView && "videoSmall_channelView"}`}>
             <div className="wr-thumb-img" onClick={handleWatchVideo}>
                 <img src= {video.thumbnailURL}
-                // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe0QCUXy_sNwXCNeGI9oGIHDQjDfAKIAqkWQ&usqp=CAU"
                  alt="thumbnail" className={`thumbimg ${channelView && "videoSmall_channelView_img"}`} />
             </div>
             <div className="wr-thumb-right">
