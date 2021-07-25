@@ -25,7 +25,7 @@ const PreviewChannel = () => {
     var v;
     var channelTitleName;
     for(v=0;v<videos.length; v++){
-        if(videos[v].email==channel){
+        if(videos[v].email===channel){
             channelTitleName=videos[v].channelName;
             break;
         }

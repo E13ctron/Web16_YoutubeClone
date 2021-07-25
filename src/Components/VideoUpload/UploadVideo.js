@@ -6,7 +6,7 @@ import {
     Divider,
     TextField,
   } from "@material-ui/core";
-import { Close, DriveEta } from '@material-ui/icons'
+import { Close} from '@material-ui/icons'
 import React, {useEffect, useState} from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import {v4 as uuidv4} from "uuid"
