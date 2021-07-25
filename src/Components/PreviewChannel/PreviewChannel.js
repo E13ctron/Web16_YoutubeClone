@@ -1,13 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
 import "./PreviewChannel.css"
 import channel_art_photo from "../../assets/channel_art_photo.jpg"
 import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
+import { useAuth } from '../../contexts/AuthContext'
+import { useLocation } from 'react-router'
 
 
 const PreviewChannel = () => {
+    const currentLocation = useLocation();
+    console.log(currentLocation);
+
+    const channel = new URLSearchParams(currentLocation.search).get("name");
+
+    // console.log(channel);
+
+    const [currentChannel,setCurrentChannel] = useState([]);
+    const {videos} = useAuth();
+    console.log(videos)
+    
+    //Below loop is to get channel name :/ :/
+    var v;
+    var channelTitleName;
+    for(v=0;v<videos.length; v++){
+        if(videos[v].email===channel){
+            channelTitleName=videos[v].channelName;
+            break;
+        }
+    }
+    // console.log(channelTitleName);
+
+    useEffect(() => {
+        setCurrentChannel(videos.filter((video) => video.email ===channel));
+    }, [channel, videos])
+
+    
     return (
         <div>
             <Header />
@@ -22,7 +51,7 @@ const PreviewChannel = () => {
                             <div className="channel_avatarWrap">
                                 <Avatar className="channel_avatar" />
                                 <div className="videothumb__channel">
-                                    <h1 className="channel_title">Captain Tony</h1>
+                                    <h1 className="channel_title">{channelTitleName}</h1>
                                     <p className="videothumb__text watch__subCount">2M Subscribers</p>
                                 </div>
                             </div>
@@ -49,14 +78,9 @@ const PreviewChannel = () => {
                     </div>
                     <div className="channel_content">
                        <div className="channel_contentWrapper">
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/>
-                           {/* <VideoSmall channelView={true}/>
-                           <VideoSmall channelView={true}/> */}
+                           {currentChannel.map((video) =>{
+                               return <VideoSmall channelView video={video} key={video.id}/>
+                           })}
                            </div>
                     </div>
                     
