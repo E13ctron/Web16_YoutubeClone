@@ -71,6 +71,7 @@ export function AuthProvider({children}){
    },[currentUser])
     const value = {
         videos,
+        loading,
         signup,
         currentUser,
         signout,
