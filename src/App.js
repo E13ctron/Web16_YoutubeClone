@@ -18,7 +18,7 @@ import Account from './Components/Settings/Account';
 import Header from './Components/Header/Header';
 
 function App() {
-  const { loading, videos } = useAuth();
+  const { videos } = useAuth();
   
   return (
     <div>

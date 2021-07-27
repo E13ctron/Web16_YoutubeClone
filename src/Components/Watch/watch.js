@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import Header from "../Header/Header"
+//import Header from "../Header/Header"
 import "./watch.css"
-import videoURL from "../../assets/videos/video.mp4"
+//import videoURL from "../../assets/videos/video.mp4"
 import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
 import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
