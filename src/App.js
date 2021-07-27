@@ -10,19 +10,22 @@ import HomePage from './Components/HomePage/HomePage';
 import PrivateRoute from "./Components/PrivateRoute";
 import Watch from "./Components/Watch/watch"
 import UpdatePassword from './Components/Account/UpdatePassword/UpdatePassword';
-import { AuthProvider } from "./contexts/AuthContext"
+import { useAuth } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import UploadedVideos from './Components/Account/UploadedVideos/UploadedVideos';
 import PreviewChannel from './Components/PreviewChannel/PreviewChannel';
 import Account from './Components/Settings/Account';
+import Header from './Components/Header/Header';
 
 function App() {
-
+  const { videos } = useAuth();
+  
   return (
-     <div>
-        <Router>
-          <AuthProvider>
-            <Switch>
+    <div>
+      <Router>
+        
+          <Switch>
+          
               <Route exact path="/login" component={ Login } />
               <Route exact path="/signup" component={ Signup } />
               <Route exact path="/forgotpassword" component={ ForgotPassword } />
@@ -31,17 +34,25 @@ function App() {
               <PrivateRoute exact path="/" component={ HomePage } />
               <PrivateRoute exact path="/Liked" component={ LikedVideo } />
               <PrivateRoute exact path="/History" component={ HistoryPage } />
-              <PrivateRoute exact path="/watch" component={ Watch } />
               <PrivateRoute exact path="/Account" component={ Profile } />
               <PrivateRoute exact path="/Profile" component={ Profile } />
               <PrivateRoute exact path="/Update Password" component={ UpdatePassword} />
               <PrivateRoute exact path="/My Videos" component={UploadedVideos} />
-              <PrivateRoute exact path="/PreviewChannel" component={ PreviewChannel } />
+              <PrivateRoute exact path="/PreviewChannel" component={ PreviewChannel } /> 
               <PrivateRoute exact path="/Account" component={ Account } />
-            </Switch>
-          </AuthProvider>
-        </Router>
-      </div>
+              
+              {videos.map((item) => (
+                
+                <Route path={"/watch/"+ item.id.toString()} key={item.id}>
+                  <Header />
+                  <Watch video={item} />
+                </Route>
+              ))} 
+          </Switch>
+        
+      
+      </Router>
+    </div>
     
 
   )
