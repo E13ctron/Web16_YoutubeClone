@@ -19,7 +19,6 @@ export function AuthProvider({children}){
     const[videos, setvideos] = useState([])
 
     const [currentUserData, setCurrentUserData] = useState()
-    const [myVideos, setMyVideos] = useState()
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
         
@@ -62,13 +61,6 @@ export function AuthProvider({children}){
             })
         }
     })       
-   useEffect(() => {
-       if(currentUser){
-        database.videos.where("UserID","==",currentUser.uid.toString()).get().then((querySnapshot) => {
-            setMyVideos(querySnapshot.docs.map((doc) => doc.data()));
-        })
-       }
-   },[currentUser])
     const value = {
         videos,
         loading,
@@ -78,7 +70,6 @@ export function AuthProvider({children}){
         resetPassword,
         login,
         updatepassword,
-        myVideos,
         videoUploadOpen,
         setVideoUploadOpen,
         currentUserData
