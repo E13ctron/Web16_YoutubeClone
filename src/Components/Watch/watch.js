@@ -8,8 +8,10 @@ import VideoSmall from '../WatchRight/VideoSmall'
 import { useHistory } from 'react-router-dom'
 import moment from "moment";
 import { useAuth } from "../../contexts/AuthContext";
+import useScrollTop from '../useScrollTop'
 
 const Watch = ({video}) => {
+    useScrollTop();
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
     const handlePreviewChannel = () => history.push("/PreviewChannel")

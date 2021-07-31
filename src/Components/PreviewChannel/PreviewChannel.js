@@ -7,9 +7,11 @@ import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
 import { useAuth } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router'
+import useScrollTop from '../useScrollTop'
 
 
 const PreviewChannel = () => {
+    useScrollTop();
     const currentLocation = useLocation();
     console.log(currentLocation);
 
