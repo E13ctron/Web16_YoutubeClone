@@ -31,7 +31,7 @@ function Search() {
         setResult("Search Results")
     }
     //console.log(foundVideos)
-    },)
+    },[foundVideos,videos])
     return (
         <div>
             <Header />
@@ -39,9 +39,9 @@ function Search() {
                 <Sidebar />
                 <div className="search-result">
                     <h1>{result}</h1>
-                    {foundVideos ? foundVideos.map((video) => (
+                    {foundVideos && foundVideos.map((video) => (
                             <VideoCard video={video} />
-                        )) : <h1></h1>}
+                        ))}
                 </div>
             </div>
         </div>
