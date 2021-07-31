@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import UploadedVideos from './Components/Account/UploadedVideos/UploadedVideos';
 import PreviewChannel from './Components/PreviewChannel/PreviewChannel';
 import Account from './Components/Settings/Account';
-
+import Search from './Components/Search/Search'
 function App() {
 
   return (
@@ -38,6 +38,7 @@ function App() {
               <PrivateRoute exact path="/My Videos" component={UploadedVideos} />
               <PrivateRoute exact path="/PreviewChannel" component={ PreviewChannel } />
               <PrivateRoute exact path="/Account" component={ Account } />
+              <PrivateRoute path="/search" component={ Search } />
             </Switch>
           </AuthProvider>
         </Router>

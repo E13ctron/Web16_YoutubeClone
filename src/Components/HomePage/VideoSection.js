@@ -11,9 +11,9 @@ const VideoSection = () => {
             <h2>Recommended</h2>
 
         <div className="video-section">
-           {videos.map((video) => (
+           {videos ? videos.map((video) => (
                <VideoCard video={video} />
-           ))}
+           )): <h1>No videos Found</h1>}
         </div>
 
     </div>
