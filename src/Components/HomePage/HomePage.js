@@ -3,7 +3,6 @@ import Header from "../Header/Header"
 import Sidebar from '../Sidebar/Sidebar'
 import VideoSection from './VideoSection'
 import "./Homepage.css";
-import SelectVideo from '../VideoUpload/SelectVideo';
 
 export default function HomePage() {
     
@@ -16,7 +15,7 @@ export default function HomePage() {
 
                {/* id="content" is used for toggling  */}
                <div className="video-section" id="content">
-                   <SelectVideo />
+                   
 
                     <VideoSection />
                </div>

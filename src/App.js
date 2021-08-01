@@ -16,6 +16,7 @@ import UploadedVideos from './Components/Account/UploadedVideos/UploadedVideos';
 import PreviewChannel from './Components/PreviewChannel/PreviewChannel';
 import Account from './Components/Settings/Account';
 import Header from './Components/Header/Header';
+import SelectVideo from './Components/VideoUpload/SelectVideo';
 
 function App() {
   const { videos } = useAuth();
@@ -23,7 +24,7 @@ function App() {
   return (
     <div>
       <Router>
-        
+          <SelectVideo />
           <Switch>
           
               <Route exact path="/login" component={ Login } />
