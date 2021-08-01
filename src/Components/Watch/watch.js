@@ -19,6 +19,15 @@ const Watch = ({video}) => {
     const formatted = moment
     .unix(video?.timestamp?.seconds)
     .format("MMM DD, YYYY  ");
+
+    const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+    function handleSubscribeClick(){
+        if(subscribe==="SUBSCRIBE"){
+     setSubscribe("SUBSCRIBED");
+        }else{
+            setSubscribe("SUBSCRIBE"); 
+        }
+    }
     return (
         <>
             
@@ -78,8 +87,9 @@ const Watch = ({video}) => {
 
                                     </div>
                                 </div>
-                                <Button className="watch__subBtn" color="primary" variant="contained">
-                                    SUBSCRIBE
+                                <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn" : "watch__subBtn_subbed" }
+                                  color="primary" variant="contained">
+                                    {subscribe}
                                 </Button>
                             </div>
                             <div className="watch__description">

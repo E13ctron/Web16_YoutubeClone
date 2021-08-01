@@ -137,6 +137,10 @@
     background-color: #cc0000 !important;
 }
 
+.watch__subBtn_subbed{
+    background-color: #aaa8a8 !important;
+}
+
 .watch__showMore{
     color: #aaa;
     margin-top: 10px;
