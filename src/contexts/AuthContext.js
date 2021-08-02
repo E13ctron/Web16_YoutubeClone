@@ -61,6 +61,7 @@ export function AuthProvider({children}){
             })
         }
     })       
+
    useEffect(() => {
        if(currentUser){
         database.videos.where("UserID","==",currentUser.uid.toString()).get().then((querySnapshot) => {
@@ -74,15 +75,16 @@ export function AuthProvider({children}){
         })
        }
    },[currentUser])
+
     const value = {
         videos,
+        loading,
         signup,
         currentUser,
         signout,
         resetPassword,
         login,
         updatepassword,
-        myVideos,
         videoUploadOpen,
         setVideoUploadOpen,
         currentUserData,
