@@ -47,7 +47,7 @@ const PreviewChannel = () => {
             <div className="preview_channel">
                 <Sidebar />
                 <div className="channel">
-                    {/* <img className="channel_coverImg" src={channel_art_photo} alt="Channel Cover"></img> */}
+                    <img className="channel_coverImg" src={channel_art_photo} alt="Channel Cover"></img>
 
                     <div className="channel_details">
                         <div className="channel_detailsWrap">
