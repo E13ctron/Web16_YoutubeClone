@@ -139,8 +139,16 @@ const Watch = ({video}) => {
                         </div>
                     </div>
                     <div className="watch-right">
-                        {videos.map((item) => 
-                            <VideoSmall video={item} />)}
+                        {videos.map(function(item){
+                            if(item.id === video.id){
+                                return null;
+                            }
+                            else{
+                                return(<VideoSmall video={item} />)
+                            }
+                        }
+                        )}
+                        
                     </div>
                 </div>
             </div>
