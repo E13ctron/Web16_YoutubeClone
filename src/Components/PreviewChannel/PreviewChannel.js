@@ -17,7 +17,7 @@ const PreviewChannel = () => {
     console.log(currentLocation);
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos} = useAuth();
+    const {videos,subscriptions,subscribeChannel} = useAuth();
     console.log(videos)
     //Below loop is to get channel name :/ :/
     var v;
@@ -36,10 +36,19 @@ const PreviewChannel = () => {
     function handleSubscribeClick(){
         if(subscribe==="SUBSCRIBE"){
      setSubscribe("SUBSCRIBED");
-        }else{
+     subscribeChannel(channel)
+            }else{
             setSubscribe("SUBSCRIBE"); 
         }
     }
+
+    useEffect(() => {
+        for(var i = 0;i < subscriptions.length;i++){
+            if(subscriptions[i].id === channel){
+                setSubscribe("SUBSCRIBE")
+            }
+        }
+    },[subscriptions,channel])
     return (
         <div>
             <Header />

@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { db } from "../firebase"
 import { auth } from "../firebase"
 import { database } from '../firebase'
+// import { useLocation } from 'react-router'
 
 
 const AuthContext = React.createContext()
 
 export function useAuth() {
+    // const currentLocation = useLocation();
+    // const previewedChannel = new URLSearchParams(currentLocation.search).get("name");
     return (
         useContext(AuthContext)
     )
@@ -18,6 +21,8 @@ export function AuthProvider({children}){
     const [ videos, setvideos] = useState([])
     const [ currentUserData, setCurrentUserData] = useState()
     const [ likedVideos, setLikedVideos ] = useState([])
+    const [subscriberNumber, setSubscriberNumber] = useState(0);
+    const [subscriptions,setSubscriptions] = useState([])
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -40,6 +45,14 @@ export function AuthProvider({children}){
         database.users.doc(currentUser.uid.toString()).collection("liked").doc(video.id).set(video)
         database.videos.doc(video.id).update({
             likes : video.likes + 1
+        })
+    }
+    function subscribeChannel(previewedChannel){
+        db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).add({
+            name:previewedChannel
+        })
+        db.collection("IndividualUsers").doc(previewedChannel.email).update({
+            subscriberNumber: subscriberNumber + 1
         })
     }
     useEffect(() => {
@@ -81,6 +94,15 @@ export function AuthProvider({children}){
             })
         }
     },[currentUser])
+    useEffect(() => {
+        if(currentUser){
+            db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").onSnapshot((snapshot) => {
+                
+                setSubscriptions(snapshot.docs.map((doc) => doc.data()))
+                
+            })
+        }
+    },[currentUser])
 
     const value = {
         videos,
@@ -96,7 +118,9 @@ export function AuthProvider({children}){
         currentUserData,
         likedVideos,
         likeVideo,
-        updateViews
+        updateViews,
+        subscriptions,
+        subscribeChannel
     }
     return(
         <AuthContext.Provider value={value}>
