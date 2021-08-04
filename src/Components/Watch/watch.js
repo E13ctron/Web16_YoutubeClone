@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect} from 'react'
 //import Header from "../Header/Header"
 import "./watch.css"
 //import videoURL from "../../assets/videos/video.mp4"
-import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
+import { ThumbUpAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
 import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
 import { useHistory } from 'react-router-dom'
@@ -12,11 +12,30 @@ import { useAuth } from "../../contexts/AuthContext";
 const Watch = ({video}) => {
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
+    const [ likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const handlePreviewChannel = () => history.push("/PreviewChannel")
-    const { videos } = useAuth()
+    const { videos,likeVideo, likedVideos, updateViews } = useAuth()
     const formatted = moment
     .unix(video?.timestamp?.seconds)
     .format("MMM DD, YYYY  ");
+    async function likedHandle(){
+        if(!likeButtonDisabled){
+            await likeVideo(video);
+            setLikeButtonDisabled(true)
+        }
+    }
+    useEffect(() => {
+        updateViews(video)
+        const videos = likedVideos
+        console.log(videos)
+        console.log(video)
+        for(var i = 0;i < videos.length;i++){
+            if(videos[i].id === video.id){
+                setLikeButtonDisabled(true)
+                console.log("Present")
+            }
+        }
+    },[updateViews, video, likedVideos])
     return (
         <>
             
@@ -30,21 +49,17 @@ const Watch = ({video}) => {
                             <h1 className="watch__title">{video.title}</h1>
                             <div className="watch__videoInfo">
                                 <div className="watch__videoInfoLeft">
-                                    <p className="videothumb__text">666 views • {formatted} </p>
+                                    <p className="videothumb__text">{video.views} views • {formatted} </p>
                                 </div>
                                 <div className="watch__videoInfoRight">
                                     <div className="watch__likeContainer">
                                         <div className="watch__likeWrap">
                                             <div className="watch__likeBtnContainer color--gray">
-                                                <ThumbUpAlt className="watch__icon" />
-                                                <p>3333</p>
+                                                {likeButtonDisabled ? <ThumbUpAlt style={{ color: "green" }} onClick={likedHandle} className="watch__icon" />
+                                                    : <ThumbUpAlt onClick={likedHandle} className="watch__icon" />}
+                                                
+                                                <p>{video.likes}</p>
                                             </div>
-
-                                            <div className="watch__likeBtnContainer color--gray">
-                                                <ThumbDownAlt className="watch__icon" />
-                                                <p>22</p>
-                                            </div>
-
                                         </div>
                                         <div className="watch__likeDislikes" />
 
@@ -67,7 +82,7 @@ const Watch = ({video}) => {
                         <div className="watch__details">
                             <div className="watch__detailsContainer">
                                 <div className="videothumb__details watch_avatarWrap">
-                                    <Avatar style={{cursor:"pointer"}}  onClick={handlePreviewChannel} />
+                                    <Avatar style={{cursor:"pointer"}} src={video.channelImage} onClick={handlePreviewChannel} />
                                     <div className="videothumb__channel">
                                         <h1 className="videothumb_title">
                                             {video.channelName}

@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
 import VideoCard from '../HomePage/VideoCard'
 import './LikedVideo.css'
 import { useAuth } from '../../contexts/AuthContext'
-import { database } from '../../firebase'
 
 export default function LikedVideo() {
-    const { currentUser, likedVideos } = useAuth();
+    const { likedVideos } = useAuth();
     return (
       <div className="liked_video">
           <Header />

@@ -23,6 +23,7 @@ const VideoCard =({ video }) => {
             <div className="videocard_info">
                 <Avatar onClick={handlePreviewChannel}
                     className="videoCard_avatar"
+                    src={video.channelImage}
                     />
 
                 <div className="videocard_channel">
@@ -30,7 +31,7 @@ const VideoCard =({ video }) => {
 
                     <div className="videocard_texts">
                         <p className="videocard_text" onClick={handlePreviewChannel}>{video.channelName}</p>
-                        <p className="videocard_text">123 views • {uploadedTime}</p>
+                        <p className="videocard_text">{video.views} views • {uploadedTime}</p>
                     </div>
                 </div>
             </div>

@@ -17,8 +17,8 @@ export function AuthProvider({children}){
     const [ videoUploadOpen, setVideoUploadOpen] = useState(false)
     const [ videos, setvideos] = useState([])
     const [ currentUserData, setCurrentUserData] = useState()
-    const [ myVideos, setMyVideos] = useState()
-    const [ likedVideos, setLikedVideos] = useState()
+    const [ likedVideos, setLikedVideos] = useState([])
+    
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
         
@@ -32,6 +32,19 @@ export function AuthProvider({children}){
     }
     function resetPassword(email){
         return auth.sendPasswordResetEmail(email)
+    }
+    function updateViews(video){
+        database.videos.doc(video.id.toString()).update({
+            views : video.views + 1
+        })
+    }
+    function likeVideo(video){
+        if(currentUser){
+            database.users.doc(currentUser.uid).collection("liked").doc(video.id).set(video);
+        }
+        database.videos.doc(video.id.toString()).update({
+            likes: video.likes + 1
+        })
     }
     function updatepassword(password){
         return (currentUser.updatePassword(password))
@@ -64,15 +77,11 @@ export function AuthProvider({children}){
 
    useEffect(() => {
        if(currentUser){
-        database.videos.where("UserID","==",currentUser.uid.toString()).get().then((querySnapshot) => {
-            setMyVideos(querySnapshot.docs.map((doc) => doc.data()));
-        })
-        database.users.doc(currentUser.uid).collection("liked").onSnapshot((querySnapShot) => {
-            if(querySnapShot.exists){
+        database.users.doc(currentUser.uid).collection("liked").get().then((querySnapShot) => {
+            
                 setLikedVideos(querySnapShot.docs.map((doc) => doc.data()));
-            }
-            console.log(querySnapShot[0])
-        })
+            
+        },[currentUser])
        }
    },[currentUser])
 
@@ -88,7 +97,9 @@ export function AuthProvider({children}){
         videoUploadOpen,
         setVideoUploadOpen,
         currentUserData,
-        likedVideos
+        likedVideos,
+        likeVideo,
+        updateViews
     }
     return(
         <AuthContext.Provider value={value}>

@@ -51,7 +51,7 @@ function SelectVideo() {
 
                             </div>
                             <div className="text_div">
-                                <p className="text">Drag and Drop Videos</p>
+                                <p className="text">Select Video</p>
                             </div>
                         </DialogContent>
                     </>
