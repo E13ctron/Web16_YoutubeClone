@@ -14,6 +14,13 @@
 
 .videocard_info{
     display: flex;
+    justify-content: space-between;
+}
+.videocard_info_left{
+    display: flex;
+}
+.videocard_info_right{
+    display: flex;
 }
 
 .videocard_channel {
