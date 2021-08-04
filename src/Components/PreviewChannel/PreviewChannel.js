@@ -18,6 +18,7 @@ const PreviewChannel = () => {
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
     const {videos,subscriptions,subscribeChannel} = useAuth();
+    const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     console.log(videos)
     //Below loop is to get channel name :/ :/
     var v;
@@ -34,18 +35,24 @@ const PreviewChannel = () => {
 
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
     function handleSubscribeClick(){
-        if(subscribe==="SUBSCRIBE"){
+        // if(subscribe==="SUBSCRIBE") 
+        if(!subscribeBtnState)
+        {
      setSubscribe("SUBSCRIBED");
+     setSubscribeBtnState(true)
      subscribeChannel(channel)
-            }else{
-            setSubscribe("SUBSCRIBE"); 
-        }
+            }
+        // else{
+        //     setSubscribe("SUBSCRIBE"); 
+        //     setSubscribeBtnState(false)
+        // }
     }
 
     useEffect(() => {
         for(var i = 0;i < subscriptions.length;i++){
-            if(subscriptions[i].id === channel){
-                setSubscribe("SUBSCRIBE")
+            if(subscriptions[i].name === channel){
+                setSubscribe("SUBSCRIBED")
+                setSubscribeBtnState(true)
             }
         }
     },[subscriptions,channel])
@@ -67,8 +74,10 @@ const PreviewChannel = () => {
                                     <p  className="videothumb__text watch__subCount">2M Subscribers</p>
                                 </div>
                             </div>
-                                <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn channel_subBtn" : "watch__subBtn_subbed channel_subBtn" }
-                                 color="primary" variant="contained">{subscribe}</Button>
+                                {/* <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn channel_subBtn" : "watch__subBtn_subbed channel_subBtn" }
+                                 color="primary" variant="contained">{subscribe}</Button> */}
+                               {subscribeBtnState ?  <Button className="watch__subBtn_subbed channel_subBtn"
+                                 color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
                             </div>
                             <div className="channel_links">
                               {/* <div className="channel_link">

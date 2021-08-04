@@ -48,10 +48,11 @@ export function AuthProvider({children}){
         })
     }
     function subscribeChannel(previewedChannel){
-        db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).add({
+        db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).set({
             name:previewedChannel
         })
-        db.collection("IndividualUsers").doc(previewedChannel.email).update({
+        db.collection("IndividualUsers").doc(previewedChannel).set({
+            name:previewedChannel,
             subscriberNumber: subscriberNumber + 1
         })
     }
