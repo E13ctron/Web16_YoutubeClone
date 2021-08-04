@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { db } from "../firebase"
 import { auth } from "../firebase"
+import { database } from '../firebase'
+
 
 const AuthContext = React.createContext()
 
@@ -9,11 +12,15 @@ export function useAuth() {
     )
 }
 export function AuthProvider({children}){
-    const [currentUser, setCurrentUser] = useState()
-    const [loading, setLoading] = useState(true)
-
+    const [ currentUser, setCurrentUser] = useState()
+    const [ loading, setLoading] = useState(true)
+    const [ videoUploadOpen, setVideoUploadOpen] = useState(false)
+    const [ videos, setvideos] = useState([])
+    const [ currentUserData, setCurrentUserData] = useState()
+    
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
+        
     }
     function login(email, password){
         return(auth.signInWithEmailAndPassword(email, password))
@@ -25,19 +32,49 @@ export function AuthProvider({children}){
     function resetPassword(email){
         return auth.sendPasswordResetEmail(email)
     }
+    function updatepassword(password){
+        return (currentUser.updatePassword(password))
+    }
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
-            setLoading(false)
             setCurrentUser(user)
+            setLoading(false)
         })
         return unsubscribe;
     }, [])
+
+    useEffect(() => {
+        db.collection("Videos").onSnapshot((snapshot) => {
+            setvideos(snapshot.docs.map((doc) => doc.data()));
+        })
+    }, []);
+
+    console.log(videos)
+
+    useEffect(() => {
+        if(currentUser){
+            database.users.doc(currentUser.uid.toString()).get().then((doc) => {
+                if(doc.exists){
+                    setCurrentUserData(doc.data())
+                }
+            })
+        }
+    })       
+
+
     const value = {
+        videos,
+        loading,
         signup,
         currentUser,
         signout,
         resetPassword,
-        login
+        login,
+        updatepassword,
+        videoUploadOpen,
+        setVideoUploadOpen,
+        currentUserData,
+        
     }
     return(
         <AuthContext.Provider value={value}>

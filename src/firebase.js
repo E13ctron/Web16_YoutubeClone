@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore"
 
 const app = firebase.initializeApp({
     apiKey: "AIzaSyAUcNy7KFH3Ie93PyMShBfjcFaCJMRHpqI",
@@ -10,6 +11,13 @@ const app = firebase.initializeApp({
     appId: "1:875587869400:web:8823ebf424183ccf1495ad",
     measurementId: "G-GJ8F7F6G0Z"
 })
+const firestore = app.firestore()
+export const database = {
+    users: firestore.collection("users"),
+    videos: firestore.collection("Videos")
+}
 export const auth = app.auth()
+export const db = firebase.firestore();
+export const storage = firebase.storage();
 
 export default app;

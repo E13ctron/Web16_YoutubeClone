@@ -1,0 +1,15 @@
+.profile{
+    text-align: center;
+    flex: 0.83;
+}
+.profile_card{
+    max-width: 300px;
+    margin: auto;
+    margin-top: 30px;
+}
+.body{
+    display:flex
+}
+email_div{
+    margin-top: 20px;
+}
