@@ -6,10 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './contexts/AuthContext'
 import "bootstrap/dist/css/bootstrap.min.css"
 
+const loader = document.querySelector('.loader');
+
+const showLoader = () => loader.classList.remove('loader--hide', 'bar--hide');
+
+const hideLoader = () => loader.classList.add('loader--hide', 'bar--hide');
+
+
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <App
+      hideLoader={hideLoader} 
+      showLoader={showLoader}
+      />
     </AuthProvider>  
   </React.StrictMode>,
   document.getElementById('root')

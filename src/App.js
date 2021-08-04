@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Login from "./Components/Authentication/Login"
 import Signup from "./Components/Authentication/Signup"
@@ -18,7 +18,10 @@ import Account from './Components/Settings/Account';
 import Header from './Components/Header/Header';
 import SelectVideo from './Components/VideoUpload/SelectVideo';
 
-function App() {
+
+
+const App=({ hideLoader })=> {
+  useEffect(hideLoader, []);
   const { videos } = useAuth();
   
   return (
