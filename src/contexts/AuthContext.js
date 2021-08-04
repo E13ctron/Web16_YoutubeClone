@@ -18,6 +18,8 @@ export function AuthProvider({children}){
     const [ videos, setvideos] = useState([])
     const [ currentUserData, setCurrentUserData] = useState()
     const [ likedVideos, setLikedVideos ] = useState([])
+    const [ deleteVideoOpen , setDeleteVideoOpen] = useState(false)
+    const [ videoDeleted, setVideoDeleted] = useState()
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -96,7 +98,11 @@ export function AuthProvider({children}){
         currentUserData,
         likedVideos,
         likeVideo,
-        updateViews
+        updateViews,
+        deleteVideoOpen,
+        setDeleteVideoOpen,
+        videoDeleted,
+        setVideoDeleted
     }
     return(
         <AuthContext.Provider value={value}>
