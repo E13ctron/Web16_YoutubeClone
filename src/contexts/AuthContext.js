@@ -51,7 +51,7 @@ export function AuthProvider({children}){
     }, [])
 
     useEffect(() => {
-        db.collection("Videos").onSnapshot((snapshot) => {
+        db.collection("Videos").orderBy("views","desc").onSnapshot((snapshot) => {
             setvideos(snapshot.docs.map((doc) => doc.data()));
         })
     }, []);
