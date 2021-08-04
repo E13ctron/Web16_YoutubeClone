@@ -75,6 +75,7 @@ export function AuthProvider({children}){
         }
     })       
 
+
    useEffect(() => {
        if(currentUser){
         database.users.doc(currentUser.uid).collection("liked").get().then((querySnapShot) => {
@@ -82,9 +83,7 @@ export function AuthProvider({children}){
                 setLikedVideos(querySnapShot.docs.map((doc) => doc.data()));
             
         },[currentUser])
-       }
-   },[currentUser])
-
+         
     const value = {
         videos,
         loading,
