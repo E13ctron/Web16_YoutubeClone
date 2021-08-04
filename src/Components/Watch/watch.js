@@ -16,6 +16,7 @@ const Watch = ({video}) => {
     const [showDesc, setShowDesc] = useState(false);
     const handlePreviewChannel = () => history.push("/PreviewChannel")
     const { videos, likedVideos, likeVideo, updateViews } = useAuth()
+    const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const views = video.views;
     const formatted = moment
@@ -23,6 +24,7 @@ const Watch = ({video}) => {
     .format("MMM DD, YYYY  ");
 
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+   
     function handleSubscribeClick(){
         if(subscribe==="SUBSCRIBE"){
      setSubscribe("SUBSCRIBED");
@@ -37,10 +39,13 @@ const Watch = ({video}) => {
             }
         }
     },[likedVideos,video])
-    console.log("running")
+    
      useEffect(() => {
-        updateViews(video)
-     },[])
+        if(!viewsUpdated){
+            updateViews(video)
+            setViewsUpdated(true)
+        }
+     },[video,viewsUpdated, updateViews])
     
 
     function handleLike(){
