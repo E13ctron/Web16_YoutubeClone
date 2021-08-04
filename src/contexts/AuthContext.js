@@ -12,14 +12,12 @@ export function useAuth() {
     )
 }
 export function AuthProvider({children}){
-    const [currentUser, setCurrentUser] = useState()
-    const [loading, setLoading] = useState(true)
-    const [videoUploadOpen, setVideoUploadOpen] = useState(false)
-
-    const[videos, setvideos] = useState([])
-
-    const [currentUserData, setCurrentUserData] = useState()
-    const [myVideos, setMyVideos] = useState()
+    const [ currentUser, setCurrentUser] = useState()
+    const [ loading, setLoading] = useState(true)
+    const [ videoUploadOpen, setVideoUploadOpen] = useState(false)
+    const [ videos, setvideos] = useState([])
+    const [ currentUserData, setCurrentUserData] = useState()
+    
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
         
@@ -62,25 +60,21 @@ export function AuthProvider({children}){
             })
         }
     })       
-   useEffect(() => {
-       if(currentUser){
-        database.videos.where("UserID","==",currentUser.uid.toString()).get().then((querySnapshot) => {
-            setMyVideos(querySnapshot.docs.map((doc) => doc.data()));
-        })
-       }
-   },[currentUser])
+
+
     const value = {
         videos,
+        loading,
         signup,
         currentUser,
         signout,
         resetPassword,
         login,
         updatepassword,
-        myVideos,
         videoUploadOpen,
         setVideoUploadOpen,
-        currentUserData
+        currentUserData,
+        
     }
     return(
         <AuthContext.Provider value={value}>

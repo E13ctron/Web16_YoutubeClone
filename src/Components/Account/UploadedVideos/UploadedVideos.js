@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Header from '../../Header/Header'
 import Sidebar from '../Sidebar'
 import VideoCard from '../../HomePage/VideoCard'
@@ -7,8 +7,11 @@ import './uploadedvideo.css'
 
 
 function UploadedVideos() {
-    const {myVideos} = useAuth()
-    
+    const {videos, currentUser} = useAuth()
+    const [myVideos, setMyVideos] = useState()
+    useEffect(() => {
+        setMyVideos(videos.filter((video) => video.email === currentUser.email))
+    },[currentUser, videos])
 
     return (
         <div>

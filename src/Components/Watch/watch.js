@@ -1,32 +1,47 @@
-import React from 'react'
-import Header from "../Header/Header"
+import React, {useState} from 'react'
+//import Header from "../Header/Header"
 import "./watch.css"
-import videoURL from "../../assets/videos/video.mp4"
+//import videoURL from "../../assets/videos/video.mp4"
 import { ThumbUpAlt, ThumbDownAlt, MoreHoriz, Reply, PlaylistAdd } from '@material-ui/icons'
 import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
 import { useHistory } from 'react-router-dom'
+import moment from "moment";
+import { useAuth } from "../../contexts/AuthContext";
+import useScrollTop from '../useScrollTop'
 
-
-const Watch = () => {
+const Watch = ({video}) => {
+    useScrollTop();
     const history = useHistory();
+    const [showDesc, setShowDesc] = useState(false);
     const handlePreviewChannel = () => history.push("/PreviewChannel")
+    const { videos } = useAuth()
+    const formatted = moment
+    .unix(video?.timestamp?.seconds)
+    .format("MMM DD, YYYY  ");
+
+    const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+    function handleSubscribeClick(){
+        if(subscribe==="SUBSCRIBE"){
+     setSubscribe("SUBSCRIBED");
+        }else{
+            setSubscribe("SUBSCRIBE"); 
+        }
+    }
     return (
         <>
-            <div>
-                <Header />
-            </div>
+            
             <div className="watch">
                 <div className="watch__wrap">
                     <div className="watch__left">
                         <video className="watch__video" controls autoPlay>
-                            <source src={videoURL} type="video/mp4" />
+                            <source src={video.videoURL} type="video/mp4" />
                         </video>
                         <div className="watch__leftBtn">
-                            <h1 className="watch__title">Demo video</h1>
+                            <h1 className="watch__title">{video.title}</h1>
                             <div className="watch__videoInfo">
                                 <div className="watch__videoInfoLeft">
-                                    <p className="videothumb__text">666 views || July 18, 2021 </p>
+                                    <p className="videothumb__text">666 views • {formatted} </p>
                                 </div>
                                 <div className="watch__videoInfoRight">
                                     <div className="watch__likeContainer">
@@ -66,32 +81,32 @@ const Watch = () => {
                                     <Avatar style={{cursor:"pointer"}}  onClick={handlePreviewChannel} />
                                     <div className="videothumb__channel">
                                         <h1 className="videothumb_title">
-                                            Captain Tony
+                                            {video.channelName}
                                         </h1>
                                         <p className="videothumb__text watch__subCount">2M Subscribers</p>
 
                                     </div>
                                 </div>
-                                <Button className="watch__subBtn" color="primary" variant="contained">
-                                    SUBSCRIBE
+                                <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn" : "watch__subBtn_subbed" }
+                                  color="primary" variant="contained">
+                                    {subscribe}
                                 </Button>
                             </div>
                             <div className="watch__description">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nisi a labore obcaecati, officia eveniet, praesentium corporis ipsum nobis sed unde quae omnis neque consequuntur cumque. Eum reprehenderit, alias laboriosam ducimus voluptates commodi sapiente blanditiis temporibus repellendus quod similique id.</p>
-                                <p className="watch__showMore">SHOW MORE</p>
+                                <p style={{ maxHeight: showDesc && "100%" }}>
+                                    {video.description}
+                                </p>
+                                <p
+                                    className="watch__showMore"
+                                    onClick={() => setShowDesc(!showDesc)}>
+                                    SHOW {showDesc ? "LESS" : "MORE"}
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div className="watch-right">
-                        <VideoSmall/>
-                        <VideoSmall/>
-                        <VideoSmall/>
-                        <VideoSmall/>
-                        <VideoSmall/>
-                        <VideoSmall/>
-                        <VideoSmall/>
-                        <VideoSmall/>
-                        <VideoSmall/>
+                        {videos.map((item) => 
+                            <VideoSmall video={item} />)}
                     </div>
                 </div>
             </div>
