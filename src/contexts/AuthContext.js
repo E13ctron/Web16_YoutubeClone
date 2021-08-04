@@ -61,7 +61,19 @@ export function AuthProvider({children}){
         //     name:previewedChannel,
         //     subscribers: 0
         // })
-        
+        db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
+            if(snap.exists){
+                db.collection("IndividualUsers").doc(previewedChannel).update({
+                    subscribers: snap.data().subscribers + 1
+                })
+            }
+            else{
+                db.collection("IndividualUsers").doc(previewedChannel).set({
+                    name: previewedChannel,
+                    subscribers: 1
+                })
+            }
+        })
         // db.collection("IndividualUsers").doc(previewedChannel).update({
         //     name:previewedChannel,
         //     subscribers: video.subscribers+1

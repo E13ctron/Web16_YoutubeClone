@@ -19,7 +19,6 @@ const PreviewChannel = () => {
     const [currentChannel,setCurrentChannel] = useState([]);
     const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
-    console.log(videos)
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
@@ -40,6 +39,7 @@ const PreviewChannel = () => {
         {
      setSubscribe("SUBSCRIBED");
      setSubscribeBtnState(true)
+     console.log("subscribeButton clicked")
      subscribeChannel(channel,currentChannel[0])
             }
         // else{
