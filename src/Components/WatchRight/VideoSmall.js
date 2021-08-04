@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 // import photoURL from "../../assets/images/logo192.png"
-import "./VideoSmall.css"<<<<<<< likePage
+import "./VideoSmall.css"
 import moment from 'moment'
 
 
