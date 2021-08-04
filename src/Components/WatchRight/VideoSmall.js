@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 // import photoURL from "../../assets/images/logo192.png"
-import "./VideoSmall.css"
+import "./VideoSmall.css"<<<<<<< likePage
 import moment from 'moment'
 
 
@@ -29,7 +29,9 @@ const VideoSmall = ({channelView=false, video}) => {
                         {video.channelName} 
                     </div>) } 
                     
+
                     <div className="wr-thumb-info">{video.views} views • {uploadedTime}</div>
+
                 </div>
             </div>
            
