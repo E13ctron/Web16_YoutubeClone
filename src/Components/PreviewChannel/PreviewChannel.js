@@ -9,8 +9,6 @@ import { useAuth } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router'
 import useScrollTop from '../useScrollTop'
 
-
-
 const PreviewChannel = () => {
     useScrollTop();
     
@@ -39,7 +37,7 @@ const PreviewChannel = () => {
      setSubscribe("SUBSCRIBED");
      setSubscribeBtnState(true)
      subscribeChannel(channel)
-            }
+         }
     }
     function handleUnSubscribeClick(){
         if(subscribeBtnState)
@@ -49,8 +47,6 @@ const PreviewChannel = () => {
      unsubscribeChannel(channel)
             }
     }
-    
-
     useEffect(() => {
         for(var i = 0;i < subscriptions.length;i++){
             if(subscriptions[i].name === channel){
@@ -59,7 +55,6 @@ const PreviewChannel = () => {
             }
         }
     },[subscriptions,channel])
-    console.log("hellooo")
     return (
         <div>
             <Header />

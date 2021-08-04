@@ -66,7 +66,6 @@ export function AuthProvider({children}){
                 })
             }
         })
-        
     }
     function unsubscribeChannel(previewedChannel){
         db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).delete()
@@ -97,9 +96,6 @@ export function AuthProvider({children}){
             setvideos(snapshot.docs.map((doc) => doc.data()));
         })
     }, []);
-
-    console.log(videos)
-
     useEffect(() => {
         if(currentUser){
             database.users.doc(currentUser.uid.toString()).get().then((doc) => {
@@ -117,7 +113,6 @@ export function AuthProvider({children}){
     useEffect(() => {
         if(currentUser){
             database.users.doc(currentUser.uid.toString()).collection("liked").onSnapshot((QuerySnap) => {
-                
                 setLikedVideos(QuerySnap.docs.map((doc) => doc.data()))
                 
             })
@@ -126,7 +121,6 @@ export function AuthProvider({children}){
     useEffect(() => {
         if(currentUser){
             db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").onSnapshot((snapshot) => {
-                
                 setSubscriptions(snapshot.docs.map((doc) => doc.data()))
                 
             })
