@@ -74,7 +74,7 @@ export function AuthProvider({children}){
     }       
     useEffect(() => {
         if(currentUser){
-            database.users.doc(currentUser.uid.toString()).collection("liked").get().then((QuerySnap) => {
+            database.users.doc(currentUser.uid.toString()).collection("liked").onSnapshot((QuerySnap) => {
                 
                 setLikedVideos(QuerySnap.docs.map((doc) => doc.data()))
                 
