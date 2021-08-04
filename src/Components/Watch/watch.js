@@ -18,7 +18,7 @@ const Watch = ({video}) => {
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
     const handlePreviewChannel = () => history.push("/PreviewChannel")
-    const { videos, likedVideos, likeVideo, updateViews } = useAuth()
+    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const views = video.views;
@@ -57,6 +57,12 @@ const Watch = ({video}) => {
             setLikeButtonDisabled(true)
         }
     }
+    function handleUnLike(){
+        if(likeButtonDisabled){
+            unlikeVideo(video)
+            setLikeButtonDisabled(false)
+        }
+    }
     function share(){
         const url = window.location.href
         navigator.clipboard.writeText(url)
@@ -81,7 +87,7 @@ const Watch = ({video}) => {
                                     <div className="watch__likeContainer">
                                         <div className="watch__likeWrap">
                                             <div className="watch__likeBtnContainer color--gray">
-                                                {likeButtonDisabled ? <ThumbUpAlt onClick={handleLike} style={{ color: "blue" }} className="watch__icon" />
+                                                {likeButtonDisabled ? <ThumbUpAlt onClick={handleUnLike} style={{ color: "blue" }} className="watch__icon" />
                                                 :
                                                 <ThumbUpAlt onClick={handleLike} className="watch__icon" />
                                                 }

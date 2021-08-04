@@ -17,7 +17,7 @@ const PreviewChannel = () => {
     console.log(currentLocation);
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos,subscriptions,subscribeChannel} = useAuth();
+    const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     console.log(videos)
     //Below loop is to get channel name :/ :/
@@ -40,13 +40,22 @@ const PreviewChannel = () => {
         {
      setSubscribe("SUBSCRIBED");
      setSubscribeBtnState(true)
-     subscribeChannel(channel)
+     subscribeChannel(channel,currentChannel[0])
             }
         // else{
         //     setSubscribe("SUBSCRIBE"); 
         //     setSubscribeBtnState(false)
         // }
     }
+    function handleUnSubscribeClick(){
+        if(subscribeBtnState)
+        {
+     setSubscribe("SUBSCRIBE");
+     setSubscribeBtnState(false)
+     unsubscribeChannel(channel,currentChannel[0])
+            }
+    }
+    
 
     useEffect(() => {
         for(var i = 0;i < subscriptions.length;i++){
@@ -76,7 +85,7 @@ const PreviewChannel = () => {
                             </div>
                                 {/* <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn channel_subBtn" : "watch__subBtn_subbed channel_subBtn" }
                                  color="primary" variant="contained">{subscribe}</Button> */}
-                               {subscribeBtnState ?  <Button className="watch__subBtn_subbed channel_subBtn"
+                               {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
                                  color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
                             </div>
                             <div className="channel_links">
