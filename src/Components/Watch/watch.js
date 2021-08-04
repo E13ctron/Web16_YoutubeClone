@@ -9,8 +9,11 @@ import { useHistory } from 'react-router-dom'
 import moment from "moment";
 import { useAuth } from "../../contexts/AuthContext";
 import useScrollTop from '../useScrollTop'
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Watch = ({video}) => {
+    toast.configure()
     useScrollTop();
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
@@ -54,6 +57,11 @@ const Watch = ({video}) => {
             setLikeButtonDisabled(true)
         }
     }
+    function share(){
+        const url = window.location.href
+        navigator.clipboard.writeText(url)
+        toast('Link copied to Clipboard')
+    }
     return (
         <>
             
@@ -86,7 +94,7 @@ const Watch = ({video}) => {
                                         <div className="watch__likeDislikes" />
 
                                     </div>
-                                    <div className="watch__likeBtnContainer color--gray">
+                                    <div onClick={share} className="watch__likeBtnContainer color--gray">
                                         <Reply className="watch__icon share-icon" />
                                         <p>SHARE</p>
                                     </div>
