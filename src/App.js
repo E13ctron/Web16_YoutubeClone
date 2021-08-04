@@ -15,9 +15,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import UploadedVideos from './Components/Account/UploadedVideos/UploadedVideos';
 import PreviewChannel from './Components/PreviewChannel/PreviewChannel';
 import Account from './Components/Settings/Account';
+import Search from './Components/Search/Search'
 import Header from './Components/Header/Header';
 import SelectVideo from './Components/VideoUpload/SelectVideo';
-
 function App() {
   const { videos } = useAuth();
   
@@ -41,7 +41,7 @@ function App() {
               <PrivateRoute exact path="/My Videos" component={UploadedVideos} />
               <PrivateRoute exact path="/PreviewChannel" component={ PreviewChannel } /> 
               <PrivateRoute exact path="/Account" component={ Account } />
-              
+              <PrivateRoute path="/search" component={ Search } />
               {videos.map((item) => (
                 
                 <Route path={"/watch/"+ item.id.toString()} key={item.id}>
@@ -54,6 +54,7 @@ function App() {
       
       </Router>
     </div>
+
     
 
   )
