@@ -103,10 +103,9 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
         handleUploadThumbnail();
     };
 
-    useEffect(() => {
-        if (uploadedThumbnail && uploadedVideo) {
+    useEffect(() => {        if (uploadedThumbnail && uploadedVideo) {
           db.collection("Videos")
-            .add({
+            .doc(id).set({
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               id: id,
               videoURL: urlVideo,
@@ -116,6 +115,10 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
               channelName: currentUser.displayName,
               email: currentUser.email,
               UserID: currentUser.uid,
+              likes: 0,
+              dislikes: 0,
+              views: 0,
+              channelImage: currentUser.photoURL
             })
             
             .then(() => {

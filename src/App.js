@@ -20,7 +20,6 @@ import SelectVideo from './Components/VideoUpload/SelectVideo';
 
 function App() {
   const { videos } = useAuth();
-  
   return (
     <div>
       <Router>
