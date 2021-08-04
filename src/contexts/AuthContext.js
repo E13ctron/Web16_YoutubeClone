@@ -17,6 +17,7 @@ export function AuthProvider({children}){
     const [ videoUploadOpen, setVideoUploadOpen] = useState(false)
     const [ videos, setvideos] = useState([])
     const [ currentUserData, setCurrentUserData] = useState()
+    const [ likedVideos, setLikedVideos ] = useState([])
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -35,6 +36,12 @@ export function AuthProvider({children}){
     function updatepassword(password){
         return (currentUser.updatePassword(password))
     }
+    function likeVideo(video){
+        database.users.doc(currentUser.uid.toString()).collection("liked").doc(video.id).set(video)
+        database.videos.doc(video.id).update({
+            likes : video.likes + 1
+        })
+    }
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -44,7 +51,7 @@ export function AuthProvider({children}){
     }, [])
 
     useEffect(() => {
-        db.collection("Videos").onSnapshot((snapshot) => {
+        db.collection("Videos").orderBy("views","desc").onSnapshot((snapshot) => {
             setvideos(snapshot.docs.map((doc) => doc.data()));
         })
     }, []);
@@ -59,8 +66,21 @@ export function AuthProvider({children}){
                 }
             })
         }
-    })       
-
+    })
+    function updateViews(video){
+        database.videos.doc(video.id).update({
+            views: video.views + 1
+        })
+    }       
+    useEffect(() => {
+        if(currentUser){
+            database.users.doc(currentUser.uid.toString()).collection("liked").onSnapshot((QuerySnap) => {
+                
+                setLikedVideos(QuerySnap.docs.map((doc) => doc.data()))
+                
+            })
+        }
+    },[currentUser])
 
     const value = {
         videos,
@@ -74,7 +94,9 @@ export function AuthProvider({children}){
         videoUploadOpen,
         setVideoUploadOpen,
         currentUserData,
-        
+        likedVideos,
+        likeVideo,
+        updateViews
     }
     return(
         <AuthContext.Provider value={value}>

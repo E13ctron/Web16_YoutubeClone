@@ -29,7 +29,9 @@ const VideoSmall = ({channelView=false, video}) => {
                         {video.channelName} 
                     </div>) } 
                     
-                    <div className="wr-thumb-info">2k views • {uploadedTime}</div>
+
+                    <div className="wr-thumb-info">{video.views} views • {uploadedTime}</div>
+
                 </div>
             </div>
            
