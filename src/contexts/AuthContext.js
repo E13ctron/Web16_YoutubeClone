@@ -2,14 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { db } from "../firebase"
 import { auth } from "../firebase"
 import { database } from '../firebase'
-// import { useLocation } from 'react-router'
 
 
 const AuthContext = React.createContext()
 
 export function useAuth() {
-    // const currentLocation = useLocation();
-    // const previewedChannel = new URLSearchParams(currentLocation.search).get("name");
     return (
         useContext(AuthContext)
     )
@@ -21,7 +18,6 @@ export function AuthProvider({children}){
     const [ videos, setvideos] = useState([])
     const [ currentUserData, setCurrentUserData] = useState()
     const [ likedVideos, setLikedVideos ] = useState([])
-    const [subscriberNumber, setSubscriberNumber] = useState(0);
     const [subscriptions,setSubscriptions] = useState([])
     
     function signup(email, password){
@@ -53,30 +49,40 @@ export function AuthProvider({children}){
             likes : video.likes - 1
         })
     }
-    function subscribeChannel(previewedChannel,video){
+    function subscribeChannel(previewedChannel){
         db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).set({
             name:previewedChannel
         })
-        // db.collection("IndividualUsers").doc(previewedChannel).set({
-        //     name:previewedChannel,
-        //     subscribers: 0
-        // })
+        db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
+            if(snap.exists){
+                db.collection("IndividualUsers").doc(previewedChannel).update({
+                    subscribers: snap.data().subscribers + 1
+                })
+            }
+            else{
+                db.collection("IndividualUsers").doc(previewedChannel).set({
+                    name: previewedChannel,
+                    subscribers: 1
+                })
+            }
+        })
         
-        // db.collection("IndividualUsers").doc(previewedChannel).update({
-        //     name:previewedChannel,
-        //     subscribers: video.subscribers+1
-        // })
     }
     function unsubscribeChannel(previewedChannel){
         db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).delete()
-        // db.collection("IndividualUsers").doc(previewedChannel).add({
-        //     name:previewedChannel,
-        //     subscribers: subscribers
-        // })
-        // db.collection("IndividualUsers").doc(previewedChannel).update({
-        //     name:previewedChannel,
-        //     subscribers: subscribers -1
-        // })
+        db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
+            if(snap.exists){
+                db.collection("IndividualUsers").doc(previewedChannel).update({
+                    subscribers: snap.data().subscribers - 1
+                })
+            }
+            else{
+                db.collection("IndividualUsers").doc(previewedChannel).set({
+                    name: previewedChannel,
+                    subscribers: 0
+                })
+            }
+        })
     }
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {

@@ -10,16 +10,15 @@ import { useLocation } from 'react-router'
 import useScrollTop from '../useScrollTop'
 
 
+
 const PreviewChannel = () => {
     useScrollTop();
     
     const currentLocation = useLocation();
-    console.log(currentLocation);
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
     const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
-    console.log(videos)
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
@@ -35,24 +34,19 @@ const PreviewChannel = () => {
 
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
     function handleSubscribeClick(){
-        // if(subscribe==="SUBSCRIBE") 
         if(!subscribeBtnState)
         {
      setSubscribe("SUBSCRIBED");
      setSubscribeBtnState(true)
-     subscribeChannel(channel,currentChannel[0])
+     subscribeChannel(channel)
             }
-        // else{
-        //     setSubscribe("SUBSCRIBE"); 
-        //     setSubscribeBtnState(false)
-        // }
     }
     function handleUnSubscribeClick(){
         if(subscribeBtnState)
         {
      setSubscribe("SUBSCRIBE");
      setSubscribeBtnState(false)
-     unsubscribeChannel(channel,currentChannel[0])
+     unsubscribeChannel(channel)
             }
     }
     
@@ -65,6 +59,7 @@ const PreviewChannel = () => {
             }
         }
     },[subscriptions,channel])
+    console.log("hellooo")
     return (
         <div>
             <Header />

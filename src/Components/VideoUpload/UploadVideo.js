@@ -131,11 +131,6 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
               setDescription("");
               closeVideoUpload();
             });
-
-            // db.collection("IndividualUsers").doc(id).set({
-            //   name:currentUser.email,
-            //   subscribers:0
-            // })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [uploadedThumbnail, uploadedVideo]);
