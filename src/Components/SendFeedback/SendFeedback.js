@@ -5,7 +5,7 @@ import './SendFeedback.css';
 // import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { useAuth } from '../../contexts/AuthContext'
-import db from 'firebase';
+import { db } from '../../firebase';
 import firebase from 'firebase';
 import SearchIcon from '@material-ui/icons/Search';
 // import FeedbackIcon from '@material-ui/icons/Feedback';
@@ -18,7 +18,7 @@ function SendFeedback() {
             const [imageUrl, setImageUrl] = useState("");
             const handleSubmit = (e) => {
                 e.preventDefault();
-                db.collection('posts').add({
+                db.collection("posts").add({
                     message: input,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     profilePic: currentUser.photoURL,
