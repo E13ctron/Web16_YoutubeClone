@@ -3,7 +3,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import moment from "moment";
 import Avatar from "@material-ui/core/Avatar";
 import DeleteIcon from "@material-ui/icons/Delete";
-import "./VideoCard.css";
+import "./UV-VideoCard.css";
 import { useHistory } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
@@ -30,7 +30,7 @@ const VideoCard = ({ video }) => {
         src={video.thumbnailURL}
         alt="Thumbnail"
       />
-      <div className="videocard_info">
+      <div className="UV-videocard_info">
         <div className="videocard_info_left">
           <Avatar
             onClick={handlePreviewChannel}
