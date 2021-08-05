@@ -18,6 +18,7 @@ const PreviewChannel = () => {
     const [currentChannel,setCurrentChannel] = useState([]);
     const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
+    const [subscribersCount, setSubscribersCount] = useState()
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
@@ -59,10 +60,10 @@ const PreviewChannel = () => {
     db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
         if(snap.exists){
             var sub = snap.data().subscribers
-            document.querySelector("#subId").textContent= sub + " subscribers";
+            setSubscribersCount(sub)
         }
         else{
-            document.querySelector("#subId").textContent= "0 subscribers";
+            setSubscribersCount(0)
         }
     })
     return (
@@ -80,7 +81,7 @@ const PreviewChannel = () => {
                                 <Avatar className="channel_avatar" />
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
-                                    <p id="subId" className="videothumb__text watch__subCount"></p>
+                                    <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>
                                 </div>
                             </div>
                                {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"

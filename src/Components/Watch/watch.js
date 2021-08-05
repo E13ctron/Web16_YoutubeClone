@@ -27,6 +27,7 @@ const Watch = ({video}) => {
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const [ playing, setPlaying ] = useState(false)
+    const [subscribersCount, setSubscribersCount] = useState()
     function findIndex(){
         for(var i = 0;i < videos.length;i++){
             if(videos[i].id === video.id){
@@ -71,10 +72,11 @@ const Watch = ({video}) => {
         db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
             if(snap.exists){
                 var sub = snap.data().subscribers
-                document.querySelector("#subId").textContent= sub + " subscribers";
+                setSubscribersCount(sub)
+                
             }
             else{
-                document.querySelector("#subId").textContent= "0 subscribers";
+                setSubscribersCount(0)
             }
             
         })
@@ -82,9 +84,6 @@ const Watch = ({video}) => {
     }catch{
         
     }
-    setTimeout(function(){
-        setPlaying(true)
-    },2000)
     toast.configure()
     useScrollTop();
     const views = video.views;
@@ -134,7 +133,7 @@ const Watch = ({video}) => {
                     <ReactPlayer 
                             url={[{src: video.videoURL, type: 'video/mp4'}]} // video location
                             controls
-                            playing={playing}
+                            playing={true}
                             autoplay
                             className="watch__video"
                             height="500px"
@@ -192,7 +191,7 @@ const Watch = ({video}) => {
                                         <h1 className="videothumb_title">
                                             {video.channelName}
                                         </h1>
-                                        <p id="subId" className="videothumb__text watch__subCount"></p>
+                                        <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>
 
                                     </div>
                                 </div>
