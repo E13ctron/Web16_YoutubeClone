@@ -69,8 +69,14 @@ const Watch = ({video}) => {
     },[subscriptions,channel])
     try{
         db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
-            var sub = snap.data().subscribers
-            document.querySelector("#subId").textContent= sub + " subscribers";
+            if(snap.exists){
+                var sub = snap.data().subscribers
+                document.querySelector("#subId").textContent= sub + " subscribers";
+            }
+            else{
+                document.querySelector("#subId").textContent= "0 subscribers";
+            }
+            
         })
     
     }catch{
