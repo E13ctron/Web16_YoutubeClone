@@ -7,7 +7,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import HistoryIcon from '@material-ui/icons/History';
 import PersonIcon from '@material-ui/icons/Person';
 import FeedbackIcon from '@material-ui/icons/Feedback';
-
+import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import "./Sidebar.css"
 
 export default function Sidebar() {
@@ -21,10 +21,11 @@ export default function Sidebar() {
             <SidebarComponent Icon={HomeIcon} title="Home"/>
             <SidebarComponent Icon={FavoriteIcon} title="Liked"/>
             <SidebarComponent Icon={HistoryIcon} title="History" />
+            <SidebarComponent Icon={SubscriptionsIcon} title="Subscriptions" />
             <div className="sidebar-empty"></div>
             <SidebarComponent Icon={PersonIcon} title="Account"/>
             <SidebarComponent Icon={FeedbackIcon} title="Send Feedback"/>
-
+           
         </div>
     )
 }
