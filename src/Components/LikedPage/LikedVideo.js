@@ -1,68 +1,22 @@
 import React from 'react'
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
-import VideoCard from '../HomePage/VideoCard'
 import './LikedVideo.css'
+import { useAuth } from '../../contexts/AuthContext'
+import VideoCard from './VideoCard'
+
+
 export default function LikedVideo() {
+   const { likedVideos } = useAuth()
+   const LikedVideoComponents = likedVideos.map((video) => (
+    <VideoCard video={video} />))
     return (
       <div className="liked_video">
           <Header />
           <div className="liked_video_section">
               <Sidebar />
               <div className="liked_video_body">
-                    {/* <h1>Liked Videos here</h1> */}
-                    <div>
-                    <div className="likedVideo">
-                   <VideoCard
-                    title="Video Title"
-                    views="views"
-                    timestamp="timestamp"
-                    channelimage="https://media.istockphoto.com/vectors/video-camera-play-icon-vector-illustration-design-vector-id1167382298?k=6&m=1167382298&s=612x612&w=0&h=B9RPJ9e0IIVqHDiFxOPKBMT0FYAhaK26CFYnVTSkqnQ="
-                    channel="channel"
-                    image="https://image.shutterstock.com/image-vector/play-button-icon-vector-illustration-260nw-1697833306.jpg"
-                />
-                   <VideoCard
-                    title="Video Title"
-                    views="views"
-                    timestamp="timestamp"
-                    channelimage="https://media.istockphoto.com/vectors/video-camera-play-icon-vector-illustration-design-vector-id1167382298?k=6&m=1167382298&s=612x612&w=0&h=B9RPJ9e0IIVqHDiFxOPKBMT0FYAhaK26CFYnVTSkqnQ="
-                    channel="channel"
-                    image="https://image.shutterstock.com/image-vector/play-button-icon-vector-illustration-260nw-1697833306.jpg"
-                />
-                   <VideoCard
-                    title="Video Title"
-                    views="views"
-                    timestamp="timestamp"
-                    channelimage="https://media.istockphoto.com/vectors/video-camera-play-icon-vector-illustration-design-vector-id1167382298?k=6&m=1167382298&s=612x612&w=0&h=B9RPJ9e0IIVqHDiFxOPKBMT0FYAhaK26CFYnVTSkqnQ="
-                    channel="channel"
-                    image="https://image.shutterstock.com/image-vector/play-button-icon-vector-illustration-260nw-1697833306.jpg"
-                />
-                   <VideoCard
-                    title="Video Title"
-                    views="views"
-                    timestamp="timestamp"
-                    channelimage="https://media.istockphoto.com/vectors/video-camera-play-icon-vector-illustration-design-vector-id1167382298?k=6&m=1167382298&s=612x612&w=0&h=B9RPJ9e0IIVqHDiFxOPKBMT0FYAhaK26CFYnVTSkqnQ="
-                    channel="channel"
-                    image="https://image.shutterstock.com/image-vector/play-button-icon-vector-illustration-260nw-1697833306.jpg"
-                />
-                   <VideoCard
-                    title="Video Title"
-                    views="views"
-                    timestamp="timestamp"
-                    channelimage="https://media.istockphoto.com/vectors/video-camera-play-icon-vector-illustration-design-vector-id1167382298?k=6&m=1167382298&s=612x612&w=0&h=B9RPJ9e0IIVqHDiFxOPKBMT0FYAhaK26CFYnVTSkqnQ="
-                    channel="channel"
-                    image="https://image.shutterstock.com/image-vector/play-button-icon-vector-illustration-260nw-1697833306.jpg"
-                />
-                   <VideoCard
-                    title="Video Title"
-                    views="views"
-                    timestamp="timestamp"
-                    channelimage="https://media.istockphoto.com/vectors/video-camera-play-icon-vector-illustration-design-vector-id1167382298?k=6&m=1167382298&s=612x612&w=0&h=B9RPJ9e0IIVqHDiFxOPKBMT0FYAhaK26CFYnVTSkqnQ="
-                    channel="channel"
-                    image="https://image.shutterstock.com/image-vector/play-button-icon-vector-illustration-260nw-1697833306.jpg"
-                />
-                </div>
-                </div>
+                   {likedVideos.length > 0 ? LikedVideoComponents : <h2>No Liked Videos</h2>}
               </div>
           </div>
       </div>

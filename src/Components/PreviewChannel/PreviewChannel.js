@@ -7,19 +7,17 @@ import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
 import { useAuth } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router'
+import useScrollTop from '../useScrollTop'
+import { db } from '../../firebase'
 
 const PreviewChannel = () => {
-    const currentLocation = useLocation();
-    console.log(currentLocation);
-
-    const channel = new URLSearchParams(currentLocation.search).get("name");
-
-    // console.log(channel);
-
-    const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos} = useAuth();
-    console.log(videos)
+    useScrollTop();
     
+    const currentLocation = useLocation();
+    const channel = new URLSearchParams(currentLocation.search).get("name");
+    const [currentChannel,setCurrentChannel] = useState([]);
+    const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
+    const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
@@ -29,13 +27,39 @@ const PreviewChannel = () => {
             break;
         }
     }
-    // console.log(channelTitleName);
-
     useEffect(() => {
         setCurrentChannel(videos.filter((video) => video.email ===channel));
     }, [channel, videos])
 
-    
+    const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+    function handleSubscribeClick(){
+        if(!subscribeBtnState)
+        {
+     setSubscribe("SUBSCRIBED");
+     setSubscribeBtnState(true)
+     subscribeChannel(channel)
+         }
+    }
+    function handleUnSubscribeClick(){
+        if(subscribeBtnState)
+        {
+     setSubscribe("SUBSCRIBE");
+     setSubscribeBtnState(false)
+     unsubscribeChannel(channel)
+            }
+    }
+    useEffect(() => {
+        for(var i = 0;i < subscriptions.length;i++){
+            if(subscriptions[i].name === channel){
+                setSubscribe("SUBSCRIBED")
+                setSubscribeBtnState(true)
+            }
+        }
+    },[subscriptions,channel])
+    db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
+        var sub = snap.data().subscribers
+        document.querySelector("#subId").textContent= sub + " subscribers";
+    })
     return (
         <div>
             <Header />
@@ -51,15 +75,16 @@ const PreviewChannel = () => {
                                 <Avatar className="channel_avatar" />
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
-                                    <p className="videothumb__text watch__subCount">2M Subscribers</p>
+                                    <p id="subId" className="videothumb__text watch__subCount"></p>
                                 </div>
                             </div>
-                                <Button className="watch__subBtn channel_subBtn" color="primary" variant="contained">SUBSCRIBE</Button>
+                               {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
+                                 color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
                             </div>
                             <div className="channel_links">
-                              <div className="channel_link">
+                              {/* <div className="channel_link">
                                   <p>HOME</p>
-                              </div>
+                              </div> */}
                               <div className="channel_link channel_link-active">
                                   <p>VIDEOS</p>
                                   <div className="channel_link_border"/>
