@@ -8,7 +8,6 @@ import VideoSmall from '../WatchRight/VideoSmall'
 import { useAuth } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router'
 
-
 const PreviewChannel = () => {
     const currentLocation = useLocation();
     console.log(currentLocation);
@@ -74,6 +73,7 @@ const PreviewChannel = () => {
                               <div className="channel_link">
                                   <p>ABOUT</p>
                               </div>
+                              
                             </div>
                     </div>
                     <div className="channel_content">
@@ -83,7 +83,6 @@ const PreviewChannel = () => {
                            })}
                            </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
