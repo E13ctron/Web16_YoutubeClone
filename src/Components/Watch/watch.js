@@ -12,6 +12,7 @@ import useScrollTop from '../useScrollTop'
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../firebase'
+import ReactPlayer from 'react-player'
 
 
 const Watch = ({video}) => {
@@ -19,6 +20,29 @@ const Watch = ({video}) => {
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const channel = video.email
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+    const history = useHistory();
+    const [showDesc, setShowDesc] = useState(false);
+    const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
+    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
+    const [viewsUpdated, setViewsUpdated ] = useState(false)
+    const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
+    const [ playing, setPlaying ] = useState(false)
+    function findIndex(){
+        for(var i = 0;i < videos.length;i++){
+            if(videos[i].id === video.id){
+                return i;
+            }
+        }
+    }
+    function nextVideo(){
+        const currentIndex = findIndex();
+        if(currentIndex + 1 >= videos.length){
+            history.push("/watch/"+ videos[0].id.toString())
+        }
+        else{
+            history.push("/watch/"+ videos[currentIndex+1].id.toString())
+        }
+    }
     function handleSubscribeClick(){
         if(!subscribeBtnState)
         {
@@ -43,21 +67,20 @@ const Watch = ({video}) => {
             }
         }
     },[subscriptions,channel])
-    db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
-        var sub = snap.data().subscribers
-        document.querySelector("#subId").textContent= sub + " subscribers";
-    })
-
-
-
+    try{
+        db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
+            var sub = snap.data().subscribers
+            document.querySelector("#subId").textContent= sub + " subscribers";
+        })
+    
+    }catch{
+        
+    }
+    setTimeout(function(){
+        setPlaying(true)
+    },2000)
     toast.configure()
     useScrollTop();
-    const history = useHistory();
-    const [showDesc, setShowDesc] = useState(false);
-    const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
-    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
-    const [viewsUpdated, setViewsUpdated ] = useState(false)
-    const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const views = video.views;
     const formatted = moment
     .unix(video?.timestamp?.seconds)
@@ -102,9 +125,18 @@ const Watch = ({video}) => {
             <div className="watch">
                 <div className="watch__wrap">
                     <div className="watch__left">
-                        <video className="watch__video" controls autoPlay>
-                            <source src={video.videoURL} type="video/mp4" />
-                        </video>
+                    <ReactPlayer 
+                            url={[{src: video.videoURL, type: 'video/mp4'}]} // video location
+                            controls
+                            playing={playing}
+                            autoplay  
+                            config={{ file: { 
+                            attributes: {
+                            controlsList: 'nodownload'  //<- this is the important bit
+                            }
+                            }}}
+                            onEnded={nextVideo}
+                        />
                         <div className="watch__leftBtn">
                             <h1 className="watch__title">{video.title}</h1>
                             <div className="watch__videoInfo">
