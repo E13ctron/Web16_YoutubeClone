@@ -18,6 +18,7 @@ export function AuthProvider({children}){
     const [ videos, setvideos] = useState([])
     const [ currentUserData, setCurrentUserData] = useState()
     const [ likedVideos, setLikedVideos ] = useState([])
+    const [subscriptions,setSubscriptions] = useState([])
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -42,6 +43,46 @@ export function AuthProvider({children}){
             likes : video.likes + 1
         })
     }
+    function unlikeVideo(video){
+        database.users.doc(currentUser.uid.toString()).collection("liked").doc(video.id).delete(video)
+        database.videos.doc(video.id).update({
+            likes : video.likes - 1
+        })
+    }
+    function subscribeChannel(previewedChannel){
+        db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).set({
+            name:previewedChannel
+        })
+        db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
+            if(snap.exists){
+                db.collection("IndividualUsers").doc(previewedChannel).update({
+                    subscribers: snap.data().subscribers + 1
+                })
+            }
+            else{
+                db.collection("IndividualUsers").doc(previewedChannel).set({
+                    name: previewedChannel,
+                    subscribers: 1
+                })
+            }
+        })
+    }
+    function unsubscribeChannel(previewedChannel){
+        db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).delete()
+        db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
+            if(snap.exists){
+                db.collection("IndividualUsers").doc(previewedChannel).update({
+                    subscribers: snap.data().subscribers - 1
+                })
+            }
+            else{
+                db.collection("IndividualUsers").doc(previewedChannel).set({
+                    name: previewedChannel,
+                    subscribers: 0
+                })
+            }
+        })
+    }
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -55,9 +96,6 @@ export function AuthProvider({children}){
             setvideos(snapshot.docs.map((doc) => doc.data()));
         })
     }, []);
-
-    console.log(videos)
-
     useEffect(() => {
         if(currentUser){
             database.users.doc(currentUser.uid.toString()).get().then((doc) => {
@@ -75,8 +113,15 @@ export function AuthProvider({children}){
     useEffect(() => {
         if(currentUser){
             database.users.doc(currentUser.uid.toString()).collection("liked").onSnapshot((QuerySnap) => {
-                
                 setLikedVideos(QuerySnap.docs.map((doc) => doc.data()))
+                
+            })
+        }
+    },[currentUser])
+    useEffect(() => {
+        if(currentUser){
+            db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").onSnapshot((snapshot) => {
+                setSubscriptions(snapshot.docs.map((doc) => doc.data()))
                 
             })
         }
@@ -96,7 +141,11 @@ export function AuthProvider({children}){
         currentUserData,
         likedVideos,
         likeVideo,
-        updateViews
+        updateViews,
+        subscriptions,
+        subscribeChannel,
+        unsubscribeChannel,
+        unlikeVideo
     }
     return(
         <AuthContext.Provider value={value}>
