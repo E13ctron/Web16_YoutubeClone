@@ -129,7 +129,10 @@ const Watch = ({video}) => {
                             url={[{src: video.videoURL, type: 'video/mp4'}]} // video location
                             controls
                             playing={playing}
-                            autoplay  
+                            autoplay
+                            className="watch__video"
+                            height="500px"
+                            width="800px"
                             config={{ file: { 
                             attributes: {
                             controlsList: 'nodownload'  //<- this is the important bit
