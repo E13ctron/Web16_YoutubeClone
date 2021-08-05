@@ -16,10 +16,10 @@ const PreviewChannel = () => {
     const currentLocation = useLocation();
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos,subscriptions,subscribeChannel,unsubscribeChannel, channelDatas} = useAuth();
+    const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const [subscriberCount, setSubscriberCount ] = useState();
-    const channelData = []
+    
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
@@ -37,8 +37,6 @@ const PreviewChannel = () => {
         db.collection("IndividualUsers").doc(channel).get().then((doc) => {
             setSubscriberCount(doc.data().subscribers)
         })
-        
-    console.log(channelData)
     },[channel])
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
     function handleSubscribeClick(){

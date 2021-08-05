@@ -5,7 +5,6 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import Avatar from "@material-ui/core/Avatar";
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import "./Header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
