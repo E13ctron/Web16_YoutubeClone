@@ -54,7 +54,7 @@ const Watch = ({video}) => {
     useScrollTop();
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
-    const handlePreviewChannel = () => history.push("/PreviewChannel")
+    const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
     const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
