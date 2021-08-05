@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Login from "./Components/Authentication/Login"
 import Signup from "./Components/Authentication/Signup"
@@ -20,7 +20,13 @@ import Header from './Components/Header/Header';
 import Feedback from './Components/SendFeedback/Feedback';
 import SelectVideo from './Components/VideoUpload/SelectVideo';
 import Subscriptions from './Components/Subscriptions/Subscriptions';
-function App() {
+
+
+
+
+const App=({hideLoader})=> {
+ useEffect(hideLoader,[hideLoader])
+ 
   const { videos } = useAuth();
   return (
     <div>
