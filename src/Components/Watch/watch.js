@@ -26,7 +26,6 @@ const Watch = ({video}) => {
     const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
-    const [ playing, setPlaying ] = useState(false)
     const [subscribersCount, setSubscribersCount] = useState()
     function findIndex(){
         for(var i = 0;i < videos.length;i++){
