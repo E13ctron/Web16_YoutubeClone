@@ -11,8 +11,9 @@ import DialogContent from '@material-ui/core/DialogContent'
 import { Close } from '@material-ui/icons'
 import { Button } from 'react-bootstrap'
 function UploadedVideos() {
+
     const {videos, currentUser, deleteVideoOpen, setDeleteVideoOpen, videoDeleted, setVideoDeleted} = useAuth()
-    const [myVideos, setMyVideos] = useState()
+    const [myVideos, setMyVideos] = useState([])
     useEffect(() => {
         setMyVideos(videos.filter((video) => video.email === currentUser.email))
     },[currentUser, videos])
@@ -28,6 +29,9 @@ function UploadedVideos() {
         database.videos.doc(videoDeleted.id).delete()
         setDeleteVideoOpen(false)
     }
+    const myVideosComponents = myVideos.map((video) => (
+        <VideoCard video={video} />
+    ))
     return (
         <div>
             <Header />
@@ -50,9 +54,7 @@ function UploadedVideos() {
                 </Dialog>
                 <Sidebar />
                 <div className="uploadedvideo">
-                {myVideos ? (myVideos.map((video) => (
-                    <VideoCard video={video} />
-                ))) : <h2>No videos</h2>}
+                {myVideos.length > 0 ? myVideosComponents : <h2>No Videos Uploaded Yet</h2>}
                 </div>
             </div>
         </div>

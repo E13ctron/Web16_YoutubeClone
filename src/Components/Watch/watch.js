@@ -11,30 +11,58 @@ import { useAuth } from "../../contexts/AuthContext";
 import useScrollTop from '../useScrollTop'
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { db } from '../../firebase'
+
 
 const Watch = ({video}) => {
+    const {subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
+    const [subscribeBtnState, setSubscribeBtnState] = useState(false);
+    const channel = video.email
+    const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+    function handleSubscribeClick(){
+        if(!subscribeBtnState)
+        {
+     setSubscribe("SUBSCRIBED");
+     setSubscribeBtnState(true)
+     subscribeChannel(channel)
+         }
+    }
+    function handleUnSubscribeClick(){
+        if(subscribeBtnState)
+        {
+     setSubscribe("SUBSCRIBE");
+     setSubscribeBtnState(false)
+     unsubscribeChannel(channel)
+            }
+    }
+    useEffect(() => {
+        for(var i = 0;i < subscriptions.length;i++){
+            if(subscriptions[i].name === channel){
+                setSubscribe("SUBSCRIBED")
+                setSubscribeBtnState(true)
+            }
+        }
+    },[subscriptions,channel])
+    db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
+        var sub = snap.data().subscribers
+        document.querySelector("#subId").textContent= sub + " subscribers";
+    })
+
+
+
     toast.configure()
     useScrollTop();
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
-    const handlePreviewChannel = () => history.push("/PreviewChannel")
-    const { videos, likedVideos, likeVideo, updateViews } = useAuth()
+    const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
+    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const views = video.views;
     const formatted = moment
     .unix(video?.timestamp?.seconds)
     .format("MMM DD, YYYY  ");
-
-    const [subscribe,setSubscribe] = useState("SUBSCRIBE");
-   
-    function handleSubscribeClick(){
-        if(subscribe==="SUBSCRIBE"){
-     setSubscribe("SUBSCRIBED");
-        }else{
-            setSubscribe("SUBSCRIBE"); 
-        }
-    }
+    
     useEffect(() => {
         for(var i = 0;i < likedVideos.length;i++){
             if(likedVideos[i].id === video.id){
@@ -55,6 +83,12 @@ const Watch = ({video}) => {
         if(!likeButtonDisabled){
             likeVideo(video)
             setLikeButtonDisabled(true)
+        }
+    }
+    function handleUnLike(){
+        if(likeButtonDisabled){
+            unlikeVideo(video)
+            setLikeButtonDisabled(false)
         }
     }
     function share(){
@@ -81,7 +115,7 @@ const Watch = ({video}) => {
                                     <div className="watch__likeContainer">
                                         <div className="watch__likeWrap">
                                             <div className="watch__likeBtnContainer color--gray">
-                                                {likeButtonDisabled ? <ThumbUpAlt onClick={handleLike} style={{ color: "blue" }} className="watch__icon" />
+                                                {likeButtonDisabled ? <ThumbUpAlt onClick={handleUnLike} style={{ color: "blue" }} className="watch__icon" />
                                                 :
                                                 <ThumbUpAlt onClick={handleLike} className="watch__icon" />
                                                 }
@@ -117,14 +151,12 @@ const Watch = ({video}) => {
                                         <h1 className="videothumb_title">
                                             {video.channelName}
                                         </h1>
-                                        <p className="videothumb__text watch__subCount">2M Subscribers</p>
+                                        <p id="subId" className="videothumb__text watch__subCount"></p>
 
                                     </div>
                                 </div>
-                                <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn" : "watch__subBtn_subbed" }
-                                  color="primary" variant="contained">
-                                    {subscribe}
-                                </Button>
+                                {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
+                                 color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
                             </div>
                             <div className="watch__description">
                                 <p style={{ maxHeight: showDesc && "100%" }}>

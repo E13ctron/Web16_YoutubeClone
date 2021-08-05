@@ -18,6 +18,7 @@ import Account from './Components/Settings/Account';
 import Search from './Components/Search/Search'
 import Header from './Components/Header/Header';
 import SelectVideo from './Components/VideoUpload/SelectVideo';
+import Subscriptions from './Components/Subscriptions/Subscriptions';
 function App() {
   const { videos } = useAuth();
   return (
@@ -41,6 +42,7 @@ function App() {
               <PrivateRoute exact path="/PreviewChannel" component={ PreviewChannel } /> 
               <PrivateRoute exact path="/Account" component={ Account } />
               <PrivateRoute path="/search" component={ Search } />
+              <PrivateRoute path="/Subscriptions" component={Subscriptions} />
               {videos.map((item) => (
                 
                 <Route path={"/watch/"+ item.id.toString()} key={item.id}>
