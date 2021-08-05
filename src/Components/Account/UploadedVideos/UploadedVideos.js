@@ -8,20 +8,20 @@ import './uploadedvideo.css'
 
 function UploadedVideos() {
     const {videos, currentUser} = useAuth()
-    const [myVideos, setMyVideos] = useState()
+    const [myVideos, setMyVideos] = useState([])
     useEffect(() => {
         setMyVideos(videos.filter((video) => video.email === currentUser.email))
     },[currentUser, videos])
-
+    const myVideosComponents = myVideos.map((video) => (
+        <VideoCard video={video} />
+    ))
     return (
         <div>
             <Header />
             <div className="body">
                 <Sidebar />
                 <div className="uploadedvideo">
-                {myVideos ? (myVideos.map((video) => (
-                    <VideoCard video={video} />
-                ))) : <h2>No videos</h2>}
+                {myVideos.length > 0 ? myVideosComponents : <h2>No Videos Uploaded Yet</h2>}
                 </div>
             </div>
         </div>
