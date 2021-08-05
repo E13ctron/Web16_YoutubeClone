@@ -31,7 +31,7 @@ const VideoCard =({ video }) => {
 
                     <div className="videocard_texts">
                         <p className="videocard_text" onClick={handlePreviewChannel}>{video.channelName}</p>
-                        <p className="videocard_text">{video.views} views • {uploadedTime}</p>
+                        <p className="videocard_text">{uploadedTime}</p>
                     </div>
                 </div>
             </div>

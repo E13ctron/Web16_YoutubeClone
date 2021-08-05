@@ -15,16 +15,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import UploadedVideos from './Components/Account/UploadedVideos/UploadedVideos';
 import PreviewChannel from './Components/PreviewChannel/PreviewChannel';
 import Account from './Components/Settings/Account';
+import Search from './Components/Search/Search'
 import Header from './Components/Header/Header';
+import Feedback from './Components/SendFeedback/Feedback';
 import SelectVideo from './Components/VideoUpload/SelectVideo';
+import Subscriptions from './Components/Subscriptions/Subscriptions';
+
 
 
 
 const App=({hideLoader})=> {
  useEffect(hideLoader,[])
- 
+
   const { videos } = useAuth();
-  
   return (
     <div>
       <Router>
@@ -45,7 +48,9 @@ const App=({hideLoader})=> {
               <PrivateRoute exact path="/My Videos" component={UploadedVideos} />
               <PrivateRoute exact path="/PreviewChannel" component={ PreviewChannel } /> 
               <PrivateRoute exact path="/Account" component={ Account } />
-              
+              <PrivateRoute path="/search" component={ Search } />
+              <PrivateRoute path="/Subscriptions" component={Subscriptions} />
+                 <PrivateRoute exact path="/Send Feedback" component={Feedback} />
               {videos.map((item) => (
                 
                 <Route path={"/watch/"+ item.id.toString()} key={item.id}>
@@ -58,7 +63,6 @@ const App=({hideLoader})=> {
       
       </Router>
     </div>
-    
 
   )
 
