@@ -109,14 +109,7 @@ export default function Header() {
             </div>
             </div>
             <div className="po-down">
-              <div className="add-account">
-                <div className="add-account-icon">
-                <PersonAddIcon/>
-                </div>
-                <div className="add-another-account">
-                  Add another account
-                </div>
-              </div>
+              
               <div className="signout-button">
               <Button onClick={signOut} >Sign Out</Button>
               </div>

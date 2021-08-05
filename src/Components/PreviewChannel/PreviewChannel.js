@@ -7,6 +7,7 @@ import { Avatar, Button } from '@material-ui/core'
 import VideoSmall from '../WatchRight/VideoSmall'
 import { useAuth } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router'
+import { db } from '../../firebase'
 import useScrollTop from '../useScrollTop'
 
 const PreviewChannel = () => {
@@ -15,8 +16,10 @@ const PreviewChannel = () => {
     const currentLocation = useLocation();
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
+    const {videos,subscriptions,subscribeChannel,unsubscribeChannel, channelDatas} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
+    const [subscriberCount, setSubscriberCount ] = useState();
+    const channelData = []
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
@@ -29,7 +32,14 @@ const PreviewChannel = () => {
     useEffect(() => {
         setCurrentChannel(videos.filter((video) => video.email ===channel));
     }, [channel, videos])
-
+    useEffect(() => {
+        
+        db.collection("IndividualUsers").doc(channel).get().then((doc) => {
+            setSubscriberCount(doc.data().subscribers)
+        })
+        
+    console.log(channelData)
+    },[channel])
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
     function handleSubscribeClick(){
         if(!subscribeBtnState)
@@ -37,6 +47,7 @@ const PreviewChannel = () => {
      setSubscribe("SUBSCRIBED");
      setSubscribeBtnState(true)
      subscribeChannel(channel)
+     
          }
     }
     function handleUnSubscribeClick(){
@@ -67,10 +78,13 @@ const PreviewChannel = () => {
                     <div className="channel_details">
                         <div className="channel_detailsWrap">
                             <div className="channel_avatarWrap">
+                                {currentChannel[0] ? <Avatar src={currentChannel[0].channelImage} className="channel_avatar" />
+                                :
                                 <Avatar className="channel_avatar" />
+                                }
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
-                                    <p  className="videothumb__text watch__subCount">2M Subscribers</p>
+                                    <p  className="videothumb__text watch__subCount">{subscriberCount} Subscribers</p>
                                 </div>
                             </div>
                                 {/* <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn channel_subBtn" : "watch__subBtn_subbed channel_subBtn" }

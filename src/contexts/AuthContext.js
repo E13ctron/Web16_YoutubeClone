@@ -20,6 +20,8 @@ export function AuthProvider({children}){
     const [ likedVideos, setLikedVideos ] = useState([])
     const [subscriptions,setSubscriptions] = useState([])
     
+    
+    
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
         
@@ -49,10 +51,12 @@ export function AuthProvider({children}){
             likes : video.likes - 1
         })
     }
+    
     function subscribeChannel(previewedChannel){
         db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).set({
             name:previewedChannel
         })
+        
         db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
             if(snap.exists){
                 db.collection("IndividualUsers").doc(previewedChannel).update({
@@ -145,7 +149,7 @@ export function AuthProvider({children}){
         subscriptions,
         subscribeChannel,
         unsubscribeChannel,
-        unlikeVideo
+        unlikeVideo,
     }
     return(
         <AuthContext.Provider value={value}>

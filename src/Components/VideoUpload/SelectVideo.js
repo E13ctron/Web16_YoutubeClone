@@ -19,8 +19,6 @@ function SelectVideo() {
         }
     };
 
-    console.log(video);
-
     function closeVideoUpload(){
         setVideoUploadOpen(false)
     }
