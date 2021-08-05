@@ -1,0 +1,48 @@
+.videocard {
+    width: 270px;
+    margin-bottom: 40px;
+    margin: 20px;
+    margin-right: 0;
+    height: 236px;
+    cursor: pointer;
+}
+.videocard_image{
+    height: 137px;
+    width: inherit;
+    margin-bottom: 10px;
+}
+
+.videocard_info{
+    display: flex;
+    justify-content: space-between;
+}
+.videocard_info_left{
+    display: flex;
+}
+.videocard_info_right{
+    display: flex;
+}
+
+.videocard_channel {
+    margin-left: 10px;
+}
+
+.videocard_title {
+    font-size: 1.17rem;
+    max-height: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+}
+
+.videocard_texts {
+    margin-top: 5px;
+}
+
+.videocard_text {
+    font-size: 14px;
+    line-height: 5px;
+    color: #aaaaaa !important;
+}

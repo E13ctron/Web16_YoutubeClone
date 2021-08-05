@@ -98,6 +98,7 @@ const PreviewChannel = () => {
                               <div className="channel_link">
                                   <p>ABOUT</p>
                               </div>
+                              
                             </div>
                     </div>
                     <div className="channel_content">
@@ -107,7 +108,6 @@ const PreviewChannel = () => {
                            })}
                            </div>
                     </div>
-                    
                 </div>
             </div>
         </div>

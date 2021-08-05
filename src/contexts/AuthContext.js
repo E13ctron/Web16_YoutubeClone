@@ -18,6 +18,8 @@ export function AuthProvider({children}){
     const [ videos, setvideos] = useState([])
     const [ currentUserData, setCurrentUserData] = useState()
     const [ likedVideos, setLikedVideos ] = useState([])
+    const [ deleteVideoOpen , setDeleteVideoOpen] = useState(false)
+    const [ videoDeleted, setVideoDeleted] = useState()
     const [subscriptions,setSubscriptions] = useState([])
     
     function signup(email, password){
@@ -142,6 +144,10 @@ export function AuthProvider({children}){
         likedVideos,
         likeVideo,
         updateViews,
+        deleteVideoOpen,
+        setDeleteVideoOpen,
+        videoDeleted,
+        setVideoDeleted,
         subscriptions,
         subscribeChannel,
         unsubscribeChannel,

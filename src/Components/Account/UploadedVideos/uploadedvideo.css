@@ -8,3 +8,12 @@
     flex: 0.83;
     margin-top: 20px;
 }
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+.delete-choices{
+    display: flex;
+}
