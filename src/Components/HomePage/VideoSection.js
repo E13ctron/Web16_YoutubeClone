@@ -4,16 +4,16 @@ import "./video-section.css"
 import VideoCard from './VideoCard'
 import { useAuth } from '../../contexts/AuthContext'
 
-const VideoSection = () => {
+function VideoSection(){
     const { videos } = useAuth();
+    
+    const VideoComponents = videos.map(video => <VideoCard video={video} />)
     return (
         <div>
             <h2>Recommended</h2>
 
         <div className="video-section">
-           {videos.map((video) => (
-               <VideoCard video={video} />
-           ))}
+           {videos.length > 0 ? VideoComponents : <h2>No Videos Found</h2>}
         </div>
 
     </div>

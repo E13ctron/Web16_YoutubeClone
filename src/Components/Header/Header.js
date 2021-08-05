@@ -1,7 +1,6 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useRef} from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import Avatar from "@material-ui/core/Avatar";
@@ -19,6 +18,7 @@ export default function Header() {
   const { signout , setVideoUploadOpen, videoUploadOpen, currentUser } = useAuth()
   const [avatarUrl, setAvatarUrl] = useState()
   const history = useHistory()
+  const searchQueryRef = useRef()
 
  useEffect(() => {
   if(currentUser.photoURL){
@@ -27,6 +27,9 @@ export default function Header() {
 
   }
  },[currentUser]) 
+ function search(){
+   history.push("/search/"+ searchQueryRef.current.value)
+ }
   async function signOut(){
     await signout()
     history.push("/")
@@ -60,12 +63,11 @@ export default function Header() {
         />
       </div>
       <div className="hp-mid-header">
-        <input type="text" placeholder=" Search" />
-        <SearchIcon className="searchicon" />
+        <input type="text" ref={searchQueryRef} placeholder=" Search" />
+        <SearchIcon onClick={search} className="searchicon" />
       </div>
       <div className="hp-right-header">
         <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon" />
-        <NotificationsIcon className="hp-right-header-icon" />
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar
           alt=""
