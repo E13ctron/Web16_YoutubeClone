@@ -8,10 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 const loader = document.querySelector('.loader');
 
-const showLoader = () => loader.classList.remove('loader--hide', 'bar--hide');
+const showLoader = () => loader.classList.remove('loader--hide');
 
-const hideLoader = () => loader.classList.add('loader--hide', 'bar--hide');
-
+const hideLoader = () => loader.classList.add('loader--hide');
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +23,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

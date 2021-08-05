@@ -20,8 +20,8 @@ import SelectVideo from './Components/VideoUpload/SelectVideo';
 
 
 
-const App=({ hideLoader })=> {
-  useEffect(hideLoader, []);
+const App=({hideLoader})=> {
+ useEffect(hideLoader,[])
   const { videos } = useAuth();
   
   return (
