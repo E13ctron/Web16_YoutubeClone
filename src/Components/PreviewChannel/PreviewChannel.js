@@ -78,8 +78,6 @@ const PreviewChannel = () => {
                                     <p id="subId" className="videothumb__text watch__subCount"></p>
                                 </div>
                             </div>
-                                {/* <Button onClick={handleSubscribeClick} className={subscribe==="SUBSCRIBE" ? "watch__subBtn channel_subBtn" : "watch__subBtn_subbed channel_subBtn" }
-                                 color="primary" variant="contained">{subscribe}</Button> */}
                                {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
                                  color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
                             </div>
