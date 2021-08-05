@@ -12,7 +12,7 @@ import useScrollTop from '../useScrollTop'
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../firebase'
-import ReactPlayer from 'react-player'
+import Autorenew from "@material-ui/icons/Autorenew";
 
 
 const Watch = ({video}) => {
@@ -27,6 +27,7 @@ const Watch = ({video}) => {
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const [subscribersCount, setSubscribersCount] = useState()
+    const [ autoPlay, setAutoPlay ] = useState(true)
     function findIndex(){
         for(var i = 0;i < videos.length;i++){
             if(videos[i].id === video.id){
@@ -35,12 +36,15 @@ const Watch = ({video}) => {
         }
     }
     function nextVideo(){
-        const currentIndex = findIndex();
+
+        if(autoPlay){
+            const currentIndex = findIndex();
         if(currentIndex + 1 >= videos.length){
             history.push("/watch/"+ videos[0].id.toString())
         }
         else{
             history.push("/watch/"+ videos[currentIndex+1].id.toString())
+        }
         }
     }
     function handleSubscribeClick(){
@@ -123,33 +127,35 @@ const Watch = ({video}) => {
         navigator.clipboard.writeText(url)
         toast('Link copied to Clipboard')
     }
+    function autoPlaySwitch(){
+        setAutoPlay(!autoPlay)
+        
+    }
     return (
         <>
             
             <div className="watch">
                 <div className="watch__wrap">
                     <div className="watch__left">
-                    <ReactPlayer 
-                            url={[{src: video.videoURL, type: 'video/mp4'}]} // video location
-                            controls
-                            playing={true}
-                            autoplay
-                            className="watch__video"
-                            height="500px"
-                            width="800px"
-                            config={{ file: { 
-                            attributes: {
-                            controlsList: 'nodownload'  //<- this is the important bit
-                            }
-                            }}}
-                            onEnded={nextVideo}
-                        />
+                        <video className="watch__video" controls autoPlay onEnded={nextVideo}>
+                            <source src={video.videoURL} type="video/mp4" />
+                        </video>
                         <div className="watch__leftBtn">
+                            <div className="title-and-autoplay">
+
                             <h1 className="watch__title">{video.title}</h1>
+                            {autoPlay && <p className="autoplay-paragraph">Autoplay is On</p>}
+                            { autoPlay ? <Autorenew className="autoplay-icon" onClick={autoPlaySwitch}  />
+                                    :
+                                    <Autorenew className="autoplay-icon" onClick={autoPlaySwitch} style={{color: "#aaa"}}/>   
+                                }
+                            </div>
                             <div className="watch__videoInfo">
                                 <div className="watch__videoInfoLeft">
                                     <p className="videothumb__text">{views} views • {formatted} </p>
                                 </div>
+                                
+                                
                                 <div className="watch__videoInfoRight">
                                     <div className="watch__likeContainer">
                                         <div className="watch__likeWrap">
