@@ -51,14 +51,7 @@ function SendFeedback() {
                     </div>
 
                     <div className="messageSender_button">
-                        {/* <div className="messageSender_option">
-                            <VideocamIcon style={{ color: "red" }} />
-                            <h3>Live Video</h3>
-                        </div> */}
-                        {/* <div className="messageSender_option">
-                            <PhotoLibraryIcon style={{ color: "Green" }} />
-                            <h3>Photo/Video</h3>
-                        </div> */}
+                      
                         {/* <div className="messageSender_option">
                             <InsertEmoticonIcon style={{ color: "orange" }} />
                             <h3>Feeling/activity</h3>
