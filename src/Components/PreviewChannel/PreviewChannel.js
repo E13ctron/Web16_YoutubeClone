@@ -16,7 +16,7 @@ const PreviewChannel = ({video}) => {
     const currentLocation = useLocation();
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos,subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
+    const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const [subscribersCount, setSubscribersCount] = useState()
     //Below loop is to get channel name :/ :/
@@ -96,8 +96,10 @@ const PreviewChannel = ({video}) => {
                                     <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>
                                 </div>
                             </div>
+                              {channel !== currentUser.email &&  <>
                                {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
                                  color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
+                               </> }
                             </div>
                             <div className="channel_links">
                               {/* <div className="channel_link">
