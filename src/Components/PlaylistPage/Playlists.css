@@ -1,0 +1,7 @@
+.body{
+    display: flex;
+}
+.playlists{
+    padding-bottom: 0;
+    flex: 0.83;
+}
