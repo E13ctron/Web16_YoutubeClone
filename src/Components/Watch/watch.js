@@ -13,17 +13,27 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../firebase'
 import Autorenew from "@material-ui/icons/Autorenew";
+import PlaylistVideoAdder from '../Playlist/PlaylistVideoAdder/PlaylistVideoAdder'
 
 
 const Watch = ({video}) => {
-    const {subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
+    const {subscriptions,
+        subscribeChannel,
+        unsubscribeChannel,
+        setPlaylistVideoAdderOpen } = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const channel = video.email
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
     const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
-    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
+    const { videos, 
+        likedVideos, 
+        likeVideo, 
+        unlikeVideo, 
+        updateViews,
+        setCurrentlyPlayedVideo,
+        currentlyPlayedVideo } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const [subscribersCount, setSubscribersCount] = useState()
@@ -108,7 +118,10 @@ const Watch = ({video}) => {
             setViewsUpdated(true)
         }
      },[video,viewsUpdated, updateViews])
-    
+    useEffect(() => {
+        setCurrentlyPlayedVideo(video)
+        console.log(currentlyPlayedVideo)
+    },[setCurrentlyPlayedVideo,currentlyPlayedVideo])
 
     function handleLike(){
         if(!likeButtonDisabled){
@@ -135,6 +148,7 @@ const Watch = ({video}) => {
         <>
             
             <div className="watch">
+                <PlaylistVideoAdder />
                 <div className="watch__wrap">
                     <div className="watch__left">
                         <video className="watch__video" controls autoPlay onEnded={nextVideo}>
@@ -177,9 +191,9 @@ const Watch = ({video}) => {
                                         <Reply className="watch__icon share-icon" />
                                         <p>SHARE</p>
                                     </div>
-                                    <div className="watch__likeBtnContainer color--gray">
+                                    <div  className="watch__likeBtnContainer color--gray">
                                         <PlaylistAdd className="watch__icon play-addicon" />
-                                        <p>SAVE</p>
+                                        <p onClick={() => setPlaylistVideoAdderOpen(true)} >SAVE</p>
                                     </div>
                                     <div className="watch__likeBtnContainer color--gray">
                                         <MoreHoriz className="watch__icon play-addicon" />

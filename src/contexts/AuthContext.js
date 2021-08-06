@@ -22,6 +22,8 @@ export function AuthProvider({children}){
     const [ videoDeleted, setVideoDeleted] = useState()
     const [subscriptions,setSubscriptions] = useState([])
     const [ playlistCreatorOpen, setPlaylistCreatorOpen] = useState(false)
+    const [playlistVideoAdderOpen, setPlaylistVideoAdderOpen] = useState(false)
+    const [ currentPlayedVideo, setCurrentlyPlayedVideo ] = useState()
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -154,7 +156,11 @@ export function AuthProvider({children}){
         unsubscribeChannel,
         unlikeVideo,
         playlistCreatorOpen,
-        setPlaylistCreatorOpen
+        setPlaylistCreatorOpen,
+        playlistVideoAdderOpen, 
+        setPlaylistVideoAdderOpen,
+        currentPlayedVideo, 
+        setCurrentlyPlayedVideo
     }
     return(
         <AuthContext.Provider value={value}>
