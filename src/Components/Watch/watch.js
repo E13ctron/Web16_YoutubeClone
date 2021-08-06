@@ -121,7 +121,7 @@ const Watch = ({video}) => {
     useEffect(() => {
         setCurrentlyPlayedVideo(video)
         console.log(currentlyPlayedVideo)
-    },[setCurrentlyPlayedVideo,currentlyPlayedVideo])
+    },[setCurrentlyPlayedVideo,currentlyPlayedVideo,video])
 
     function handleLike(){
         if(!likeButtonDisabled){

@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useRef} from 'react'
+import React, {useState, useRef} from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import { Divider } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-import { Form, Button, Alert } from 'react-bootstrap'
+import { Form, Button} from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext'
 import { database } from '../../firebase'
 import './playlistcreator.css'
 function PlaylistCreator() {
-    const { playlistCreatorOpen,setPlaylistCreatorOpen, videos, currentUser} = useAuth()
-    const [ toBeChosen, setToBeChosen ] = useState([])
+    const { playlistCreatorOpen,setPlaylistCreatorOpen, currentUser} = useAuth()
+    
     const [ processing, setProcessing ] = useState(false)
-    const [ currentPlaylists, setCurrentPlaylists] = useState([])
+    
     const playlistNameRef = useRef()
     function closePlaylistCreator(){
         setPlaylistCreatorOpen(false)
