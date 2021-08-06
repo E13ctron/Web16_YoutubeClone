@@ -37,17 +37,6 @@
     display: flex;
     justify-content: space-between;
 }
-.title-and-autoplay{
-    display: flex;
-    justify-content: space-between;
-}
-.autoplay-paragraph{
-    margin: 10px;
-    color: #aaa;
-}
-.autoplay-icon{
-    margin: 10px;
-}
 
 .watch__likeBtnContainer{
     display: flex;

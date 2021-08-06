@@ -1,5 +1,4 @@
-
-.profile-body{
+.profile{
     text-align: center;
     flex: 0.83;
 }
@@ -13,15 +12,4 @@
 }
 email_div{
     margin-top: 20px;
-}
-.profile-body{
-    display:flex;
-    justify-content: space-between;
-    padding-left: 200px;
-}
-.profile-video-data{
-    margin-right: 100px;
-}
-.profile-display{
-    margin-top: 100px;
 }

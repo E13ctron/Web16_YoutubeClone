@@ -6,24 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './contexts/AuthContext'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-const loader = document.querySelector('.loader');
-
-// const showLoader = () => loader.classList.remove('loader--hide');
-
-const hideLoader = () => loader.classList.add('loader--hide');
-
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <App
-      hideLoader={hideLoader} 
-      
-      />
+      <App />
     </AuthProvider>  
   </React.StrictMode>,
   document.getElementById('root')
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

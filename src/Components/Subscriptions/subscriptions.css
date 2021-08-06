@@ -1,9 +1,3 @@
 .body{
     display: flex;
 }
-.subscriptions{
-    padding-bottom: 0;
-    display: flex;
-    flex-wrap: wrap;
-    flex: 0.83;
-}

@@ -18,6 +18,9 @@ function SelectVideo() {
             setVideo(e.target.files[0]);
         }
     };
+
+    console.log(video);
+
     function closeVideoUpload(){
         setVideoUploadOpen(false)
     }

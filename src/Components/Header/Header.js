@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef} from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import Avatar from "@material-ui/core/Avatar";
@@ -68,6 +69,7 @@ export default function Header() {
       </div>
       <div className="hp-right-header">
         <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon" />
+        <NotificationsIcon className="hp-right-header-icon" />
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar
           alt=""

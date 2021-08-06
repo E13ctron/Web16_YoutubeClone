@@ -12,14 +12,7 @@
     margin-bottom: 10px;
 }
 
-.UV-videocard_info{
-    display: flex;
-    justify-content: space-between;
-}
-.videocard_info_left{
-    display: flex;
-}
-.videocard_info_right{
+.videocard_info{
     display: flex;
 }
 
