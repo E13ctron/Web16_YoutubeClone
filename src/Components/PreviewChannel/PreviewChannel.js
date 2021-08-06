@@ -10,7 +10,7 @@ import { useLocation } from 'react-router'
 import useScrollTop from '../useScrollTop'
 import { db } from '../../firebase'
 
-const PreviewChannel = () => {
+const PreviewChannel = ({video}) => {
     useScrollTop();
     
     const currentLocation = useLocation();
@@ -28,9 +28,20 @@ const PreviewChannel = () => {
             break;
         }
     }
+
+    //code to get default gmail image
+    var channelIMG;
+    for(v=0;v<videos.length; v++){
+        if(videos[v].email===channel){
+            channelIMG=videos[v].channelImage;
+            break;
+        }
+    }
     useEffect(() => {
         setCurrentChannel(videos.filter((video) => video.email ===channel));
     }, [channel, videos])
+
+    
 
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
     function handleSubscribeClick(){
@@ -66,6 +77,7 @@ const PreviewChannel = () => {
             setSubscribersCount(0)
         }
     })
+    
     return (
         <div>
             <Header />
@@ -78,7 +90,7 @@ const PreviewChannel = () => {
                     <div className="channel_details">
                         <div className="channel_detailsWrap">
                             <div className="channel_avatarWrap">
-                                <Avatar className="channel_avatar" />
+                                <Avatar src={channelIMG} className="channel_avatar" />
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
                                     <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>
