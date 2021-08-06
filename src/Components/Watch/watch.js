@@ -12,6 +12,7 @@ import useScrollTop from '../useScrollTop'
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../firebase'
+import Autorenew from "@material-ui/icons/Autorenew";
 
 
 const Watch = ({video}) => {
@@ -19,6 +20,33 @@ const Watch = ({video}) => {
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const channel = video.email
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+    const history = useHistory();
+    const [showDesc, setShowDesc] = useState(false);
+    const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
+    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
+    const [viewsUpdated, setViewsUpdated ] = useState(false)
+    const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
+    const [subscribersCount, setSubscribersCount] = useState()
+    const [ autoPlay, setAutoPlay ] = useState(true)
+    function findIndex(){
+        for(var i = 0;i < videos.length;i++){
+            if(videos[i].id === video.id){
+                return i;
+            }
+        }
+    }
+    function nextVideo(){
+
+        if(autoPlay){
+            const currentIndex = findIndex();
+        if(currentIndex + 1 >= videos.length){
+            history.push("/watch/"+ videos[0].id.toString())
+        }
+        else{
+            history.push("/watch/"+ videos[currentIndex+1].id.toString())
+        }
+        }
+    }
     function handleSubscribeClick(){
         if(!subscribeBtnState)
         {
@@ -43,25 +71,33 @@ const Watch = ({video}) => {
             }
         }
     },[subscriptions,channel])
-    db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
-        var sub = snap.data().subscribers
-        document.querySelector("#subId").textContent= sub + " subscribers";
-    })
 
 
+
+    try{
+        db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
+            if(snap.exists){
+                var sub = snap.data().subscribers
+                setSubscribersCount(sub)
+                
+            }
+            else{
+                setSubscribersCount(0)
+            }
+            
+        })
+    
+    }catch{
+        
+    }
+  
     useEffect(() => {
         db.collection('users').doc(currentUser.uid).collection("history").doc(video.id).set(video)
         
         })
-
+        
     toast.configure()
     useScrollTop();
-    const history = useHistory();
-    const [showDesc, setShowDesc] = useState(false);
-    const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
-    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
-    const [viewsUpdated, setViewsUpdated ] = useState(false)
-    const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const views = video.views;
     const formatted = moment
     .unix(video?.timestamp?.seconds)
@@ -100,21 +136,35 @@ const Watch = ({video}) => {
         navigator.clipboard.writeText(url)
         toast('Link copied to Clipboard')
     }
+    function autoPlaySwitch(){
+        setAutoPlay(!autoPlay)
+        
+    }
     return (
         <>
             
             <div className="watch">
                 <div className="watch__wrap">
                     <div className="watch__left">
-                        <video className="watch__video" controls autoPlay>
+                        <video className="watch__video" controls autoPlay onEnded={nextVideo}>
                             <source src={video.videoURL} type="video/mp4" />
                         </video>
                         <div className="watch__leftBtn">
+                            <div className="title-and-autoplay">
+
                             <h1 className="watch__title">{video.title}</h1>
+                            {autoPlay && <p className="autoplay-paragraph">Autoplay is On</p>}
+                            { autoPlay ? <Autorenew className="autoplay-icon" onClick={autoPlaySwitch}  />
+                                    :
+                                    <Autorenew className="autoplay-icon" onClick={autoPlaySwitch} style={{color: "#aaa"}}/>   
+                                }
+                            </div>
                             <div className="watch__videoInfo">
                                 <div className="watch__videoInfoLeft">
                                     <p className="videothumb__text">{views} views • {formatted} </p>
                                 </div>
+                                
+                                
                                 <div className="watch__videoInfoRight">
                                     <div className="watch__likeContainer">
                                         <div className="watch__likeWrap">
@@ -155,7 +205,7 @@ const Watch = ({video}) => {
                                         <h1 className="videothumb_title">
                                             {video.channelName}
                                         </h1>
-                                        <p id="subId" className="videothumb__text watch__subCount"></p>
+                                        <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>
 
                                     </div>
                                 </div>
