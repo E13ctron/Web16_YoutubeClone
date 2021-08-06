@@ -24,7 +24,7 @@ function Profile() {
             }
         }
         setUploadCount(count)
-    },[videos, setUploadCount])
+    },[videos, setUploadCount, currentUser])
     useEffect(() => {
         setLikeCount(likedVideos.length)
     }, [likedVideos])
@@ -91,7 +91,7 @@ function Profile() {
                </div>
                <div className="profile-video-data">
                         <div className="profile-display">
-                            <img src={currentUser.photoURL} />
+                            <img alt="profileImage" src={currentUser.photoURL} />
                             <p>Uploads: {uploadCount} </p>
                             <p>Likes: {likeCount} </p>
                             <p>Subscriptions: {subscriptionCount} </p>
