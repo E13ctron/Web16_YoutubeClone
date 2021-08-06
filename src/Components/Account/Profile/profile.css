@@ -25,3 +25,46 @@ email_div{
 .profile-display{
     margin-top: 100px;
 }
+
+#channelIconContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#channelIconContainer button{
+    border: none;
+    color: blue;
+    background-color: white !important;
+    font-size: 16px;
+}
+
+.logo-input{
+    outline: none;
+}
+.logo-input::-webkit-file-upload-button{
+    visibility: hidden;
+    outline: none;
+}
+.logo-input::before{
+    margin-left: 21px;
+    /* margin: 0 auto; */
+     /*margin-top: 20px;
+    margin-right: 70px; */
+    content: "Change Channel Icon";
+    color:blue;
+    display: inline-block;
+    /* background: #065fd4; */
+    border-radius: 3px;
+    padding: 10px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    /* text-transform: uppercase; */
+}
+
+.custom-file-input:active{
+    outline: 0;
+}

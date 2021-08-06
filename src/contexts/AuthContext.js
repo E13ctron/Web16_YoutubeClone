@@ -151,7 +151,7 @@ export function AuthProvider({children}){
         subscriptions,
         subscribeChannel,
         unsubscribeChannel,
-        unlikeVideo
+        unlikeVideo,
     }
     return(
         <AuthContext.Provider value={value}>
