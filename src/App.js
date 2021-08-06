@@ -21,6 +21,7 @@ import Feedback from './Components/SendFeedback/Feedback';
 import SelectVideo from './Components/VideoUpload/SelectVideo';
 import Subscriptions from './Components/Subscriptions/Subscriptions';
 import PlaylistCreator from './Components/Playlist/PlaylistCreator'
+import Playlists from './Components/PlaylistPage/Playlists'
 
 
 
@@ -51,7 +52,8 @@ const App=({hideLoader})=> {
               <PrivateRoute exact path="/Account" component={ Account } />
               <PrivateRoute path="/search" component={ Search } />
               <PrivateRoute path="/Subscriptions" component={Subscriptions} />
-                 <PrivateRoute exact path="/Send Feedback" component={Feedback} />
+              <PrivateRoute exact path="/Send Feedback" component={Feedback} />
+              <PrivateRoute exact path="/Playlists" component={Playlists} />
               {videos.map((item) => (
                 
                 <Route path={"/watch/"+ item.id.toString()} key={item.id}>

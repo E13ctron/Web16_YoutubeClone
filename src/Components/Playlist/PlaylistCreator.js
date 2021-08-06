@@ -21,7 +21,8 @@ function PlaylistCreator() {
         setProcessing(true)
         const playlistName = playlistNameRef.current.value;
         database.users.doc(currentUser.uid).collection("playlists").doc(playlistName).set({
-            name: playlistName
+            name: playlistName,
+            size: 0
         })
         setProcessing(false)
         closePlaylistCreator()
