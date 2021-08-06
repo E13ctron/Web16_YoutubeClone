@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useEffect, useState} from 'react'
 import './PlaylistNameCard.css'
 import { useAuth } from '../../../contexts/AuthContext'
 import { database } from '../../../firebase'
