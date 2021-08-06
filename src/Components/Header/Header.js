@@ -9,13 +9,18 @@ import "./Header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button, Popover } from "@material-ui/core";
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 // import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
 
 export default function Header() {
 
-  const { signout , setVideoUploadOpen, videoUploadOpen, currentUser } = useAuth()
+  const { signout , 
+    setVideoUploadOpen, 
+    videoUploadOpen, 
+    currentUser, 
+    setPlaylistCreatorOpen } = useAuth()
   const [avatarUrl, setAvatarUrl] = useState()
   const history = useHistory()
   const searchQueryRef = useRef()
@@ -52,6 +57,10 @@ export default function Header() {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  function openPlaylistCreator(){
+    setPlaylistCreatorOpen(true)
+  }
+
   return (
     <div className="hp-header">
       <div className="hp-left-header">
@@ -67,6 +76,7 @@ export default function Header() {
         <SearchIcon onClick={search} className="searchicon" />
       </div>
       <div className="hp-right-header">
+        <PlaylistAddIcon onClick={openPlaylistCreator} className="hp-right-header-icon" />
         <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon" />
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar

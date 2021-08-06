@@ -20,7 +20,7 @@ import Header from './Components/Header/Header';
 import Feedback from './Components/SendFeedback/Feedback';
 import SelectVideo from './Components/VideoUpload/SelectVideo';
 import Subscriptions from './Components/Subscriptions/Subscriptions';
-
+import PlaylistCreator from './Components/Playlist/PlaylistCreator'
 
 
 
@@ -32,6 +32,7 @@ const App=({hideLoader})=> {
     <div>
       <Router>
           <SelectVideo />
+          <PlaylistCreator />
           <Switch>
           
               <Route exact path="/login" component={ Login } />
