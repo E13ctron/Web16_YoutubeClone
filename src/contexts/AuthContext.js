@@ -21,6 +21,7 @@ export function AuthProvider({children}){
     const [ deleteVideoOpen , setDeleteVideoOpen] = useState(false)
     const [ videoDeleted, setVideoDeleted] = useState()
     const [subscriptions,setSubscriptions] = useState([])
+    const [LOGO,SetLOGO]= useState([])
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -85,6 +86,11 @@ export function AuthProvider({children}){
             }
         })
     }
+     
+    function deletePrevLogo(logoId){
+        db.collection("ChannelUsers").where('UserId','==' , currentUser.uid).delete()
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -129,6 +135,15 @@ export function AuthProvider({children}){
         }
     },[currentUser])
 
+
+    useEffect(() => {
+        if(currentUser){
+            db.collection("ChannelUsers").where('UserId','==',currentUser.uid.toString()).onSnapshot((snapshot) => {
+                    SetLOGO(snapshot.docs.map((doc)=>doc.data()))
+                })
+        }
+    },[currentUser])
+
     const value = {
         videos,
         loading,
@@ -152,6 +167,8 @@ export function AuthProvider({children}){
         subscribeChannel,
         unsubscribeChannel,
         unlikeVideo,
+        deletePrevLogo,
+        LOGO,SetLOGO
     }
     return(
         <AuthContext.Provider value={value}>
