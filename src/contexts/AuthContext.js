@@ -23,7 +23,7 @@ export function AuthProvider({children}){
     const [subscriptions,setSubscriptions] = useState([])
     const [ playlistCreatorOpen, setPlaylistCreatorOpen] = useState(false)
     const [playlistVideoAdderOpen, setPlaylistVideoAdderOpen] = useState(false)
-    const [ currentPlayedVideo, setCurrentlyPlayedVideo ] = useState()
+    const [ currentlyPlayedVideo, setCurrentlyPlayedVideo ] = useState({})
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -159,7 +159,7 @@ export function AuthProvider({children}){
         setPlaylistCreatorOpen,
         playlistVideoAdderOpen, 
         setPlaylistVideoAdderOpen,
-        currentPlayedVideo, 
+        currentlyPlayedVideo, 
         setCurrentlyPlayedVideo
     }
     return(

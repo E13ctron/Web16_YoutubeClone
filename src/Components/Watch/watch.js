@@ -38,6 +38,10 @@ const Watch = ({video}) => {
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const [subscribersCount, setSubscribersCount] = useState()
     const [ autoPlay, setAutoPlay ] = useState(true)
+    useEffect(() => {
+        setCurrentlyPlayedVideo(video)
+    },[setCurrentlyPlayedVideo,video])
+
     function findIndex(){
         for(var i = 0;i < videos.length;i++){
             if(videos[i].id === video.id){
@@ -118,11 +122,7 @@ const Watch = ({video}) => {
             setViewsUpdated(true)
         }
      },[video,viewsUpdated, updateViews])
-    useEffect(() => {
-        setCurrentlyPlayedVideo(video)
-        console.log(currentlyPlayedVideo)
-    },[setCurrentlyPlayedVideo,currentlyPlayedVideo,video])
-
+    
     function handleLike(){
         if(!likeButtonDisabled){
             likeVideo(video)
