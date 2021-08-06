@@ -1,5 +1,5 @@
 import React from 'react'
-import './PlaylistNameCard'
+import './PlaylistNameCard.css'
 import { useAuth } from '../../../contexts/AuthContext'
 import { database } from '../../../firebase'
 
@@ -15,8 +15,9 @@ function PlaylistNameCard({name}) {
         .set(currentlyPlayedVideo)
     }
     return (
-        <div className="card" onClick={addVideoToPlaylist}>
-            <p>{name}</p>
+        <div className="playlist-card" onClick={addVideoToPlaylist}>
+            <p className="playlist-name">{name}</p>
+            
         </div>
     )
 }

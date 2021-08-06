@@ -39,7 +39,7 @@ function PlaylistVideoAdder() {
                     <Close className="close_icon" onClick={close} />
                 </div>
                 <Divider />
-                <DialogContent>
+                <DialogContent className="playlist-name-list">
                     <div className="play-lists">
                         { playlistNames.map((item) => 
                         <PlaylistNameCard name={item} />

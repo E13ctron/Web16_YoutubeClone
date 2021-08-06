@@ -1,4 +1,15 @@
-.card{
-    border: black solid 2px;
+.playlist-card{
+    /* border: black solid 2px; */
     text-align: center;
+    /* border: none !important; */
+    justify-content: center;
+}
+.playlist-name{
+    border-bottom: 1px solid rgb(180, 180, 180);
+    height: 35px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+.playlist-name:hover{
+    cursor: pointer;
 }
