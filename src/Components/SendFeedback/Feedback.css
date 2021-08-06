@@ -1,0 +1,15 @@
+.feeback_sidebar{
+    display: flex;
+}
+
+.feedback_body{
+    flex: 0.83;
+}
+
+/* .feedback{
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex: 0.83; */
+    /* margin-top: 20px; */
+/* } */ 
