@@ -21,7 +21,6 @@ export function AuthProvider({children}){
     const [ deleteVideoOpen , setDeleteVideoOpen] = useState(false)
     const [ videoDeleted, setVideoDeleted] = useState()
     const [subscriptions,setSubscriptions] = useState([])
-    const [LOGO,SetLOGO]= useState([])
     
     function signup(email, password){
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -87,16 +86,7 @@ export function AuthProvider({children}){
         })
     }
 
-    function updateLogo(currentUserId,URLofLogo){
-        db.collection("ChannelCreators").doc(currentUser.uid.toString()).update({
-        //   id:logoid,
-          iconURL:URLofLogo
-        })
-    }
-     
-    // function deletePrevLogo(logoId){
-    //     db.collection("ChannelUsers").where('UserId','==' , currentUser.uid).delete()
-    // }
+   
     function deletePrevLogo(currentUserId){
         db.collection("ChannelCreators").doc(currentUserId).delete()
     }
@@ -145,27 +135,6 @@ export function AuthProvider({children}){
         }
     },[currentUser])
 
-
-    // useEffect(() => {
-    //     if(currentUser){
-    //         db.collection("ChannelUsers").where('UserId','==',currentUser.uid.toString()).onSnapshot((snapshot) => {
-    //                 SetLOGO(snapshot.docs.map((doc)=>doc.data()))
-    //             })
-    //     }
-    // },[currentUser])
-
-    useEffect(() => {
-        if(currentUser){
-            db.collection("ContentCreators").doc(currentUser.uid.toString()).onSnapshot((snapshot) => {
-                if(snapshot.exists){
-                SetLOGO(snapshot.data().iconURL )
-            }else{
-                SetLOGO(currentUser.photoURL)
-            }
-            })
-        }
-    },[currentUser])
-
     const value = {
         videos,
         loading,
@@ -190,7 +159,6 @@ export function AuthProvider({children}){
         unsubscribeChannel,
         unlikeVideo,
         deletePrevLogo,
-        LOGO,SetLOGO,updateLogo
     }
     return(
         <AuthContext.Provider value={value}>
