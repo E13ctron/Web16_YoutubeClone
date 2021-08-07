@@ -2,10 +2,9 @@ import React from 'react';
 import moment from "moment";
 import Avatar from "@material-ui/core/Avatar";
 import "./VideoCard.css";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom"
 
 const VideoCard =({ video }) => {
-    
     const history = useHistory();
 
     const handleWatchVideo = () => history.push(`/watch/${video.id}`);
