@@ -98,11 +98,7 @@ export function AuthProvider({children}){
     //     db.collection("ChannelUsers").where('UserId','==' , currentUser.uid).delete()
     // }
     function deletePrevLogo(currentUserId){
-        db.collection("ChannelUsers").doc(currentUser.uid.toString()).delete()
-        db.collection("ChannelUsers").doc(currentUser.uid.toString()).update({
-            iconURL:currentUser.photoURL
-        })
-        
+        db.collection("ChannelCreators").doc(currentUserId).delete()
     }
 
     useEffect(() => {

@@ -51,11 +51,13 @@ function Profile() {
     const handleIconChange=(e)=>{
         if (e.target.files[0]){
             setIcon(e.target.files[0]);
+            setIconState(true);
         }
     }
     const createID=()=> setID(uuidv4());
 
     const[icon, setIcon] = useState(null);
+    const [iconState,setIconState]= useState(false);
     const[urlIcon, setUrlIcon] = useState(null);
     const[uploadedIcon, setUploadedIcon] = useState(false)
 
@@ -87,6 +89,7 @@ function Profile() {
               .then((url) => {
                 setUrlIcon(url);
                 setUploadedIcon(true);
+                setIconState(false);
                 
               });
           }
@@ -94,8 +97,10 @@ function Profile() {
       };
       const handleSubmit = () => {
         //   deletePrevLogo(id)
+        if(iconState){
           createID();
           handleUploadIcon();
+      }
           
 
     };
@@ -175,17 +180,30 @@ function Profile() {
         //    var iconnnn= db.collection("ChannelUsers").doc("a76a6ab2-1f32-4394-ad38-41351991cd2a").get().then(snap=>{
         //        setlg(snap.data().iconURL)
         //    })
-            db.collection("ChannelCreators").doc(currentUser.uid.toString()).get().then(snap=>{
-            if(snap.exists){
-               setlg(snap.data().iconURL)
-               SetLOGO(snap.data().iconURL)
-            }else{
-                setlg(currentUser.photoURL)
-                SetLOGO(snap.data().iconURL)
-            }
-           })
-
-           console.log(lg)
+        
+        function deleteLogo(){
+            deletePrevLogo(currentUser.uid)
+        }
+        
+    //     db.collection("ChannelCreators").doc(currentUser.uid.toString()).get().then(snap=>{
+    //     if(snap.exists){
+    //        setlg(snap.data().iconURL)
+    //     //    SetLOGO(snap.data().iconURL)
+    //     }else{
+    //         setlg(currentUser.photoURL)
+    //         // SetLOGO(snap.data().iconURL)
+    //     }
+    //    })
+        db.collection("ChannelCreators").doc(currentUser.uid.toString()).onSnapshot(snap=>{
+        if(snap.exists){
+           setlg(snap.data().iconURL)
+        //    SetLOGO(snap.data().iconURL)
+        }else{
+            setlg(currentUser.photoURL)
+            // SetLOGO(snap.data().iconURL)
+        }
+       })
+        //    console.log(lg)
 
     return (
        <div>
@@ -208,11 +226,18 @@ function Profile() {
                         <h4>Channel Icon</h4>
                         <div id="channelIconContainer">
                         <Avatar src={lg}></Avatar>
+                        <div className="btn-holders">
                         <button 
                         ><input onChange=
                         // {handleLogoChange}
                         {handleIconChange}
                                 type="file" className="logo-input"/></button>
+                        {/* {handleLogoChange} */}
+                        <button onClick={deleteLogo} className="logo-input-delete"
+                        >
+                        
+                                 </button>
+                        </div>
                             
                         </div>
                         {/* <h4>User Id</h4> */}

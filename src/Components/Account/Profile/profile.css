@@ -64,6 +64,8 @@ email_div{
     /* background: #065fd4; */
     border-radius: 3px;
     padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     outline: none;
     white-space: nowrap;
     cursor: pointer;
@@ -72,6 +74,38 @@ email_div{
     /* text-transform: uppercase; */
 }
 
-.custom-file-input:active{
+.logo-input:active{
+    outline: 0;
+}
+
+.logo-input-delete{
+    outline: none;
+}
+.logo-input-delete::-webkit-file-upload-button{
+    visibility: hidden;
+    outline: none;
+}
+.logo-input-delete::before{
+    margin-left: -76px;
+    /* margin: 0 auto; */
+     /*margin-top: 20px;
+    margin-right: 70px; */
+    content: "Remove Channel Icon";
+    color:blue;
+    display: inline-block;
+    /* background: #065fd4; */
+    border-radius: 3px;
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    /* text-transform: uppercase; */
+}
+
+.logo-input-delete:active{
     outline: 0;
 }
