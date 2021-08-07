@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../firebase'
 import Autorenew from "@material-ui/icons/Autorenew";
 import PlaylistVideoAdder from '../Playlist/PlaylistVideoAdder/PlaylistVideoAdder'
+import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 
 const Watch = ({video}) => {
@@ -115,6 +116,25 @@ const Watch = ({video}) => {
                console.log(queue)
            }
         }
+    }
+    function nextVideo_withoutautoplay(){
+
+           if(!playlistPlaying){
+            const position = findIndex()
+            if(position + 1 < videos.length){
+                history.push("/watch/"+videos[position+1].id)
+            }
+           }
+           else{
+               const position = findPositionInPlaylist()
+               if(position + 1 < queue.length){
+                history.push("/watch/"+queue[position + 1].id)
+               }
+               else{
+                history.push("/watch/"+queue[0].id)
+               }
+               console.log(queue)
+           }
     }
     function findPositionInPlaylist(){
         for(var i = 0;i < queue.length;i++){
@@ -232,10 +252,14 @@ const Watch = ({video}) => {
 
                             <h1 className="watch__title">{video.title}</h1>
                             {autoPlay && <p className="autoplay-paragraph">Autoplay is On</p>}
+                            <div className="autoplay-and-nextvideo-icon">
+                                <SkipNextIcon className="next-video-icon" onClick={nextVideo_withoutautoplay}/>
                             { autoPlay ? <Autorenew className="autoplay-icon" onClick={autoPlaySwitch}  />
                                     :
                                     <Autorenew className="autoplay-icon" onClick={autoPlaySwitch} style={{color: "#aaa"}}/>   
                                 }
+                            </div>
+                            
                             </div>
                             <div className="watch__videoInfo">
                                 <div className="watch__videoInfoLeft">
