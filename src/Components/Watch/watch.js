@@ -33,9 +33,7 @@ const Watch = ({video}) => {
         unlikeVideo, 
         updateViews,
         setCurrentlyPlayedVideo,
-        currentlyPlayedVideo,
         queue,
-        setQueue,
         playlistPlaying,
         setPlaylistPlaying } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
@@ -44,27 +42,43 @@ const Watch = ({video}) => {
     const [ autoPlay, setAutoPlay ] = useState(true)
     const [ watchRightVideos, setWatchRightVideos ] = useState([])
     useEffect(() => {
+        function findIndex(){
+            for(var i = 0;i < videos.length;i++){
+                if(videos[i].id === video.id){
+                    return i;
+                }
+            }
+        }
+        function findPositionInPlaylist(){
+            for(var i = 0;i < queue.length;i++){
+                if(queue[i].id === video.id){
+                    return i;
+                }
+            }
+            setPlaylistPlaying(false)
+            return 0
+        }
         var tempArr= []
         if(playlistPlaying){
             const position = findPositionInPlaylist()
             for(var i = position+1;i < queue.length;i++){
                 tempArr.push(queue[i])
             }
-            for(var i = 0;i < position;i++){
-                tempArr.push(queue[i])
+            for(var j = 0;j < position;j++){
+                tempArr.push(queue[j])
             }
         }
         else{
             const position = findIndex()
-            for(var i = position+1;i < videos.length;i++){
-                tempArr.push(videos[i])
+            for(var k = position+1;k < videos.length;k++){
+                tempArr.push(videos[k])
             }
-            for(var i = 0;i < position;i++){
-                tempArr.push(videos[i])
+            for(var l = 0;l < position;l++){
+                tempArr.push(videos[l])
             }
         }
         setWatchRightVideos(tempArr)
-    },[setWatchRightVideos, queue, videos])
+    },[setWatchRightVideos, queue,videos,playlistPlaying,video,setPlaylistPlaying])
     useEffect(() => {
         setCurrentlyPlayedVideo(video)
     },[setCurrentlyPlayedVideo,video])

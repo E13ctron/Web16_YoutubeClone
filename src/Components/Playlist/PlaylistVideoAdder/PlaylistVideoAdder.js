@@ -12,8 +12,7 @@ import './PlaylistVideoAdder.css'
 function PlaylistVideoAdder() {
     const { playlistVideoAdderOpen,
          setPlaylistVideoAdderOpen,
-          currentUser,
-        currentlyPlayedVideo } = useAuth()
+          currentUser } = useAuth()
     const [ playlistNames, setPlaylistNames ] = useState([])
     useEffect(() => {
         try{

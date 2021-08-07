@@ -20,7 +20,7 @@ function PlaylistNameCard({name}) {
         }catch{
             setPosition(0)
         }
-    }, [currentUser,setPosition,position])
+    }, [currentUser,setPosition,position,name])
     function addVideoToPlaylist(){
         database.users
         .doc(currentUser.uid)
