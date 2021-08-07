@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Header from "../Header/Header";
-import Sidebar from "../Sidebar/Sidebar";
-import "./PreviewChannel.css";
-import channel_art_photo from "../../assets/channel_art_photo.jpg";
-import { Avatar, Button } from "@material-ui/core";
-import VideoCard from "../HomePage/VideoCard";
-import { useAuth } from "../../contexts/AuthContext";
-import { useLocation } from "react-router";
-import useScrollTop from "../useScrollTop";
-import { db } from "../../firebase";
-
+import React, { useEffect, useState } from 'react'
+import Header from '../Header/Header'
+import Sidebar from '../Sidebar/Sidebar'
+import "./PreviewChannel.css"
+import channel_art_photo from "../../assets/channel_art_photo.jpg"
+import { Avatar, Button } from '@material-ui/core'
+import VideoSmall from '../WatchRight/VideoSmall'
+import { useAuth } from '../../contexts/AuthContext'
+import { useLocation } from 'react-router'
+import useScrollTop from '../useScrollTop'
+import { db } from '../../firebase'
 
 const PreviewChannel = ({video}) => {
     useScrollTop();
@@ -55,30 +54,23 @@ const PreviewChannel = ({video}) => {
 
     
 
-
-  const [subscribe, setSubscribe] = useState("SUBSCRIBE");
-  function handleSubscribeClick() {
-    if (!subscribeBtnState) {
-      setSubscribe("SUBSCRIBED");
-      setSubscribeBtnState(true);
-      subscribeChannel(channel);
+    const [subscribe,setSubscribe] = useState("SUBSCRIBE");
+    function handleSubscribeClick(){
+        if(!subscribeBtnState)
+        {
+     setSubscribe("SUBSCRIBED");
+     setSubscribeBtnState(true)
+     subscribeChannel(channel)
+         }
     }
-  }
-  function handleUnSubscribeClick() {
-    if (subscribeBtnState) {
-      setSubscribe("SUBSCRIBE");
-      setSubscribeBtnState(false);
-      unsubscribeChannel(channel);
+    function handleUnSubscribeClick(){
+        if(subscribeBtnState)
+        {
+     setSubscribe("SUBSCRIBE");
+     setSubscribeBtnState(false)
+     unsubscribeChannel(channel)
+            }
     }
-  }
-  useEffect(() => {
-    for (var i = 0; i < subscriptions.length; i++) {
-      if (subscriptions[i].name === channel) {
-        setSubscribe("SUBSCRIBED");
-        setSubscribeBtnState(true);
-      }
-    }
-
     useEffect(() => {
         for(var i = 0;i < subscriptions.length;i++){
             if(subscriptions[i].name === channel){
@@ -101,15 +93,10 @@ const PreviewChannel = ({video}) => {
         <div>
             <Header />
 
-      <div className="preview_channel">
-        <Sidebar />
-        <div className="channel">
-          <img
-            className="channel_coverImg"
-            src={channel_art_photo}
-            alt="Channel Cover"
-          ></img>
-
+            <div className="preview_channel">
+                <Sidebar />
+                <div className="channel">
+                    <img className="channel_coverImg" src={channel_art_photo} alt="Channel Cover"></img>
 
                     <div className="channel_details">
                         <div className="channel_detailsWrap">
@@ -129,34 +116,35 @@ const PreviewChannel = ({video}) => {
                             </div>
                             <div className="channel_links">
                               {/* <div className="channel_link">
-
                                   <p>HOME</p>
                               </div> */}
-              <div className="channel_link channel_link-active">
-                <p>VIDEOS</p>
-                <div className="channel_link_border" />
-              </div>
-              <div className="channel_link">
-                <p>PLAYLISTS</p>
-              </div>
-              <div className="channel_link">
-                <p>COMMUNITY</p>
-              </div>
-              <div className="channel_link">
-                <p>ABOUT</p>
-              </div>
+                              <div className="channel_link channel_link-active">
+                                  <p>VIDEOS</p>
+                                  <div className="channel_link_border"/>
+                              </div>
+                              <div className="channel_link">
+                                  <p>PLAYLISTS</p>
+                              </div>
+                              <div className="channel_link">
+                                  <p>COMMUNITY</p>
+                              </div>
+                              <div className="channel_link">
+                                  <p>ABOUT</p>
+                              </div>
+                              
+                            </div>
+                    </div>
+                    <div className="channel_content">
+                       <div className="channel_contentWrapper">
+                           {currentChannel.map((video) =>{
+                               return <VideoSmall channelView video={video} key={video.id}/>
+                           })}
+                           </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div className="channel_content">
-            <div className="channel_contentWrapper">
-              {currentChannel.map((video) => {
-                return <VideoCard channelView video={video} key={video.id} />;
-              })}
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
-};
+    )
+}
+
 export default PreviewChannel
