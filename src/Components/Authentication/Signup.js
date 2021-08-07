@@ -3,6 +3,7 @@ import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
 import { useAuth } from "../../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import "./styles.css"
+import youtube_logo_png from "../../assets/youtube-logo-png.jpg"
 
 export default function Signup() {
     const emailRef = useRef()
@@ -48,41 +49,45 @@ export default function Signup() {
         <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}
     >
-        <div>
-            <>
-                <Card>
-                    <Card.Body>
-                        <h2 className="text-center mb-4">Sign Up</h2>
+        
+            <div className="signup-body">
+                <Card className="card_parent">
+                    <Card.Body className="card_body">
+                        <div className="youtubelogo">
+                        <img src={youtube_logo_png} className="youtube-img" alt="" />
+                        </div>
+                        
+                        <h2 className="text-center mb-4 white-color">Sign Up for Youtube</h2>
                         {error && <Alert variant="danger">{ error }</Alert>}
-                        <Form onSubmit={handleSubmit}>
-                        <Form.Group id="Name" style={{ margin: "10px" }}>
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" ref={nameRef} required />
+                        <Form className="form-body" onSubmit={handleSubmit}>
+                        <Form.Group className="particular-field" id="Name" style={{ margin: "10px" }}>
+                                
+                                <Form.Control classname="particular-input" placeholder="Name" type="text" ref={nameRef} required />
                             </Form.Group>
-                            <Form.Group id="email" style={{ margin: "10px" }}>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" ref={emailRef} required />
+                            <Form.Group className="particular-field" id="email" style={{ margin: "10px" }}>
+                                
+                                <Form.Control classname="particular-input" placeholder="Email" type="email" ref={emailRef} required />
                             </Form.Group>
-                            <Form.Group id="password" style={{ margin: "10px" }}>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" ref={passwordRef} required />
+                            <Form.Group className="particular-field" id="password" style={{ margin: "10px" }}>
+                                
+                                <Form.Control classname="particular-input" placeholder="Password" type="password" ref={passwordRef} required />
                             </Form.Group>
-                            <Form.Group id="password" style={{ margin: "10px" }}>
-                                <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control type="password" ref={confirmPasswordRef} required />
+                            <Form.Group className="particular-field" id="password" style={{ margin: "10px" }}>
+                                
+                                <Form.Control classname="particular-input" placeholder="Confirm Password" type="password" ref={confirmPasswordRef} required />
                             </Form.Group>
-                            <Button disabled={loading} className="w-100 button" style={{ margin: "10px" }} type="submit">
+                            <Button disabled={loading} className="w-100 button particular-field" style={{ margin: "10px", backgroundColor: "rgb(211, 0, 0)" }} type="submit">
                                 Sign Up
                             </Button>
-                            <div>Already have an account?</div>
+                            <div style={{color: "white"}}>Already have an account?</div>
                             <div>
-                                <Link to="/login">Sign In</Link>
+                                <Link to="/login" style={{color: "white", textDecoration: "none"}}>Sign In</Link>
                             </div>
                         </Form>
                     </Card.Body>
                 </Card>
-            </>
-        </div>
+            </div>
+    
     </Container>
     )
 }
