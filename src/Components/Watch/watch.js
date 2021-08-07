@@ -16,7 +16,7 @@ import Autorenew from "@material-ui/icons/Autorenew";
 
 
 const Watch = ({video}) => {
-    const {subscriptions,subscribeChannel,unsubscribeChannel} = useAuth();
+    const {subscriptions,subscribeChannel,unsubscribeChannel, currentUser} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const channel = video.email
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
@@ -71,6 +71,9 @@ const Watch = ({video}) => {
             }
         }
     },[subscriptions,channel])
+
+
+
     try{
         db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
             if(snap.exists){
@@ -87,6 +90,12 @@ const Watch = ({video}) => {
     }catch{
         
     }
+  
+    useEffect(() => {
+        db.collection('users').doc(currentUser.uid).collection("history").doc(video.id).set(video)
+        
+        })
+        
     toast.configure()
     useScrollTop();
     const views = video.views;
