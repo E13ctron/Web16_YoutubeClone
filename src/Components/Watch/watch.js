@@ -33,15 +33,41 @@ const Watch = ({video}) => {
         unlikeVideo, 
         updateViews,
         setCurrentlyPlayedVideo,
-        currentlyPlayedVideo } = useAuth()
+        currentlyPlayedVideo,
+        queue,
+        setQueue,
+        playlistPlaying,
+        setPlaylistPlaying } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const [subscribersCount, setSubscribersCount] = useState()
     const [ autoPlay, setAutoPlay ] = useState(true)
+    const [ watchRightVideos, setWatchRightVideos ] = useState([])
+    useEffect(() => {
+        var tempArr= []
+        if(playlistPlaying){
+            const position = findPositionInPlaylist()
+            for(var i = position+1;i < queue.length;i++){
+                tempArr.push(queue[i])
+            }
+            for(var i = 0;i < position;i++){
+                tempArr.push(queue[i])
+            }
+        }
+        else{
+            const position = findIndex()
+            for(var i = position+1;i < videos.length;i++){
+                tempArr.push(videos[i])
+            }
+            for(var i = 0;i < position;i++){
+                tempArr.push(videos[i])
+            }
+        }
+        setWatchRightVideos(tempArr)
+    },[setWatchRightVideos, queue, videos])
     useEffect(() => {
         setCurrentlyPlayedVideo(video)
     },[setCurrentlyPlayedVideo,video])
-
     function findIndex(){
         for(var i = 0;i < videos.length;i++){
             if(videos[i].id === video.id){
@@ -49,17 +75,39 @@ const Watch = ({video}) => {
             }
         }
     }
+    useEffect(() => {
+        console.log(queue)
+        console.log(playlistPlaying)
+    },[queue, playlistPlaying])
     function nextVideo(){
 
         if(autoPlay){
-            const currentIndex = findIndex();
-        if(currentIndex + 1 >= videos.length){
-            history.push("/watch/"+ videos[0].id.toString())
+           if(!playlistPlaying){
+            const position = findIndex()
+            if(position + 1 < videos.length){
+                history.push("/watch/"+videos[position+1].id)
+            }
+           }
+           else{
+               const position = findPositionInPlaylist()
+               if(position + 1 < queue.length){
+                history.push("/watch/"+queue[position + 1].id)
+               }
+               else{
+                history.push("/watch/"+queue[0].id)
+               }
+               console.log(queue)
+           }
         }
-        else{
-            history.push("/watch/"+ videos[currentIndex+1].id.toString())
+    }
+    function findPositionInPlaylist(){
+        for(var i = 0;i < queue.length;i++){
+            if(queue[i].id === video.id){
+                return i;
+            }
         }
-        }
+        setPlaylistPlaying(false)
+        return 0
     }
     function handleSubscribeClick(){
         if(!subscribeBtnState)
@@ -230,13 +278,8 @@ const Watch = ({video}) => {
                         </div>
                     </div>
                     <div className="watch-right">
-                        {videos.map(function(item){
-                            if(item.id === video.id){
-                                return null;
-                            }
-                            else{
+                        {watchRightVideos.map(function(item){
                                 return(<VideoSmall video={item} />)
-                            }
                         }
                         )}
                         

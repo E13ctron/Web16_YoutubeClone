@@ -7,8 +7,12 @@ import PlaylistCard from './PlaylistCard'
 
 import './Playlists.css'
 function Playlists() {
-    const { currentUser } = useAuth()
+    const { currentUser, setQueue, setPlaylistPlaying } = useAuth()
     const [playlists, setPlaylists ] = useState([])
+    useEffect(() => {
+        setQueue([])
+        setPlaylistPlaying(false)
+    }, [setQueue, setPlaylistPlaying])
     useEffect(() => {
         database.users.doc(currentUser.uid).collection("playlists").onSnapshot((snaps) => {
             setPlaylists(snaps.docs.map((doc) => doc.data()))

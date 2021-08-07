@@ -4,9 +4,10 @@ import moment from "moment";
 import Avatar from "@material-ui/core/Avatar";
 import "./VideoCard.css";
 import { useHistory } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext'
 
 const VideoCard =({ video }) => {
-    
+    const { setPlaylistPlaying } = useAuth()
     const history = useHistory();
 
     const handleWatchVideo = () => history.push(`/watch/${video.id}`);
