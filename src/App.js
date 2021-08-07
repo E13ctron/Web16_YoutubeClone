@@ -22,6 +22,7 @@ import SelectVideo from './Components/VideoUpload/SelectVideo';
 import Subscriptions from './Components/Subscriptions/Subscriptions';
 import PlaylistCreator from './Components/Playlist/PlaylistCreator'
 import Playlists from './Components/PlaylistPage/Playlists'
+import Notfound from './Components/404-page/NotFound'
 
 
 
@@ -61,6 +62,7 @@ const App=({hideLoader})=> {
                   <Watch video={item} />
                 </Route>
               ))} 
+              <PrivateRoute component={Notfound} />
           </Switch>
         
       
