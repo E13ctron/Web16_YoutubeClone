@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 import { db } from '../../firebase';
 
 const VideoCard =({ video }) => {
-    
     const history = useHistory();
 
     const handleWatchVideo = () => history.push(`/watch/${video.id}`);
