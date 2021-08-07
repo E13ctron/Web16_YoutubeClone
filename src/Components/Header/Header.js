@@ -4,7 +4,7 @@ import VideoCallIcon from "@material-ui/icons/VideoCall";
 import SearchIcon from "@material-ui/icons/Search";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import Avatar from "@material-ui/core/Avatar";
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+// import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import "./Header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -120,12 +120,12 @@ export default function Header() {
             </div>
             <div className="po-down">
               <div className="add-account">
-                <div className="add-account-icon">
+                {/* <div className="add-account-icon">
                 <PersonAddIcon/>
                 </div>
                 <div className="add-another-account">
                   Add another account
-                </div>
+                </div> */}
               </div>
               <div className="signout-button">
               <Button onClick={signOut} >Sign Out</Button>
