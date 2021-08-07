@@ -13,7 +13,7 @@ function VideoSection(){
             <h2>Recommended</h2>
 
         <div className="video-section">
-           {videos.length > 0 ? VideoComponents : <h2>No Videos Found</h2>}
+           {videos.length > 0 ? VideoComponents : <h2>Loading ...</h2>}
         </div>
 
     </div>
