@@ -1,98 +1,108 @@
-.preview_channel{
-    display:flex;
-}
-
-.video-section{
+.preview_channel {
+    display: flex;
+    width: 100%;
+  }
+  .channel {
+    flex: 0.83;
+  }
+  .video-section {
     margin-left: 20px;
-}
-
-.channel_coverImg{
-    width:100%;
+  }
+  
+  .channel_coverImg {
+    width: 100%;
     height: 250px;
-}
-
-.channel_avatar{
-    width:80px !important;
-    height:80px !important;
+  }
+  
+  .channel_avatar {
+    width: 80px !important;
+    height: 80px !important;
     margin-right: 20px;
-}
-
-.channel_details{
+  }
+  
+  .channel_details {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
-}
-
-.channel_avatarWrap{
+    background-color: rgb(250, 250, 250);
+  }
+  
+  .channel_avatarWrap {
     display: flex;
     align-items: center;
-}
-
-.channel_title{
+  }
+  
+  .channel_title {
     font-size: 26px !important;
     font-weight: normal !important;
-}
-
-.channel_content{
+  }
+  
+  .channel_content {
     height: 100%;
     overflow-y: auto;
-}
-
-.channel_detailsWrap{
+    background-color: rgb(240, 240, 240);
+    /* align-content: center; */
+    padding-top: 20px;
+  }
+  
+  .channel_detailsWrap {
     display: flex;
-    justify-content:space-between;
-    width: 80%;
+    justify-content: space-between;
+    width: 90%;
     align-items: center;
-}
-
-.channel_subBtn{
+  }
+  
+  .channel_subBtn {
     height: 40px !important;
-}
-
-.channel_links{
+  }
+  
+  .channel_links {
     display: flex;
-    width: 50%;
-    margin-right: 300px;
+    width: 85%;
+    /* margin-right: 300px; */
     margin-top: 20px;
     justify-content: space-between;
     position: sticky;
     top: 0px;
-}
-
-.channel_link >p{
+  }
+  
+  .channel_link > p {
     opacity: 0.5;
     font-weight: 500;
     cursor: pointer;
     font-size: 15px;
-}
-
-.channel_link:hover >p{
+  }
+  
+  .channel_link:hover > p {
     opacity: 1;
-}
-
-.channel_link-active{
+  }
+  
+  .channel_link-active {
     height: 20px;
-}
-.channel_link-active >p{
+  }
+  .channel_link-active > p {
     opacity: 1 !important;
-}
-
-.channel_link_border{
+  }
+  
+  .channel_link_border {
     height: 2px;
-    margin-top: 10px;
+    /* margin-top: 5px; */
     opacity: 0.6;
     background-color: #292727;
-}
-
-.channel_contentWrapper{
+  }
+  
+  .channel_contentWrapper {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 140px;
+    width: 90%;
+  
+    margin: auto;
+    /* margin-left: 140px; */
     /* padding-top: 20px; */
     padding-top: 0px;
-}
-
-.channel{
-    overflow-y: scroll;
-}
+  }
+  
+  /* .channel{
+      overflow-y: scroll;
+  } */

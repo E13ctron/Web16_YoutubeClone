@@ -1,5 +1,4 @@
 import React from 'react';
-
 import moment from "moment";
 import Avatar from "@material-ui/core/Avatar";
 import "./VideoCard.css";

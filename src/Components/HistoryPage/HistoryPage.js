@@ -1,17 +1,25 @@
 import React from 'react'
-import Body from './Body'
+import HistoryVideoSection from './HistoryVideoSection'
 import Header from '../Header/Header'
 import './historypage.css'
 import Sidebar from '../Sidebar/Sidebar'
 
 function HistoryPage() {
     return (
-        <div className="history_page">
-            <Header />
-            <div className="history_page_body">
-                <Sidebar />
-                <Body />
-            </div>
+        <div>
+           <Header />
+
+           <div className="history_page">
+               <Sidebar />
+
+               {/* id="content" is used for toggling  */}
+               <div className="history-video-section" id="content">
+                   
+
+                    <HistoryVideoSection />
+               </div>
+
+           </div>
         </div>
     )
 }

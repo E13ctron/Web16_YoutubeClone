@@ -16,12 +16,14 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
 export default function Header() {
 
+
   const { signout , 
     setVideoUploadOpen, 
     videoUploadOpen, 
     currentUser, 
     setPlaylistCreatorOpen } = useAuth()
   const [avatarUrl, setAvatarUrl] = useState()
+
   const history = useHistory()
   const searchQueryRef = useRef()
 
@@ -81,7 +83,7 @@ export default function Header() {
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar
           alt=""
-          src={avatarUrl}
+          src={AvatarUrl}
           onClick={handleClick}
         />
         <Popover
@@ -102,7 +104,7 @@ export default function Header() {
             <div className="po-top">
             <div className="po-left">
               <div className="po-avatar">
-                <Avatar src={avatarUrl}/>
+                <Avatar src={AvatarUrl}/>
               </div>
               <div className="po-empty"></div>
             </div>
