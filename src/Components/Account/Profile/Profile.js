@@ -7,11 +7,11 @@ import { useAuth } from "../../../contexts/AuthContext"
 import { database, db,storage } from '../../../firebase'
 import { Avatar } from '@material-ui/core'
 import {v4 as uuidv4} from "uuid"
-import firebase from 'firebase'
+
 
 
 function Profile() {
-    const { currentUser, currentUserData, videos, likedVideos,deletePrevLogo, LOGO, SetLOGO,updateLogo} = useAuth()
+    const { currentUser, currentUserData, videos, likedVideos,deletePrevLogo} = useAuth()
     const [loading, setLoading] = useState(false)
     const nameRef = useRef()
     const [error, setError] = useState()
@@ -21,7 +21,6 @@ function Profile() {
     const [ subscriptionCount, setSubscriptionCount] = useState()
     useEffect(() => {
         var count = 0;
-        // console.log(videos)
         for(var i = 0;i < videos.length;i++){
             if(videos[i].email === currentUser.email){
                 count ++;
@@ -38,15 +37,9 @@ function Profile() {
         })
     },[setSubscriptionCount, currentUser])
 
-    // const [logo, setLogo] = useState(null);
+ 
     const [lg,setlg] = useState()
     const[id, setID] = useState(uuidv4());
-
-    // const handleLogoChange=(e)=>{
-    //     if (e.target.files[0]){
-    //         setLogo(e.target.files[0]);
-    //     }
-    // };
 
     const handleIconChange=(e)=>{
         if (e.target.files[0]){
@@ -61,7 +54,7 @@ function Profile() {
     const[urlIcon, setUrlIcon] = useState(null);
     const[uploadedIcon, setUploadedIcon] = useState(false)
 
-    // console.log(currentUser.uid)
+
 
     const handleUploadIcon = () => {
         // var metadata = {
@@ -95,27 +88,17 @@ function Profile() {
           }
         );
       };
+
+    
+
+      //update profile button had onclick={handlesubmit earlier}. Now passed it into update profile function
       const handleSubmit = () => {
         //   deletePrevLogo(id)
         if(iconState){
           createID();
           handleUploadIcon();
-      }
-          
+      }}
 
-    };
-
-    // useEffect(() => {        if (uploadedIcon) {
-    //       db.collection("ChannelUsers")
-    //         .doc(id).set({
-    //           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //           id: id,
-    //           iconURL: urlIcon,
-    //           channelName: currentUser.displayName,
-    //           email: currentUser.email,
-    //           UserID: currentUser.uid,
-    //           channelImage: currentUser.photoURL
-    //         })
     useEffect(() => {        if (uploadedIcon) {
           db.collection("ChannelCreators")
             .doc(currentUser.uid.toString()).set({
@@ -138,6 +121,10 @@ function Profile() {
       }, [uploadedIcon]);
 
       function updateProfile(){
+        // if(iconState){
+        //     createID();
+        //     handleUploadIcon();
+        // }
         const Name = nameRef.current.value
         if(currentUserData){
             if(currentUserData.name !== Name){
@@ -169,96 +156,66 @@ function Profile() {
         setLoading(false)
     }
 
-
-    
-            // db.collection("ChannelUsers").doc().onSnapshot((snapshot) => {
-            //     snapshot.docs.forEach(doc=>{
-            //        console.log(doc.data().iconURL)
-            //     })
-            // })
-
-        //    var iconnnn= db.collection("ChannelUsers").doc("a76a6ab2-1f32-4394-ad38-41351991cd2a").get().then(snap=>{
-        //        setlg(snap.data().iconURL)
-        //    })
         
         function deleteLogo(){
             deletePrevLogo(currentUser.uid)
         }
         
-    //     db.collection("ChannelCreators").doc(currentUser.uid.toString()).get().then(snap=>{
-    //     if(snap.exists){
-    //        setlg(snap.data().iconURL)
-    //     //    SetLOGO(snap.data().iconURL)
-    //     }else{
-    //         setlg(currentUser.photoURL)
-    //         // SetLOGO(snap.data().iconURL)
-    //     }
-    //    })
         db.collection("ChannelCreators").doc(currentUser.uid.toString()).onSnapshot(snap=>{
         if(snap.exists){
            setlg(snap.data().iconURL)
-        //    SetLOGO(snap.data().iconURL)
         }else{
             setlg(currentUser.photoURL)
-            // SetLOGO(snap.data().iconURL)
         }
        })
-        //    console.log(lg)
 
     return (
-       <div>
-           <Header />
-           <div className="body">
-               <Sidebar />
-               <div className="profile-body">
+        <div>
+            <Header />
+            <div className="body">
+                <Sidebar />
+                <div className="profile-body">
                     <div className="profile">
                         <h1>Profile</h1>
                         <div className="profile_card">
-                        <Form>
-                            <Form.Group id="name" style={{margin: "20px"}}>
-                                <h4>Name</h4>
-                                <Form.Control type="text" ref={nameRef} />
-                            </Form.Group>
-                        </Form>
-                        { currentUser &&  <div className="email_div">
-                        <h4>Email</h4>
-                        <p>{currentUser.email}</p>
-                        <h4>Channel Icon</h4>
-                        <div id="channelIconContainer">
-                        <Avatar src={lg}></Avatar>
-                        <div className="btn-holders">
-                        <button 
-                        ><input onChange=
-                        // {handleLogoChange}
-                        {handleIconChange}
-                                type="file" className="logo-input"/></button>
-                        {/* {handleLogoChange} */}
-                        <button onClick={deleteLogo} className="logo-input-delete"
-                        >
-                        
-                                 </button>
+                            <Form>
+                                <Form.Group id="name" style={{ margin: "20px" }}>
+                                    <h4>Name</h4>
+                                    <Form.Control type="text" ref={nameRef} />
+                                </Form.Group>
+                            </Form>
+                            {currentUser && <div className="email_div">
+                                <h4>Email</h4>
+                                <p>{currentUser.email}</p>
+                                <h4>Channel Icon</h4>
+                                <div id="channelIconContainer">
+                                    <Avatar src={lg}></Avatar>
+                                    <div className="btn-holders">
+                                        <button><input onChange={handleIconChange}
+                                            type="file" className="logo-input" /></button>
+                                        <button onClick={deleteLogo} className="logo-input-delete">
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>}
+                            <Button disabled={loading} onClick={iconState? handleSubmit: updateProfile}>Update Profile</Button>
+                            {result && <Alert variant="success">{result}</Alert>}
+                            {error && <Alert variant="danger">{error}</Alert>}
                         </div>
-                            
-                        </div>
-                        {/* <h4>User Id</h4> */}
-                        
-                        </div>}
-                        <Button disabled={loading} onClick={updateProfile,handleSubmit}>Update Profile</Button>
-                        {result &&  <Alert variant="success">{result}</Alert> }
-                        {error && <Alert variant="danger">{error}</Alert>}
                     </div>
-               </div>
-               <div className="profile-video-data">
+                    <div className="profile-video-data">
                         <div className="profile-display">
                             <img alt="profileImage" src={lg} />
                             <p>Uploads: {uploadCount} </p>
                             <p>Likes: {likeCount} </p>
                             <p>Subscriptions: {subscriptionCount} </p>
                         </div>
+                    </div>
                 </div>
+            </div>
         </div>
-           </div>
-       </div>
     )
 }
 

@@ -16,7 +16,7 @@ const PreviewChannel = ({video}) => {
     const currentLocation = useLocation();
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser,LOGO} = useAuth();
+    const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const [subscribersCount, setSubscribersCount] = useState()
     
