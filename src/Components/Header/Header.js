@@ -30,7 +30,7 @@ export default function Header() {
  useEffect(() => {
   if(currentUser.photoURL){
     setAvatarUrl(currentUser.photoURL.toString())
-    console.log(currentUser.photoURL)
+    // console.log(currentUser.photoURL)
 
   }
  },[currentUser]) 

@@ -90,6 +90,12 @@ export function AuthProvider({ children }) {
             }
         })
     }
+
+   
+    function deletePrevLogo(currentUserId){
+        db.collection("ChannelCreators").doc(currentUserId).delete()
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -157,6 +163,7 @@ export function AuthProvider({ children }) {
         subscribeChannel,
         unsubscribeChannel,
         unlikeVideo,
+        deletePrevLogo,
         playlistCreatorOpen,
         setPlaylistCreatorOpen,
         playlistVideoAdderOpen,
