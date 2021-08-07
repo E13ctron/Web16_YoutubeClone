@@ -86,9 +86,23 @@ export function AuthProvider({children}){
             }
         })
     }
+
+    function updateLogo(currentUserId,URLofLogo){
+        db.collection("ChannelCreators").doc(currentUser.uid.toString()).update({
+        //   id:logoid,
+          iconURL:URLofLogo
+        })
+    }
      
-    function deletePrevLogo(logoId){
-        db.collection("ChannelUsers").where('UserId','==' , currentUser.uid).delete()
+    // function deletePrevLogo(logoId){
+    //     db.collection("ChannelUsers").where('UserId','==' , currentUser.uid).delete()
+    // }
+    function deletePrevLogo(currentUserId){
+        db.collection("ChannelUsers").doc(currentUser.uid.toString()).delete()
+        db.collection("ChannelUsers").doc(currentUser.uid.toString()).update({
+            iconURL:currentUser.photoURL
+        })
+        
     }
 
     useEffect(() => {
@@ -136,11 +150,23 @@ export function AuthProvider({children}){
     },[currentUser])
 
 
+    // useEffect(() => {
+    //     if(currentUser){
+    //         db.collection("ChannelUsers").where('UserId','==',currentUser.uid.toString()).onSnapshot((snapshot) => {
+    //                 SetLOGO(snapshot.docs.map((doc)=>doc.data()))
+    //             })
+    //     }
+    // },[currentUser])
+
     useEffect(() => {
         if(currentUser){
-            db.collection("ChannelUsers").where('UserId','==',currentUser.uid.toString()).onSnapshot((snapshot) => {
-                    SetLOGO(snapshot.docs.map((doc)=>doc.data()))
-                })
+            db.collection("ContentCreators").doc(currentUser.uid.toString()).onSnapshot((snapshot) => {
+                if(snapshot.exists){
+                SetLOGO(snapshot.data().iconURL )
+            }else{
+                SetLOGO(currentUser.photoURL)
+            }
+            })
         }
     },[currentUser])
 
@@ -168,7 +194,7 @@ export function AuthProvider({children}){
         unsubscribeChannel,
         unlikeVideo,
         deletePrevLogo,
-        LOGO,SetLOGO
+        LOGO,SetLOGO,updateLogo
     }
     return(
         <AuthContext.Provider value={value}>

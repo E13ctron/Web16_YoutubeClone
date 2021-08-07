@@ -16,7 +16,7 @@ const PreviewChannel = ({video}) => {
     const currentLocation = useLocation();
     const channel = new URLSearchParams(currentLocation.search).get("name");
     const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser} = useAuth();
+    const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser,LOGO} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const [subscribersCount, setSubscribersCount] = useState()
     //Below loop is to get channel name :/ :/
@@ -90,7 +90,9 @@ const PreviewChannel = ({video}) => {
                     <div className="channel_details">
                         <div className="channel_detailsWrap">
                             <div className="channel_avatarWrap">
-                                <Avatar src={channelIMG} className="channel_avatar" />
+                                <Avatar 
+                                src={LOGO} //channelIMG alternate variable for default gmail img
+                                className="channel_avatar" />
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
                                     <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>

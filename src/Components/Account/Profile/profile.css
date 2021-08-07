@@ -25,6 +25,13 @@ email_div{
 .profile-display{
     margin-top: 100px;
 }
+.profile-display img{
+    object-fit: cover;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+    
+}
 
 #channelIconContainer{
     display: flex;

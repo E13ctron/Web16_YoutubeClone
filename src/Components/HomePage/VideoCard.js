@@ -4,9 +4,11 @@ import moment from "moment";
 import Avatar from "@material-ui/core/Avatar";
 import "./VideoCard.css";
 import { useHistory } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext';
 
 const VideoCard =({ video }) => {
     
+    const {LOGO} = useAuth();
     const history = useHistory();
 
     const handleWatchVideo = () => history.push(`/watch/${video.id}`);
@@ -23,7 +25,9 @@ const VideoCard =({ video }) => {
             <div className="videocard_info">
                 <Avatar onClick={handlePreviewChannel}
                     className="videoCard_avatar"
-                    src={video.channelImage}
+                    src=
+                    // {video.channelImage}
+                    {LOGO}
                     />
 
                 <div className="videocard_channel">

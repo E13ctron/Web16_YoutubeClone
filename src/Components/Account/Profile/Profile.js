@@ -11,7 +11,7 @@ import firebase from 'firebase'
 
 
 function Profile() {
-    const { currentUser, currentUserData, videos, likedVideos,deletePrevLogo, LOGO, SetLOGO} = useAuth()
+    const { currentUser, currentUserData, videos, likedVideos,deletePrevLogo, LOGO, SetLOGO,updateLogo} = useAuth()
     const [loading, setLoading] = useState(false)
     const nameRef = useRef()
     const [error, setError] = useState()
@@ -38,7 +38,7 @@ function Profile() {
         })
     },[setSubscriptionCount, currentUser])
 
-    const [logo, setLogo] = useState(null);
+    // const [logo, setLogo] = useState(null);
     const [lg,setlg] = useState()
     const[id, setID] = useState(uuidv4());
 
@@ -87,19 +87,34 @@ function Profile() {
               .then((url) => {
                 setUrlIcon(url);
                 setUploadedIcon(true);
+                
               });
           }
         );
       };
       const handleSubmit = () => {
         //   deletePrevLogo(id)
+          createID();
           handleUploadIcon();
+          
+
     };
 
+    // useEffect(() => {        if (uploadedIcon) {
+    //       db.collection("ChannelUsers")
+    //         .doc(id).set({
+    //           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //           id: id,
+    //           iconURL: urlIcon,
+    //           channelName: currentUser.displayName,
+    //           email: currentUser.email,
+    //           UserID: currentUser.uid,
+    //           channelImage: currentUser.photoURL
+    //         })
     useEffect(() => {        if (uploadedIcon) {
-          db.collection("ChannelUsers")
-            .doc(id).set({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          db.collection("ChannelCreators")
+            .doc(currentUser.uid.toString()).set({
+            //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               id: id,
               iconURL: urlIcon,
               channelName: currentUser.displayName,
@@ -109,13 +124,13 @@ function Profile() {
             })
             
             .then(() => {
-              setIcon("");
-              setUrlIcon("");
+            //   updateLogo(currentUser.uid,urlIcon)
+            //   setIcon("");
+            //   setUrlIcon("");
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [uploadedIcon]);
-    //   var ChannelLogo = LOGO[LOGO.LENGTH-1];
 
       function updateProfile(){
         const Name = nameRef.current.value
@@ -157,16 +172,20 @@ function Profile() {
             //     })
             // })
 
-           var iconnnn= db.collection("ChannelUsers").doc("a76a6ab2-1f32-4394-ad38-41351991cd2a").get().then(snap=>{
+        //    var iconnnn= db.collection("ChannelUsers").doc("a76a6ab2-1f32-4394-ad38-41351991cd2a").get().then(snap=>{
+        //        setlg(snap.data().iconURL)
+        //    })
+            db.collection("ChannelCreators").doc(currentUser.uid.toString()).get().then(snap=>{
+            if(snap.exists){
                setlg(snap.data().iconURL)
+               SetLOGO(snap.data().iconURL)
+            }else{
+                setlg(currentUser.photoURL)
+                SetLOGO(snap.data().iconURL)
+            }
            })
 
-
-
-
-   
-    
-
+           console.log(lg)
 
     return (
        <div>
@@ -206,7 +225,7 @@ function Profile() {
                </div>
                <div className="profile-video-data">
                         <div className="profile-display">
-                            <img alt="profileImage" src={currentUser.photoURL} />
+                            <img alt="profileImage" src={lg} />
                             <p>Uploads: {uploadCount} </p>
                             <p>Likes: {likeCount} </p>
                             <p>Subscriptions: {subscriptionCount} </p>
