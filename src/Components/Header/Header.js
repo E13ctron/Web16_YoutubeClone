@@ -22,7 +22,7 @@ export default function Header() {
     videoUploadOpen, 
     currentUser, 
     setPlaylistCreatorOpen } = useAuth()
-  const [avatarUrl, setAvatarUrl] = useState()
+  const [AvatarUrl, setAvatarUrl] = useState()
 
   const history = useHistory()
   const searchQueryRef = useRef()

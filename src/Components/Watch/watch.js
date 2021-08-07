@@ -19,6 +19,7 @@ import PlaylistVideoAdder from '../Playlist/PlaylistVideoAdder/PlaylistVideoAdde
 const Watch = ({video}) => {
 
     const {subscriptions,
+        currentUser,
         subscribeChannel,
         unsubscribeChannel,
         setPlaylistVideoAdderOpen } = useAuth();
