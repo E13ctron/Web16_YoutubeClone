@@ -131,6 +131,16 @@ const Watch = ({video}) => {
         setAutoPlay(!autoPlay)
         
     }
+
+    var channelIMG= video.channelImage;
+    var ChannelUSERid=video.UserID;
+    const [lg,setlg]= useState(channelIMG)
+    useEffect(()=>{
+    db.collection("ChannelCreators").doc(ChannelUSERid).onSnapshot((snap)=>{
+        if(snap.exists){
+            setlg(snap.data().iconURL)
+        }
+    })},[ChannelUSERid])
     return (
         <>
             
@@ -191,7 +201,7 @@ const Watch = ({video}) => {
                         <div className="watch__details">
                             <div className="watch__detailsContainer">
                                 <div className="videothumb__details watch_avatarWrap">
-                                    <Avatar style={{cursor:"pointer"}} src={video.channelImage} onClick={handlePreviewChannel} />
+                                    <Avatar style={{cursor:"pointer"}} src={lg} onClick={handlePreviewChannel} />
                                     <div className="videothumb__channel">
                                         <h1 className="videothumb_title">
                                             {video.channelName}

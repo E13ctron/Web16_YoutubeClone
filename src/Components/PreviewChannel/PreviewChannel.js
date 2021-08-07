@@ -19,6 +19,7 @@ const PreviewChannel = ({video}) => {
     const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser,LOGO} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const [subscribersCount, setSubscribersCount] = useState()
+    
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
@@ -31,15 +32,25 @@ const PreviewChannel = ({video}) => {
 
     //code to get default gmail image
     var channelIMG;
+    var ChannelUSERid;
     for(v=0;v<videos.length; v++){
         if(videos[v].email===channel){
             channelIMG=videos[v].channelImage;
+            ChannelUSERid=videos[v].UserID;
             break;
         }
     }
     useEffect(() => {
         setCurrentChannel(videos.filter((video) => video.email ===channel));
     }, [channel, videos])
+    
+    const [lg,setlg]= useState(channelIMG)
+    useEffect(()=>{
+    db.collection("ChannelCreators").doc(ChannelUSERid).onSnapshot((snap)=>{
+        if(snap.exists){
+            setlg(snap.data().iconURL)
+        }
+    })},[ChannelUSERid])
 
     
 
@@ -91,7 +102,7 @@ const PreviewChannel = ({video}) => {
                         <div className="channel_detailsWrap">
                             <div className="channel_avatarWrap">
                                 <Avatar 
-                                src={LOGO} //channelIMG alternate variable for default gmail img
+                                src={lg} //channelIMG alternate variable for default gmail img
                                 className="channel_avatar" />
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
