@@ -127,11 +127,11 @@ const VideoCard = ({ video }) => {
     </div>
   );
 
-  var editBtn= document.querySelector(".edit_icon").setAttribute('video-id',video.id);
+  // var editBtn= document.querySelector(".edit_icon").setAttribute('video-id',video.id);
 
   function editVideoClicked(e){ 
       setEditDialogOpen(true)
-       let ID = e.target.parentElement.getAttribute('video-id');
+      //  let ID = e.target.parentElement.getAttribute('video-id');
        db.collection("Videos").doc(video.id).onSnapshot(snap=>{
        if(snap.exists){
         setTitle(snap.data().title)
