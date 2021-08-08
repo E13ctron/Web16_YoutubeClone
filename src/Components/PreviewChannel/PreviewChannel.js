@@ -9,23 +9,23 @@ import { useLocation } from 'react-router'
 import useScrollTop from '../useScrollTop'
 import { db } from '../../firebase'
 
-const PreviewChannel = ({video}) => {
+const PreviewChannel = ({ video }) => {
     useScrollTop();
-    
+
     const currentLocation = useLocation();
     const channel = new URLSearchParams(currentLocation.search).get("name");
-    const [currentChannel,setCurrentChannel] = useState([]);
-    const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser} = useAuth();
+    const [currentChannel, setCurrentChannel] = useState([]);
+    const { videos, subscriptions, subscribeChannel, unsubscribeChannel, currentUser } = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const [subscribersCount, setSubscribersCount] = useState()
-    const [displayState,setDisplayState]= useState("Videos")
-    
+    const [displayState, setDisplayState] = useState("Videos")
+
     //Below loop is to get channel name :/ :/
     var v;
     var channelTitleName;
-    for(v=0;v<videos.length; v++){
-        if(videos[v].email===channel){
-            channelTitleName=videos[v].channelName;
+    for (v = 0; v < videos.length; v++) {
+        if (videos[v].email === channel) {
+            channelTitleName = videos[v].channelName;
             break;
         }
     }
@@ -33,72 +33,71 @@ const PreviewChannel = ({video}) => {
     //code to get default gmail image
     var channelIMG;
     var ChannelUSERid;
-    for(v=0;v<videos.length; v++){
-        if(videos[v].email===channel){
-            channelIMG=videos[v].channelImage;
-            ChannelUSERid=videos[v].UserID;
+    for (v = 0; v < videos.length; v++) {
+        if (videos[v].email === channel) {
+            channelIMG = videos[v].channelImage;
+            ChannelUSERid = videos[v].UserID;
             break;
         }
     }
     useEffect(() => {
-        setCurrentChannel(videos.filter((video) => video.email ===channel));
+        setCurrentChannel(videos.filter((video) => video.email === channel));
     }, [channel, videos])
-    
-    const [lg,setlg]= useState(channelIMG)
-    useEffect(()=>{
-    db.collection("ChannelCreators").doc(ChannelUSERid).onSnapshot((snap)=>{
-        if(snap.exists){
-            setlg(snap.data().iconURL)
-        }
-    })},[ChannelUSERid])
 
-    
-
-    const [subscribe,setSubscribe] = useState("SUBSCRIBE");
-    function handleSubscribeClick(){
-        if(!subscribeBtnState)
-        {
-     setSubscribe("SUBSCRIBED");
-     setSubscribeBtnState(true)
-     subscribeChannel(channel)
-         }
-    }
-    function handleUnSubscribeClick(){
-        if(subscribeBtnState)
-        {
-     setSubscribe("SUBSCRIBE");
-     setSubscribeBtnState(false)
-     unsubscribeChannel(channel)
+    const [lg, setlg] = useState(channelIMG)
+    useEffect(() => {
+        db.collection("ChannelCreators").doc(ChannelUSERid).onSnapshot((snap) => {
+            if (snap.exists) {
+                setlg(snap.data().iconURL)
             }
+        })
+    }, [ChannelUSERid])
+
+
+
+    const [subscribe, setSubscribe] = useState("SUBSCRIBE");
+    function handleSubscribeClick() {
+        if (!subscribeBtnState) {
+            setSubscribe("SUBSCRIBED");
+            setSubscribeBtnState(true)
+            subscribeChannel(channel)
+        }
+    }
+    function handleUnSubscribeClick() {
+        if (subscribeBtnState) {
+            setSubscribe("SUBSCRIBE");
+            setSubscribeBtnState(false)
+            unsubscribeChannel(channel)
+        }
     }
     useEffect(() => {
-        for(var i = 0;i < subscriptions.length;i++){
-            if(subscriptions[i].name === channel){
+        for (var i = 0; i < subscriptions.length; i++) {
+            if (subscriptions[i].name === channel) {
                 setSubscribe("SUBSCRIBED")
                 setSubscribeBtnState(true)
             }
         }
-    },[subscriptions,channel])
-    db.collection("IndividualUsers").doc(channel).onSnapshot((snap)=>{
-        if(snap.exists){
+    }, [subscriptions, channel])
+    db.collection("IndividualUsers").doc(channel).onSnapshot((snap) => {
+        if (snap.exists) {
             var sub = snap.data().subscribers
             setSubscribersCount(sub)
         }
-        else{
+        else {
             setSubscribersCount(0)
         }
     })
 
-    const [about,setAbout]= useState("")
-    useEffect(()=>{
-        db.collection("ChannelAbouts").doc(ChannelUSERid).onSnapshot(snap=>{
-            if(snap.exists){
+    const [about, setAbout] = useState("")
+    useEffect(() => {
+        db.collection("ChannelAbouts").doc(ChannelUSERid).onSnapshot(snap => {
+            if (snap.exists) {
                 setAbout(snap.data().About);
             }
         })
-    },[ChannelUSERid]);
-  
-    
+    }, [ChannelUSERid]);
+
+
     return (
         <div>
             <Header />
@@ -109,51 +108,45 @@ const PreviewChannel = ({video}) => {
                     <div className="channel_details">
                         <div className="channel_detailsWrap">
                             <div className="channel_avatarWrap">
-                                <Avatar 
-                                src={lg} //channelIMG alternate variable for default gmail img
-                                className="channel_avatar" />
+                                <Avatar
+                                    src={lg} //channelIMG alternate variable for default gmail img
+                                    className="channel_avatar" />
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
                                     <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>
-                                    <p className="videothumb__text watch__subCount">{about}</p>
                                 </div>
                             </div>
-                              {channel !== currentUser.email &&  <>
-                               {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
-                                 color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
-                               </> }
+                            {channel !== currentUser.email && <>
+                                {subscribeBtnState ? <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
+                                    color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className="watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
+                            </>}
+                        </div>
+                        <div className="channel_links">
+                            <div className={displayState === "Videos" ? "channel_link channel_link-active" : "channel_link"}>
+                                <p onClick={() => setDisplayState("Videos")}>VIDEOS</p>
+                                {displayState === "Videos" && <div className="channel_link_border" />}
                             </div>
-                            <div className="channel_links">
-                              <div 
-                            //   className="channel_link channel_link-active"
-                                 className={displayState==="Videos"?"channel_link channel_link-active" :"channel_link" }
-                              >
-                                  <p onClick={() => setDisplayState("Videos")}>VIDEOS</p>
-                                  <div className="channel_link_border"/>
-                              </div>
-                              <div className="channel_link">
-                                  <p>PLAYLISTS</p>
-                              </div>
-                              <div
-                            //    className="channel_link"
-                            className={displayState==="About"?"channel_link channel_link-active" :"channel_link" }
-                               >
-                                  <p onClick={() => setDisplayState("About")}>ABOUT</p>
-                              </div>
-                              
+                            <div className="channel_link">
+                                <p>PLAYLISTS</p>
                             </div>
+                            <div className={displayState === "About" ? "channel_link channel_link-active" : "channel_link"}>
+                                <p onClick={() => setDisplayState("About")}>ABOUT</p>
+                                {displayState === "About" && <div className="channel_link_border" />}
+                            </div>
+
+                        </div>
                     </div>
                     <div className="channel_content">
-                       <div className="channel_contentWrapper">
-                         {displayState==="Videos" ?
-                             currentChannel.map((video) =>{
-                               return <VideoSmall channelView video={video} key={video.id}/>
-                           })
-                           : <div className="about_container">
-                           <h5>Channel Description</h5>
-                           <p>{about}</p></div>
-                           }
-                           </div>
+                        <div className="channel_contentWrapper">
+                            {displayState === "Videos" ?
+                                currentChannel.map((video) => {
+                                    return <VideoSmall channelView video={video} key={video.id} />
+                                })
+                                : <div>
+                                    <h5>Channel Description</h5>
+                                    <p>{about}</p></div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
