@@ -26,6 +26,8 @@ export function AuthProvider({ children }) {
     const [currentlyPlayedVideo, setCurrentlyPlayedVideo] = useState({})
     const [playlistPlaying, setPlaylistPlaying] = useState(false)
     const [queue, setQueue] = useState([])
+    const [ deletePlaylistOpen, setDeletePlaylistOpen] = useState(false)
+    const [ confirmedPlaylistDelete, setConfirmedPlaylistDelete ] = useState(false)
 
     function signup(email, password) {
         return (auth.createUserWithEmailAndPassword(email, password))
@@ -173,7 +175,11 @@ export function AuthProvider({ children }) {
         playlistPlaying,
         setPlaylistPlaying,
         queue,
-        setQueue
+        setQueue,
+        deletePlaylistOpen,
+        setDeletePlaylistOpen,
+        confirmedPlaylistDelete,
+        setConfirmedPlaylistDelete
     }
     return (
         <AuthContext.Provider value={value}>
