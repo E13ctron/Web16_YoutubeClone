@@ -34,8 +34,11 @@
     margin-top: 5px;
 }
 
+.text_colour{
+    color: #606060 !important;
+}
 .videocard_text {
     font-size: 14px;
     line-height: 5px;
-    color: #aaaaaa !important;
+    color: #606060;
 }

@@ -42,8 +42,8 @@ const VideoCard =({ video }) => {
                     <h1 className="videocard_title" onClick={handleWatchVideo}>{video.title}</h1>
 
                     <div className="videocard_texts">
-                        <p className="videocard_text" onClick={handlePreviewChannel}>{video.channelName}</p>
-                        <p className="videocard_text">{video.views} views • {uploadedTime}</p>
+                        <p className="text_colour videocard_text"  onClick={handlePreviewChannel}>{video.channelName}</p>
+                        <p className="text_colour videocard_text" >{video.views} views • {uploadedTime}</p>
                     </div>
                 </div>
             </div>
