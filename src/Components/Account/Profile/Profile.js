@@ -89,10 +89,6 @@ function Profile() {
     };
 
 
-    // console.log(currentUser)
-
-
-
     const handleSubmit = () => {
           deletePrevLogo(id)
             if(iconState){
@@ -176,9 +172,6 @@ function Profile() {
             About: channelDescription
         })
     }
-
-    console.log(currentUser.displayName)
-
     return (
         <div>
             <Header />
