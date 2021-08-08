@@ -4,7 +4,7 @@ import './CommentSection.css'
 function CommentCard({comment}){
     return(
         <div>
-            <img src={comment.photoURL} />
+            <img alt="UserImage" src={comment.photoURL} />
             <p>{comment.Name}</p>
             <p>{comment.text}</p>
         </div>
