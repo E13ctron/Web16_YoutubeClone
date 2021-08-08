@@ -76,12 +76,12 @@ export default function Signup() {
                                 
                                 <Form.Control classname="particular-input" placeholder="Confirm Password" type="password" ref={confirmPasswordRef} required />
                             </Form.Group>
-                            <Button disabled={loading} className="w-100 button particular-field" style={{ margin: "10px", backgroundColor: "rgb(211, 0, 0)" }} type="submit">
+                            <Button disabled={loading} className="w-100 button particular-field" style={{ margin: "10px", backgroundColor: "rgb(201 29 32)" }} type="submit">
                                 Sign Up
                             </Button>
                             <div style={{color: "white"}}>Already have an account?</div>
                             <div>
-                                <Link to="/login" style={{color: "white", textDecoration: "none"}}>Sign In</Link>
+                                <Link to="/login" style={{color: "rgb(201 29 32)", textDecoration: "none"}}>Sign In</Link>
                             </div>
                         </Form>
                     </Card.Body>
