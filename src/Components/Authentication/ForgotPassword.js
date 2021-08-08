@@ -35,7 +35,7 @@ export default function ForgotPassword() {
             <div className="youtubelogo">
               <img src={youtube_logo_png} className="youtube-img" alt="" />
             </div>
-            <h2 className="text-center mb-4 white-color">Forgot Password</h2>
+            <h2 className="text-center mb-4 white-color">Forgot Password ?</h2>
             <h4 className="text-center mb-2 white-color">Enter Your Email</h4>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form className="form-body" onSubmit={handleSubmit}>
