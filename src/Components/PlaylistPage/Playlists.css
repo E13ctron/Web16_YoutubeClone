@@ -5,3 +5,6 @@
     padding-bottom: 0;
     flex: 0.83;
 }
+.delete-choices{
+    display: flex;
+}
