@@ -3,6 +3,7 @@ import CommentCard from './CommentCard'
 import { db } from '../../firebase'
 import { useAuth } from '../../contexts/AuthContext'
 import firebase from 'firebase/app';
+import './CommentSection.css'
 
 function CommentSection({videoId}){
     const { currentUser } = useAuth()
