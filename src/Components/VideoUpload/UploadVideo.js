@@ -176,7 +176,6 @@ const UploadVideo = ({video, setVideo, closeVideoUpload}) => {
               style={{marginTop : "30px"} }
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              
               />
 
               <input

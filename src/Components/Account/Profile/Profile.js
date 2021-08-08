@@ -5,10 +5,8 @@ import Sidebar from "../Sidebar"
 import './profile.css'
 import { useAuth } from "../../../contexts/AuthContext"
 import { database, db,storage } from '../../../firebase'
-import { Avatar } from '@material-ui/core'
+import { Avatar,TextField } from '@material-ui/core'
 import {v4 as uuidv4} from "uuid"
-
-
 
 function Profile() {
     const { currentUser, currentUserData, videos, likedVideos,deletePrevLogo} = useAuth()
@@ -53,6 +51,8 @@ function Profile() {
     const [iconState,setIconState]= useState(false);
     const[urlIcon, setUrlIcon] = useState(null);
     const[uploadedIcon, setUploadedIcon] = useState(false)
+    const[channelDescription, setChannelDescription] = useState("");
+    const [descState,setDescState]=useState(false);
 
 
 
@@ -154,8 +154,6 @@ function Profile() {
         }
         setLoading(false)
     }
-
-        
         function deleteLogo(){
             deletePrevLogo(currentUser.uid)
         }
@@ -167,6 +165,15 @@ function Profile() {
             setlg(currentUser.photoURL)
         }
        })
+
+       function handleAboutSubmit(){
+        //    console.log("yeah click working boy")
+        //    console.log(currentUser.uid)
+           db.collection("ChannelAbouts").doc(currentUser.uid.toString()
+            ).set({
+               About: channelDescription
+           })   
+       }      
 
     return (
         <div>
@@ -195,11 +202,26 @@ function Profile() {
                                         <button onClick={deleteLogo} className="logo-input-delete">
                                         </button>
                                     </div>
-
                                 </div>
+                                <h4>About</h4>
+                                <TextField
+                                    label="Channel Description"
+                                    multiline
+                                    rows={10}
+                                    variant="outlined"
+                                    fullWidth
+                                    placeHolder="Add your channel description."
+                                    // defaultValue={channelDescription}
+                                    style={{ marginBottom: "10px" }}
+                                    value={channelDescription}
+                                    onChange={(e) => setChannelDescription(e.target.value)}
+                                />
 
                             </div>}
-                            <Button disabled={loading} onClick={iconState? handleSubmit: updateProfile}>Update Profile</Button>
+                            <Button disabled={loading} 
+                            // onClick={iconState? handleSubmit: updateProfile}
+                            onClick={handleAboutSubmit}
+                            >Update Profile</Button>
                             {result && <Alert variant="success">{result}</Alert>}
                             {error && <Alert variant="danger">{error}</Alert>}
                         </div>
