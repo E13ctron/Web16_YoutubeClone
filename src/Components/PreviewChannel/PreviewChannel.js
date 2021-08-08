@@ -18,6 +18,7 @@ const PreviewChannel = ({video}) => {
     const {videos,subscriptions,subscribeChannel,unsubscribeChannel,currentUser} = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const [subscribersCount, setSubscribersCount] = useState()
+    const [displayState,setDisplayState]= useState("Videos")
     
     //Below loop is to get channel name :/ :/
     var v;
@@ -87,6 +88,16 @@ const PreviewChannel = ({video}) => {
             setSubscribersCount(0)
         }
     })
+
+    const [about,setAbout]= useState("")
+    useEffect(()=>{
+        db.collection("ChannelAbouts").doc(ChannelUSERid).onSnapshot(snap=>{
+            if(snap.exists){
+                setAbout(snap.data().About);
+            }
+        })
+    },[ChannelUSERid]);
+  
     
     return (
         <div>
@@ -104,6 +115,7 @@ const PreviewChannel = ({video}) => {
                                 <div className="videothumb__channel">
                                     <h1 className="channel_title">{channelTitleName}</h1>
                                     <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>
+                                    <p className="videothumb__text watch__subCount">{about}</p>
                                 </div>
                             </div>
                               {channel !== currentUser.email &&  <>
@@ -113,23 +125,26 @@ const PreviewChannel = ({video}) => {
                             </div>
                             <div className="channel_links">
                               <div className="channel_link channel_link-active">
-                                  <p>VIDEOS</p>
+                                  <p onClick={() => setDisplayState("Videos")}>VIDEOS</p>
                                   <div className="channel_link_border"/>
                               </div>
                               <div className="channel_link">
                                   <p>PLAYLISTS</p>
                               </div>
                               <div className="channel_link">
-                                  <p>ABOUT</p>
+                                  <p onClick={() => setDisplayState("About")}>ABOUT</p>
                               </div>
                               
                             </div>
                     </div>
                     <div className="channel_content">
                        <div className="channel_contentWrapper">
-                           {currentChannel.map((video) =>{
+                         {displayState==="Videos" ?
+                             currentChannel.map((video) =>{
                                return <VideoSmall channelView video={video} key={video.id}/>
-                           })}
+                           })
+                           : <p>{about}</p>
+                           }
                            </div>
                     </div>
                 </div>
