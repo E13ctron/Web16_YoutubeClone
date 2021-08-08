@@ -181,13 +181,13 @@ function Profile() {
                             <Form>
                                 <Form.Group id="name" style={{ margin: "20px" }}>
                                     <h4>Name</h4>
-                                    <Form.Control type="text" ref={nameRef} />
+                                    <Form.Control placeholder="Name" type="text" ref={nameRef} />
                                 </Form.Group>
                             </Form>
                             {currentUser && <div className="email_div">
-                                <h4>Email</h4>
+                                <h4 style={{marginTop: "40px"}}>Email</h4>
                                 <p>{currentUser.email}</p>
-                                <h4>Channel Icon</h4>
+                                <h4 style={{marginTop: "40px"}}>Channel Icon</h4>
                                 <div id="channelIconContainer">
                                     <Avatar src={lg}></Avatar>
                                     <div className="btn-holders">
@@ -200,12 +200,13 @@ function Profile() {
                                 </div>
 
                             </div>}
-                            <Button disabled={loading} onClick={iconState? handleSubmit: updateProfile}>Update Profile</Button>
+                            <Button style={{backgroundColor: "rgb(201 29 32)", border:"none", marginTop: "40px"}} disabled={loading} onClick={iconState? handleSubmit: updateProfile}>Update Profile</Button>
                             {result && <Alert variant="success">{result}</Alert>}
                             {error && <Alert variant="danger">{error}</Alert>}
                         </div>
                     </div>
-                    <div className="profile-video-data">
+                </div>
+                <div className="profile-video-data">
                         <div className="profile-display">
                             <img alt="profileImage" src={lg} />
                             <p>Uploads: {uploadCount} </p>
@@ -213,7 +214,6 @@ function Profile() {
                             <p>Subscriptions: {subscriptionCount} </p>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     )

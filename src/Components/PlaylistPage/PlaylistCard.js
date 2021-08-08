@@ -56,9 +56,13 @@ function PlaylistCard({name}) {
    
     return (
         <div className="playlist" >
-            <h2 onClick={startPlaylist} >{name}</h2>
-            <p>Videos: {videosCount}</p>
+            <div className="pl-firstline">
+            <div className="pl-name" onClick={startPlaylist} >{name}</div>
             <DeleteIcon onClick={() => setDeletePlaylistOpen(true)} />
+            </div>
+            
+            <p>Videos: {videosCount}</p>
+            
         </div>
     )
 }

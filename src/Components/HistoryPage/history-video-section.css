@@ -1,9 +1,12 @@
+.watch-history{
+    width: 100%;
+}
 .history-video-section{
     padding-bottom: 0;
     display: flex;
     flex-wrap: wrap;
     flex: 0.83;
-    background-color: rgb(250, 250, 250);
+    /* background-color: rgb(250, 250, 250); */
     min-height: 100vh;
 }
 .history-video-section > h2 {

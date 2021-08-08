@@ -1,3 +1,21 @@
 .playlist{
-    border:black solid 2px;
+    /* border:black solid 2px; */
+    margin-bottom: 10px;
+    width: 49%;
+    margin-right: 0.5%;
+    margin-left: 00.5%;
+    background-color: rgb(240, 240, 240);
+    border-radius: 2px;
+    padding: 0 10px;
+}
+.pl-firstline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.playlist:hover{
+    cursor: pointer;
+}
+.pl-name{
+    font-size: x-large;
 }
