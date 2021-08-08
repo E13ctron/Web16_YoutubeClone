@@ -4,7 +4,7 @@ import Sidebar from '../Sidebar/Sidebar'
 import "./PreviewChannel.css"
 import channel_art_photo from "../../assets/channel_art_photo.jpg"
 import { Avatar, Button } from '@material-ui/core'
-import VideoSmall from '../WatchRight/VideoSmall'
+import VideoCard from '../HomePage/VideoCard'
 import { useAuth } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router'
 import useScrollTop from '../useScrollTop'
@@ -137,7 +137,7 @@ const PreviewChannel = ({video}) => {
                     <div className="channel_content">
                        <div className="channel_contentWrapper">
                            {currentChannel.map((video) =>{
-                               return <VideoSmall channelView video={video} key={video.id}/>
+                               return <VideoCard channelView video={video} key={video.id}/>
                            })}
                            </div>
                     </div>
