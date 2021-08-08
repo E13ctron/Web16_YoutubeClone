@@ -1,66 +1,106 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from "react";
 import GoogleSignIn from "./GoogleSignIn";
-import { useAuth } from "../../contexts/AuthContext"
-import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
-import "./styles.css"
+import { useAuth } from "../../contexts/AuthContext";
+import { Card, Form, Button, Alert, Container } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import "./styles.css";
+import youtube_logo_png from "../../assets/youtube-logo-png.jpg";
 
-       
 export default function Login() {
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login } = useAuth()
-    const [ error, setError ] = useState('')
-    const [ loading, setLoading ] = useState(false)
-    const history = useHistory()
-    async function handleSubmit(e){
-        e.preventDefault()
-        try{
-            setError('')
-            setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
-            history.push("/Home")
-           } catch {
-               setError("Failed to login ")
-               
-           }
-           setLoading(false)
-                
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      history.push("/Home");
+    } catch {
+      setError("Failed to login ");
     }
-    return (
-        <Container className="d-flex align-items-center justify-content-center"
+    setLoading(false);
+  }
+  return (
+    <Container
+      className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}
     >
-        <div style={{textAlign: "center"}}>
-            <>
-                <Card>
-                    <Card.Body>
-                        <h2 className="text-center mb-4">LOGIN PAGE</h2>
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        <Form onSubmit={ handleSubmit }>
-                            <Form.Group id="email" style={{ margin: "10px" }}>
-                                <Form.Label>Email Address</Form.Label>
-                                <Form.Control type="email" ref={emailRef} required />
-                            </Form.Group>
-                            <Form.Group id="password" style={{ margin: "10px" }}>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" ref={passwordRef} required />
-                            </Form.Group>
-                            <Button disabled={loading} className="w-100 button" style={{ margin: "10px" }} type="submit">
-                                Sign In
-                            </Button >
-                            <div>Don't have an account?</div>
-                            <div> <a href="./signup" style={{ textAlign: "center" }}>Sign Up</a></div>
-                            <div>Forgot Password ? </div>
-                            <div> <a href="./forgotpassword" style={{ textAlign: "center" }}>Reset Password</a></div>
-                        </Form>
-                    </Card.Body>
-                </Card>
-                 </>
-            <GoogleSignIn/>
-        </div>
-        </Container>
-    )
+      <div className="signup-body" style={{ textAlign: "center" }}>
+        <Card className="card_parent">
+          <Card.Body className="card_body">
+            <div className="youtubelogo">
+              <img src={youtube_logo_png} className="youtube-img" alt="" />
+            </div>
+            <h2 className="text-center mb-4 white-color">LOGIN PAGE</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form className="form-body" onSubmit={handleSubmit}>
+              <Form.Group
+                className="particular-field"
+                id="email"
+                style={{ margin: "10px" }}
+              >
+                <Form.Control
+                  classname="particular-input"
+                  placeholder="Email"
+                  type="email"
+                  ref={emailRef}
+                  required
+                />
+              </Form.Group>
+              <Form.Group
+                className="particular-field"
+                id="password"
+                style={{ margin: "10px" }}
+              >
+                <Form.Control
+                  placeholder="Password"
+                  type="password"
+                  ref={passwordRef}
+                  required
+                />
+              </Form.Group>
+              <Button
+                disabled={loading}
+                className="w-100 button particular-field"
+                style={{ margin: "10px", backgroundColor: "rgb(201 29 32)" }}
+                type="submit"
+              >
+                Sign In
+              </Button>
+              <div style={{ color: "white" }}>Don't have an account?</div>
+              <div>
+                {" "}
+                <a
+                  href="./signup"
+                  style={{ color: "rgb(201 29 32)", textDecoration: "none" }}
+                >
+                  Sign Up
+                </a>
+              </div>
+              <div style={{ color: "white" }}>Forgot Password ? </div>
+              <div>
+                {" "}
+                <a
+                  href="./forgotpassword"
+                  style={{ color: "rgb(201 29 32)", textDecoration: "none" }}
+                >
+                  Reset Password
+                </a>
+              </div>
+            </Form>
+            <GoogleSignIn />
+          </Card.Body>
+        </Card>
+      </div>
+    </Container>
+  );
 }
+
         
+
 

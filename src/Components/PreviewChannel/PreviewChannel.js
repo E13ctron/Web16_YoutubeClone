@@ -3,11 +3,12 @@ import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
 import "./PreviewChannel.css"
 import { Avatar, Button } from '@material-ui/core'
-import VideoSmall from '../WatchRight/VideoSmall'
+import VideoCard from './VideoCard'
 import { useAuth } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router'
 import useScrollTop from '../useScrollTop'
 import { db } from '../../firebase'
+// import VideoSmall from "../WatchRight/VideoSmall"
 
 const PreviewChannel = ({ video }) => {
     useScrollTop();
@@ -126,9 +127,13 @@ const PreviewChannel = ({ video }) => {
                                 <p onClick={() => setDisplayState("Videos")}>VIDEOS</p>
                                 {displayState === "Videos" && <div className="channel_link_border" />}
                             </div>
-                            <div className="channel_link">
-                                <p>PLAYLISTS</p>
+                            <div className={displayState === "Playlists" ? "channel_link channel_link-active" : "channel_link"}>
+                                <p onClick={() => setDisplayState("Playlists")}>PLAYLISTS</p>
+                                {displayState === "Playlists" && <div className="channel_link_border" />}
                             </div>
+                            {/* <div className="channel_link">
+                                <p>PLAYLISTS</p>
+                            </div> */}
                             <div className={displayState === "About" ? "channel_link channel_link-active" : "channel_link"}>
                                 <p onClick={() => setDisplayState("About")}>ABOUT</p>
                                 {displayState === "About" && <div className="channel_link_border" />}
@@ -137,14 +142,18 @@ const PreviewChannel = ({ video }) => {
                         </div>
                     </div>
                     <div className="channel_content">
+
                         <div className="channel_contentWrapper">
-                            {displayState === "Videos" ?
+                            {displayState === "Videos" &&
                                 currentChannel.map((video) => {
-                                    return <VideoSmall channelView video={video} key={video.id} />
-                                })
-                                : <div>
-                                    <h5>Channel Description</h5>
-                                    <p>{about}</p></div>
+                                    return <VideoCard video={video} key={video.id} />
+                                })}
+                            {displayState === "About" && <div>
+                                <h5>Channel Description</h5>
+                                <p>{about}</p></div>
+                            }{
+                                displayState === "Playlists" &&
+                                <h5>This channel hasn't created any playlists.</h5>
                             }
                         </div>
                     </div>

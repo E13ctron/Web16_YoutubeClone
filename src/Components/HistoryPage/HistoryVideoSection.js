@@ -15,7 +15,9 @@ function HistoryVideoSection(){
     const VideoComponents = historyVideos.map(video => <HistoryVideoCard historyVideo={video} />)
     return (
         <div>
-            <h3>Watch history</h3>
+            <div className="wh-heading">
+            <div className="recommended-heading" >Watch history</div>
+            </div>
 
         <div className="history-video-section">
            {videos.length > 0 ? VideoComponents : <h2>No Videos Found</h2>}
