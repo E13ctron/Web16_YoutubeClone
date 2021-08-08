@@ -1,12 +1,21 @@
 import React from 'react'
 import './CommentSection.css'
+import { Avatar } from '@material-ui/core';
 
 function CommentCard({comment}){
     return(
-        <div>
-            <img alt="UserImage" src={comment.photoURL} />
-            <p>{comment.Name}</p>
-            <p>{comment.text}</p>
+        <div className="comment-card">
+            <div className="user-img">
+            <Avatar
+          alt=""
+          src={comment.photoURL}
+        />
+            </div>
+            <div className="comment-details">
+            <div className="user-name">{comment.Name}</div>
+            <div className="user-comment">{comment.text}</div>
+            </div>
+            
         </div>
     )
 }

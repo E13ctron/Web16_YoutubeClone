@@ -1,0 +1,36 @@
+.comment-input{
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.comment-input-box{
+    width: 90%;
+    border: none;
+    /* border-bottom: 1px solid black; */
+    font-size: x-large;
+    outline: none;
+}
+
+.comment-button{
+    width: 10%;
+    border: none;
+    height: 39px;
+}
+.comment-card{
+    display: flex;
+    margin-bottom: 10px;
+}
+.comment-details{
+    margin-left: 10px;
+}
+.user-name{
+    font-weight: 600;
+}
+.user-comment{
+    color: gray;
+    /* overflow: scroll; */
+    word-wrap: break-word;
+    max-width: 50vw;
+}
