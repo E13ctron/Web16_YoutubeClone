@@ -299,7 +299,7 @@ const Watch = ({video}) => {
                                         <p>SHARE</p>
                                     </div>
                                     <div  className="watch__likeBtnContainer color--gray">
-                                        <PlaylistAdd className="watch__icon play-addicon" />
+                                        <PlaylistAdd onClick={() => setPlaylistVideoAdderOpen(true)} className="watch__icon play-addicon" />
                                         <p onClick={() => setPlaylistVideoAdderOpen(true)} >SAVE</p>
                                     </div>
                                     <div className="watch__likeBtnContainer color--gray">

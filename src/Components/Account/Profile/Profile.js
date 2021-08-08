@@ -91,7 +91,6 @@ function Profile() {
 
     
 
-      //update profile button had onclick={handlesubmit earlier}. Now passed it into update profile function
       const handleSubmit = () => {
         //   deletePrevLogo(id)
         if(iconState){

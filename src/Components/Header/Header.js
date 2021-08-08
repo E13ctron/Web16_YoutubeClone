@@ -10,6 +10,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button, Popover } from "@material-ui/core";
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import { db } from "../../firebase";
 // import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
@@ -63,6 +64,15 @@ export default function Header() {
     setPlaylistCreatorOpen(true)
   }
 
+ 
+  const [lg,setlg]= useState(AvatarUrl)
+  useEffect(()=>{
+  db.collection("ChannelCreators").doc(currentUser.uid.toString()).onSnapshot((snap)=>{
+      if(snap.exists){
+          setlg(snap.data().iconURL)
+      }
+  })},[currentUser])
+
   return (
     <div className="hp-header">
       <div className="hp-left-header">
@@ -78,12 +88,12 @@ export default function Header() {
         <SearchIcon onClick={search} className="searchicon" />
       </div>
       <div className="hp-right-header">
-        <PlaylistAddIcon onClick={openPlaylistCreator} className="hp-right-header-icon" />
         <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon" />
+        <PlaylistAddIcon onClick={openPlaylistCreator} className="hp-right-header-icon" />
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar
           alt=""
-          src={AvatarUrl}
+          src={lg}
           onClick={handleClick}
         />
         <Popover
@@ -104,7 +114,10 @@ export default function Header() {
             <div className="po-top">
             <div className="po-left">
               <div className="po-avatar">
-                <Avatar src={AvatarUrl}/>
+                <Avatar src=
+                // {AvatarUrl}
+                {lg}
+                />
               </div>
               <div className="po-empty"></div>
             </div>
@@ -137,3 +150,5 @@ export default function Header() {
     </div>
   );
 }
+
+
