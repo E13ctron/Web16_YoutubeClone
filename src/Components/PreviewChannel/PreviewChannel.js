@@ -124,14 +124,20 @@ const PreviewChannel = ({video}) => {
                                </> }
                             </div>
                             <div className="channel_links">
-                              <div className="channel_link channel_link-active">
+                              <div 
+                            //   className="channel_link channel_link-active"
+                                 className={displayState==="Videos"?"channel_link channel_link-active" :"channel_link" }
+                              >
                                   <p onClick={() => setDisplayState("Videos")}>VIDEOS</p>
                                   <div className="channel_link_border"/>
                               </div>
                               <div className="channel_link">
                                   <p>PLAYLISTS</p>
                               </div>
-                              <div className="channel_link">
+                              <div
+                            //    className="channel_link"
+                            className={displayState==="About"?"channel_link channel_link-active" :"channel_link" }
+                               >
                                   <p onClick={() => setDisplayState("About")}>ABOUT</p>
                               </div>
                               
@@ -143,7 +149,9 @@ const PreviewChannel = ({video}) => {
                              currentChannel.map((video) =>{
                                return <VideoSmall channelView video={video} key={video.id}/>
                            })
-                           : <p>{about}</p>
+                           : <div className="about_container">
+                           <h5>Channel Description</h5>
+                           <p>{about}</p></div>
                            }
                            </div>
                     </div>
