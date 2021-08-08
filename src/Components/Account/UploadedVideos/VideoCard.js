@@ -24,7 +24,6 @@ const VideoCard = ({ video }) => {
   const handleWatchVideo = () => history.push(`/watch/${video.id}`);
   const handlePreviewChannel = () =>
     history.push(`/PreviewChannel?name=${video.email}`);
-  // console.log(video.email);
 
   const newDate = moment
     .unix(video?.timestamp?.seconds)
@@ -39,9 +38,6 @@ const VideoCard = ({ video }) => {
   const[title, setTitle] = useState("");
   const[description, setDescription] = useState("");
 
-  function editVideoClicked(){ 
-    setEditDialogOpen(true)
-  }
   function closeDialog(){
     setEditDialogOpen(false)
   }
@@ -72,7 +68,7 @@ const VideoCard = ({ video }) => {
                 {video.channelName}
               </p>
               <p className="videocard_text">
-                {video.views} views • {uploadedTime}
+                {video.views} views • {uploadedTime} 
               </p>
             </div>
           </div>
@@ -96,45 +92,62 @@ const VideoCard = ({ video }) => {
 
           <Divider/>
           <DialogContent>
-              <TextField 
-              label="Title" 
+              <TextField
+              // label= "Description"
+              multiline 
               variant="outlined" 
-              fullwidth
-              // value={title}
-              // onChange={(e) => setTitle(e.target.value)}
+              fullWidth
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               defaultValue={title}
               />
               
               <TextField
-              label= "Description"
+              // label= "Description"
               multiline 
               rows={10} 
               variant="outlined" 
               fullWidth 
               placeHolder = "Tell viewers about your video." 
               style={{marginTop : "30px"} }
-              // value={description}
-              // onChange={(e) => setDescription(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               defaultValue={description}
               />
 
               <DialogActions>
                   <Button
-                  //  onClick={handleSubmit}
-                   variant="contained" color="primary"> Upload </Button>
+                   onClick={handleEdit}
+                   variant="contained" color="primary"> Update Details </Button>
               </DialogActions>
           </DialogContent>
       </div>     
             </Dialog>
         </div>
     </div>
-
-    
-    
-
   );
 
-  var editBtn= document.querySelector(".delete_icon").setAttribute('video-id',video.id);
+  var editBtn= document.querySelector(".edit_icon").setAttribute('video-id',video.id);
+
+  function editVideoClicked(e){ 
+      setEditDialogOpen(true)
+       let ID = e.target.parentElement.getAttribute('video-id');
+       db.collection("Videos").doc(video.id).onSnapshot(snap=>{
+       if(snap.exists){
+        setTitle(snap.data().title)
+        setDescription(snap.data().description)
+      }
+    })
+    }
+
+    function handleEdit(){
+      db.collection("Videos").doc(video.id).update({
+        title:title,
+        description:description
+      }).then(()=>{
+        setEditDialogOpen(false)
+      })
+    }
 };
 
 export default VideoCard;
