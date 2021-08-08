@@ -191,8 +191,8 @@ const Watch = ({video}) => {
   
     useEffect(() => {
         db.collection('users').doc(currentUser.uid).collection("history").doc(video.id).set(video)
-        
-        })
+            console.log("looping")
+        },[currentUser, video])
         
     toast.configure()
     useScrollTop();
