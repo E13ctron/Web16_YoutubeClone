@@ -13,8 +13,12 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../firebase'
 import Autorenew from "@material-ui/icons/Autorenew";
+
+import CommentSection from '../Comments/CommentSection'
+
 import PlaylistVideoAdder from '../Playlist/PlaylistVideoAdder/PlaylistVideoAdder'
 import SkipNextIcon from '@material-ui/icons/SkipNext';
+
 
 
 const Watch = ({video}) => {
@@ -334,7 +338,10 @@ const Watch = ({video}) => {
                                     SHOW {showDesc ? "LESS" : "MORE"}
                                 </p>
                             </div>
+                            
+              
                         </div>
+                        <CommentSection videoId={video.id} />
                     </div>
                     <div className="watch-right">
                         {watchRightVideos.map(function(item){
