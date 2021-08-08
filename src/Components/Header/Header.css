@@ -2,8 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px;
+    padding: 10px;
     cursor: pointer;
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    z-index: 100;
+    opacity: 0.99;
   }
   .hp-left-header {
     display: flex;

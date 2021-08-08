@@ -11,57 +11,62 @@ export function useAuth() {
         useContext(AuthContext)
     )
 }
-export function AuthProvider({children}){
-    const [ currentUser, setCurrentUser] = useState()
-    const [ loading, setLoading] = useState(true)
-    const [ videoUploadOpen, setVideoUploadOpen] = useState(false)
-    const [ videos, setvideos] = useState([])
-    const [ currentUserData, setCurrentUserData] = useState()
-    const [ likedVideos, setLikedVideos ] = useState([])
-    const [ deleteVideoOpen , setDeleteVideoOpen] = useState(false)
-    const [ videoDeleted, setVideoDeleted] = useState()
-    const [subscriptions,setSubscriptions] = useState([])
-    
-    function signup(email, password){
+export function AuthProvider({ children }) {
+    const [currentUser, setCurrentUser] = useState()
+    const [loading, setLoading] = useState(true)
+    const [videoUploadOpen, setVideoUploadOpen] = useState(false)
+    const [videos, setvideos] = useState([])
+    const [currentUserData, setCurrentUserData] = useState()
+    const [likedVideos, setLikedVideos] = useState([])
+    const [deleteVideoOpen, setDeleteVideoOpen] = useState(false)
+    const [videoDeleted, setVideoDeleted] = useState()
+    const [subscriptions, setSubscriptions] = useState([])
+    const [playlistCreatorOpen, setPlaylistCreatorOpen] = useState(false)
+    const [playlistVideoAdderOpen, setPlaylistVideoAdderOpen] = useState(false)
+    const [currentlyPlayedVideo, setCurrentlyPlayedVideo] = useState({})
+    const [playlistPlaying, setPlaylistPlaying] = useState(false)
+    const [queue, setQueue] = useState([])
+
+    function signup(email, password) {
         return (auth.createUserWithEmailAndPassword(email, password))
-        
+
     }
-    function login(email, password){
-        return(auth.signInWithEmailAndPassword(email, password))
+    function login(email, password) {
+        return (auth.signInWithEmailAndPassword(email, password))
     }
-    function signout(){
+    function signout() {
         setCurrentUser(null)
-        return(auth.signOut())
+        return (auth.signOut())
     }
-    function resetPassword(email){
+    function resetPassword(email) {
         return auth.sendPasswordResetEmail(email)
     }
-    function updatepassword(password){
+    function updatepassword(password) {
         return (currentUser.updatePassword(password))
     }
-    function likeVideo(video){
+    function likeVideo(video) {
         database.users.doc(currentUser.uid.toString()).collection("liked").doc(video.id).set(video)
         database.videos.doc(video.id).update({
-            likes : video.likes + 1
+            likes: video.likes + 1
         })
     }
-    function unlikeVideo(video){
+    function unlikeVideo(video) {
         database.users.doc(currentUser.uid.toString()).collection("liked").doc(video.id).delete(video)
         database.videos.doc(video.id).update({
-            likes : video.likes - 1
+            likes: video.likes - 1
         })
     }
-    function subscribeChannel(previewedChannel){
+    function subscribeChannel(previewedChannel) {
         db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).set({
-            name:previewedChannel
+            name: previewedChannel
         })
         db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
-            if(snap.exists){
+            if (snap.exists) {
                 db.collection("IndividualUsers").doc(previewedChannel).update({
                     subscribers: snap.data().subscribers + 1
                 })
             }
-            else{
+            else {
                 db.collection("IndividualUsers").doc(previewedChannel).set({
                     name: previewedChannel,
                     subscribers: 1
@@ -69,15 +74,15 @@ export function AuthProvider({children}){
             }
         })
     }
-    function unsubscribeChannel(previewedChannel){
+    function unsubscribeChannel(previewedChannel) {
         db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").doc(previewedChannel).delete()
         db.collection("IndividualUsers").doc(previewedChannel).get().then((snap) => {
-            if(snap.exists){
+            if (snap.exists) {
                 db.collection("IndividualUsers").doc(previewedChannel).update({
                     subscribers: snap.data().subscribers - 1
                 })
             }
-            else{
+            else {
                 db.collection("IndividualUsers").doc(previewedChannel).set({
                     name: previewedChannel,
                     subscribers: 0
@@ -85,6 +90,12 @@ export function AuthProvider({children}){
             }
         })
     }
+
+   
+    function deletePrevLogo(currentUserId){
+        db.collection("ChannelCreators").doc(currentUserId).delete()
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -94,40 +105,40 @@ export function AuthProvider({children}){
     }, [])
 
     useEffect(() => {
-        db.collection("Videos").orderBy("timestamp","desc").onSnapshot((snapshot) => {
+        db.collection("Videos").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             setvideos(snapshot.docs.map((doc) => doc.data()));
         })
     }, []);
     useEffect(() => {
-        if(currentUser){
+        if (currentUser) {
             database.users.doc(currentUser.uid.toString()).get().then((doc) => {
-                if(doc.exists){
+                if (doc.exists) {
                     setCurrentUserData(doc.data())
                 }
             })
         }
     })
-    function updateViews(video){
+    function updateViews(video) {
         database.videos.doc(video.id).update({
             views: video.views + 1
         })
-    }       
+    }
     useEffect(() => {
-        if(currentUser){
+        if (currentUser) {
             database.users.doc(currentUser.uid.toString()).collection("liked").onSnapshot((QuerySnap) => {
                 setLikedVideos(QuerySnap.docs.map((doc) => doc.data()))
-                
+
             })
         }
-    },[currentUser])
+    }, [currentUser])
     useEffect(() => {
-        if(currentUser){
+        if (currentUser) {
             db.collection("UserSubscriptions").doc(currentUser.uid.toString()).collection("subscribedChannels").onSnapshot((snapshot) => {
                 setSubscriptions(snapshot.docs.map((doc) => doc.data()))
-                
+
             })
         }
-    },[currentUser])
+    }, [currentUser])
 
     const value = {
         videos,
@@ -151,9 +162,20 @@ export function AuthProvider({children}){
         subscriptions,
         subscribeChannel,
         unsubscribeChannel,
-        unlikeVideo
+        unlikeVideo,
+        deletePrevLogo,
+        playlistCreatorOpen,
+        setPlaylistCreatorOpen,
+        playlistVideoAdderOpen,
+        setPlaylistVideoAdderOpen,
+        currentlyPlayedVideo,
+        setCurrentlyPlayedVideo,
+        playlistPlaying,
+        setPlaylistPlaying,
+        queue,
+        setQueue
     }
-    return(
+    return (
         <AuthContext.Provider value={value}>
             {!loading && children}
         </AuthContext.Provider>

@@ -1,5 +1,41 @@
 .button{
     margin: 10px  !important;
-    max-width: 201.6px;
+    /* max-width: 201.6px; */
+    border: none !important;
+    border-radius: 5px !important;
+}
+.signup-body{
+    width: 450px;
+}
+.form-body{
+    display: flex;
+    width: 60%;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+.youtubelogo{
+    display: flex;
+    justify-content: center;
+}
+.youtube-img{
+    width: 100px;
+}
+.particular-field{
+    width: 100%;
+    margin: 10px !important;
+}
+.particular-input{
+    border-radius: 10px !important;
+}
+.card_body{
+    background-color: rgb(56, 56, 56);
+    border-radius: 5px;
+}
+.white-color{
+    color: white;
+}
+.card_parent{
     border: none !important;
 }

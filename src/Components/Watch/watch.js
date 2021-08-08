@@ -13,22 +13,82 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../../firebase'
 import Autorenew from "@material-ui/icons/Autorenew";
+
 import CommentSection from '../Comments/CommentSection'
+
+import PlaylistVideoAdder from '../Playlist/PlaylistVideoAdder/PlaylistVideoAdder'
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+
 
 
 const Watch = ({video}) => {
-    const {subscriptions,subscribeChannel,unsubscribeChannel, currentUser} = useAuth();
+
+    const {subscriptions,
+        currentUser,
+        subscribeChannel,
+        unsubscribeChannel,
+        setPlaylistVideoAdderOpen } = useAuth();
     const [subscribeBtnState, setSubscribeBtnState] = useState(false);
     const channel = video.email
     const [subscribe,setSubscribe] = useState("SUBSCRIBE");
     const history = useHistory();
     const [showDesc, setShowDesc] = useState(false);
     const handlePreviewChannel = () => history.push(`/PreviewChannel?name=${video.email}`)
-    const { videos, likedVideos, likeVideo, unlikeVideo, updateViews } = useAuth()
+    const { videos, 
+        likedVideos, 
+        likeVideo, 
+        unlikeVideo, 
+        updateViews,
+        setCurrentlyPlayedVideo,
+        queue,
+        playlistPlaying,
+        setPlaylistPlaying } = useAuth()
     const [viewsUpdated, setViewsUpdated ] = useState(false)
     const [likeButtonDisabled, setLikeButtonDisabled] = useState(false)
     const [subscribersCount, setSubscribersCount] = useState()
     const [ autoPlay, setAutoPlay ] = useState(true)
+    const [ watchRightVideos, setWatchRightVideos ] = useState([])
+    useEffect(() => {
+        function findIndex(){
+            for(var i = 0;i < videos.length;i++){
+                if(videos[i].id === video.id){
+                    return i;
+                }
+            }
+        }
+        function findPositionInPlaylist(){
+            for(var i = 0;i < queue.length;i++){
+                if(queue[i].id === video.id){
+                    return i;
+                }
+            }
+            setPlaylistPlaying(false)
+            return 0
+        }
+        var tempArr= []
+        if(playlistPlaying){
+            const position = findPositionInPlaylist()
+            for(var i = position+1;i < queue.length;i++){
+                tempArr.push(queue[i])
+            }
+            for(var j = 0;j < position;j++){
+                tempArr.push(queue[j])
+            }
+        }
+        else{
+            const position = findIndex()
+            for(var k = position+1;k < videos.length;k++){
+                tempArr.push(videos[k])
+            }
+            for(var l = 0;l < position;l++){
+                tempArr.push(videos[l])
+            }
+        }
+        setWatchRightVideos(tempArr)
+    },[setWatchRightVideos, queue,videos,playlistPlaying,video,setPlaylistPlaying])
+    useEffect(() => {
+        setCurrentlyPlayedVideo(video)
+    },[setCurrentlyPlayedVideo,video])
     function findIndex(){
         for(var i = 0;i < videos.length;i++){
             if(videos[i].id === video.id){
@@ -36,17 +96,58 @@ const Watch = ({video}) => {
             }
         }
     }
+    useEffect(() => {
+        console.log(queue)
+        console.log(playlistPlaying)
+    },[queue, playlistPlaying])
     function nextVideo(){
 
         if(autoPlay){
-            const currentIndex = findIndex();
-        if(currentIndex + 1 >= videos.length){
-            history.push("/watch/"+ videos[0].id.toString())
+           if(!playlistPlaying){
+            const position = findIndex()
+            if(position + 1 < videos.length){
+                history.push("/watch/"+videos[position+1].id)
+            }
+           }
+           else{
+               const position = findPositionInPlaylist()
+               if(position + 1 < queue.length){
+                history.push("/watch/"+queue[position + 1].id)
+               }
+               else{
+                history.push("/watch/"+queue[0].id)
+               }
+               console.log(queue)
+           }
         }
-        else{
-            history.push("/watch/"+ videos[currentIndex+1].id.toString())
+    }
+    function nextVideo_withoutautoplay(){
+
+           if(!playlistPlaying){
+            const position = findIndex()
+            if(position + 1 < videos.length){
+                history.push("/watch/"+videos[position+1].id)
+            }
+           }
+           else{
+               const position = findPositionInPlaylist()
+               if(position + 1 < queue.length){
+                history.push("/watch/"+queue[position + 1].id)
+               }
+               else{
+                history.push("/watch/"+queue[0].id)
+               }
+               console.log(queue)
+           }
+    }
+    function findPositionInPlaylist(){
+        for(var i = 0;i < queue.length;i++){
+            if(queue[i].id === video.id){
+                return i;
+            }
         }
-        }
+        setPlaylistPlaying(false)
+        return 0
     }
     function handleSubscribeClick(){
         if(!subscribeBtnState)
@@ -119,7 +220,6 @@ const Watch = ({video}) => {
         }
      },[video,viewsUpdated, updateViews])
     
-
     function handleLike(){
         if(!likeButtonDisabled){
             likeVideo(video)
@@ -141,10 +241,21 @@ const Watch = ({video}) => {
         setAutoPlay(!autoPlay)
         
     }
+
+    var channelIMG= video.channelImage;
+    var ChannelUSERid=video.UserID;
+    const [lg,setlg]= useState(channelIMG)
+    useEffect(()=>{
+    db.collection("ChannelCreators").doc(ChannelUSERid).onSnapshot((snap)=>{
+        if(snap.exists){
+            setlg(snap.data().iconURL)
+        }
+    })},[ChannelUSERid])
     return (
         <>
             
             <div className="watch">
+                <PlaylistVideoAdder />
                 <div className="watch__wrap">
                     <div className="watch__left">
                         <video className="watch__video" controls autoPlay onEnded={nextVideo}>
@@ -155,10 +266,14 @@ const Watch = ({video}) => {
 
                             <h1 className="watch__title">{video.title}</h1>
                             {autoPlay && <p className="autoplay-paragraph">Autoplay is On</p>}
+                            <div className="autoplay-and-nextvideo-icon">
+                                <SkipNextIcon className="next-video-icon" onClick={nextVideo_withoutautoplay}/>
                             { autoPlay ? <Autorenew className="autoplay-icon" onClick={autoPlaySwitch}  />
                                     :
                                     <Autorenew className="autoplay-icon" onClick={autoPlaySwitch} style={{color: "#aaa"}}/>   
                                 }
+                            </div>
+                            
                             </div>
                             <div className="watch__videoInfo">
                                 <div className="watch__videoInfoLeft">
@@ -187,9 +302,9 @@ const Watch = ({video}) => {
                                         <Reply className="watch__icon share-icon" />
                                         <p>SHARE</p>
                                     </div>
-                                    <div className="watch__likeBtnContainer color--gray">
+                                    <div  className="watch__likeBtnContainer color--gray">
                                         <PlaylistAdd className="watch__icon play-addicon" />
-                                        <p>SAVE</p>
+                                        <p onClick={() => setPlaylistVideoAdderOpen(true)} >SAVE</p>
                                     </div>
                                     <div className="watch__likeBtnContainer color--gray">
                                         <MoreHoriz className="watch__icon play-addicon" />
@@ -201,7 +316,7 @@ const Watch = ({video}) => {
                         <div className="watch__details">
                             <div className="watch__detailsContainer">
                                 <div className="videothumb__details watch_avatarWrap">
-                                    <Avatar style={{cursor:"pointer"}} src={video.channelImage} onClick={handlePreviewChannel} />
+                                    <Avatar style={{cursor:"pointer"}} src={lg} onClick={handlePreviewChannel} />
                                     <div className="videothumb__channel">
                                         <h1 className="videothumb_title">
                                             {video.channelName}
@@ -229,13 +344,8 @@ const Watch = ({video}) => {
                         <CommentSection videoId={video.id} />
                     </div>
                     <div className="watch-right">
-                        {videos.map(function(item){
-                            if(item.id === video.id){
-                                return null;
-                            }
-                            else{
+                        {watchRightVideos.map(function(item){
                                 return(<VideoSmall video={item} />)
-                            }
                         }
                         )}
                         
