@@ -1,3 +1,6 @@
+.whole-video-section{
+    width: 100%;
+}
 .video-section{
     padding-bottom: 0;
     display: flex;

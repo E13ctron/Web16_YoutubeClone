@@ -9,7 +9,7 @@ function VideoSection(){
     
     const VideoComponents = videos.map(video => <VideoCard video={video} />)
     return (
-        <div>
+        <div className="whole-video-section">
             <div className="hp-heading">
             <div className="recommended-heading">Recommended</div>
             </div>
