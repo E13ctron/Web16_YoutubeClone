@@ -71,6 +71,9 @@ export default function Header() {
       if(snap.exists){
           setlg(snap.data().iconURL)
       }
+      else{
+        setlg(currentUser.photoURL)
+      }
   })},[currentUser])
 
   return (
