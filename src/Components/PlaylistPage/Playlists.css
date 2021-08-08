@@ -4,7 +4,28 @@
 .playlists{
     padding-bottom: 0;
     flex: 0.83;
+    margin-left: 20px ;
+    min-height: 100vh;
+}
+.playlists:hover{
+    background: rgb(250, 250, 250);
+}
+.pl-cards{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .delete-choices{
     display: flex;
+}
+.recommended-heading{
+    /* margin-left: 5px; */
+    /* padding-bottom: 20px !important; */
+    margin-bottom: 0px !important;
+    font-size: xx-large;
+    font-weight: 600;
+    /* text-align: center; */
+    width: fit-content;
+    margin: auto;
+    
 }

@@ -14,7 +14,7 @@ function HistoryVideoSection(){
     },[currentUser])
     const VideoComponents = historyVideos.map(video => <HistoryVideoCard historyVideo={video} />)
     return (
-        <div>
+        <div className="watch-history">
             <div className="wh-heading">
             <div className="recommended-heading" >Watch history</div>
             </div>

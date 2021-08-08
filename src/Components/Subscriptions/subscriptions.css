@@ -6,4 +6,8 @@
     display: flex;
     flex-wrap: wrap;
     flex: 0.83;
+    min-height: 100vh;
+}
+.subscriptions:hover{
+    background-color: rgb(250, 250, 250);
 }

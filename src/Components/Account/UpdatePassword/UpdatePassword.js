@@ -51,7 +51,7 @@ function UpdatePassword() {
                                 </Form.Group>
                             </div>
                         </Form>
-                        <Button disabled={loading} onClick={updatePassword}>Update Password</Button>
+                        <Button disabled={loading} onClick={updatePassword} style={{backgroundColor: "rgb(201 29 32)", border: "none"}}>Update Password</Button>
                         {error && <Alert variant="danger">{error}</Alert>}
                         {result && <Alert variant="success">{result}</Alert>}
                     </div>

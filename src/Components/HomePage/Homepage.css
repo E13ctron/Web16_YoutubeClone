@@ -1,9 +1,13 @@
+
 .home_page{
     display: flex;
     
 }
 .video-section{
     margin-left: 20px;
+}
+.video-section:hover{
+    background-color: rgb(250, 250, 250);
 }
 
 /* styles for toggling sidebar  */

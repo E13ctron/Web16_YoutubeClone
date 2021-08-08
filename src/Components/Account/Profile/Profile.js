@@ -90,12 +90,12 @@ function Profile() {
 
 
     const handleSubmit = () => {
-          deletePrevLogo(id)
-            if(iconState){
-              createID();
-              handleUploadIcon();
-          }
-     }
+        deletePrevLogo(id)
+        if (iconState) {
+            createID();
+            handleUploadIcon();
+        }
+    }
 
     useEffect(() => {
         if (uploadedIcon) {
@@ -118,39 +118,39 @@ function Profile() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uploadedIcon]);
-    
-    function updateProfile(){
+
+    function updateProfile() {
         // if(iconState){
         //     createID();
         //     handleUploadIcon();
         // }
         const Name = nameRef.current.value
-        if(currentUserData){
-            if(currentUserData.name !== Name){
+        if (currentUserData) {
+            if (currentUserData.name !== Name) {
                 setLoading(true)
                 // currentUser.displayName = Name
                 database.users.doc(currentUser.uid.toString).set({
                     name: Name
                 })
+                    .then(() => {
+                        setResult("Profile Updated Successfully")
+                    })
+                    .catch((error) => {
+                        setError("An Error Occured while updating")
+                    })
+            }
+        }
+        else {
+            setLoading(true)
+            database.users.doc(currentUser.uid).set({
+                name: Name
+            })
                 .then(() => {
                     setResult("Profile Updated Successfully")
                 })
                 .catch((error) => {
                     setError("An Error Occured while updating")
                 })
-            }
-        }
-        else{
-            setLoading(true)
-            database.users.doc(currentUser.uid).set({
-                name: Name
-            })
-            .then(() => {
-                setResult("Profile Updated Successfully")
-            })
-            .catch((error) => {
-                setError("An Error Occured while updating")
-            })
         }
         setLoading(false)
     }
@@ -184,13 +184,13 @@ function Profile() {
                             <Form>
                                 <Form.Group id="name" style={{ margin: "20px" }}>
                                     <h4>Name</h4>
-                                    <Form.Control type="text" ref={nameRef} />
+                                    <Form.Control placeholder="Name" type="text" ref={nameRef} />
                                 </Form.Group>
                             </Form>
                             {currentUser && <div className="email_div">
-                                <h4>Email</h4>
+                                <h4 style={{ marginTop: "30px" }}>Email</h4>
                                 <p>{currentUser.email}</p>
-                                <h4>About</h4>
+                                <h4 style={{ marginTop: "30px" }}>About</h4>
                                 <TextField
                                     label="Channel Description"
                                     multiline
@@ -201,9 +201,10 @@ function Profile() {
                                     // defaultValue={channelDescription}
                                     style={{ marginBottom: "10px" }}
                                     value={channelDescription}
-                                    onChange={(e) =>{ setChannelDescription(e.target.value);setDescState(true);}}
+                                    onChange={(e) => { setChannelDescription(e.target.value); setDescState(true); }}
                                 />
-                                <h4>Channel Icon</h4>
+                                <h4 style={{ marginTop: "30px" }}>Channel Icon</h4>
+                            
                                 <div id="channelIconContainer">
                                     <Avatar src={lg}></Avatar>
                                     <div className="btn-holders">
@@ -215,25 +216,26 @@ function Profile() {
                                 </div>
 
                             </div>}
-                            {descState?<Button style={{ marginTop: "10px" }} disabled={loading}
+
+                            {descState ? <Button style={{ backgroundColor: "rgb(201 29 32)", border: "none", marginTop: "20px" }} disabled={loading}
                                 onClick={handleAboutSubmit}
-                            >Update Description</Button>:
-                            <Button style={{ marginTop: "10px" }} disabled={loading}
-                            onClick={iconState? handleSubmit: updateProfile}
-                        >Update Profile</Button>
-    }
-                            
+                            >Update Description</Button> :
+                                <Button style={{ backgroundColor: "rgb(201 29 32)", border: "none", marginTop: "20px" }} disabled={loading}
+                                    onClick={iconState ? handleSubmit : updateProfile}
+                                >Update Profile</Button>
+                            }
+
                             {result && <Alert variant="success">{result}</Alert>}
                             {error && <Alert variant="danger">{error}</Alert>}
                         </div>
                     </div>
-                    <div className="profile-video-data">
-                        <div className="profile-display">
-                            <img alt="profileImage" src={lg} />
-                            <p>Uploads: {uploadCount} </p>
-                            <p>Likes: {likeCount} </p>
-                            <p>Subscriptions: {subscriptionCount} </p>
-                        </div>
+                </div>
+                <div className="profile-video-data">
+                    <div className="profile-display">
+                        <img alt="profileImage" src={lg} />
+                        <p>Uploads: {uploadCount} </p>
+                        <p>Likes: {likeCount} </p>
+                        <p>Subscriptions: {subscriptionCount} </p>
                     </div>
                 </div>
             </div>

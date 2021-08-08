@@ -1,7 +1,9 @@
 
 .profile-body{
+    display: flex;
     text-align: center;
-    flex: 0.83;
+    flex: 0.66;
+    justify-content: center;
 }
 .profile_card{
     max-width: 300px;
@@ -9,18 +11,19 @@
     margin-top: 30px;
 }
 .body{
-    display:flex
-}
-email_div{
-    margin-top: 20px;
-}
-.profile-body{
     display:flex;
     justify-content: space-between;
-    padding-left: 200px;
 }
+.email_div{
+    margin-top: 20px;
+}
+
 .profile-video-data{
-    margin-right: 100px;
+    /* margin-right: 100px; */
+    display: flex;
+    flex: 0.17;
+    /* align-items: center; */
+    justify-content: center;
 }
 .profile-display{
     margin-top: 100px;
@@ -41,7 +44,7 @@ email_div{
 
 #channelIconContainer button{
     border: none;
-    color: blue;
+    color: rgb(201 29 32) !important;
     background-color: white !important;
     font-size: 16px;
 }
@@ -59,7 +62,7 @@ email_div{
      /*margin-top: 20px;
     margin-right: 70px; */
     content: "Change Channel Icon";
-    color:blue;
+    color:rgb(201 29 32);
     display: inline-block;
     /* background: #065fd4; */
     border-radius: 3px;
@@ -91,7 +94,7 @@ email_div{
      /*margin-top: 20px;
     margin-right: 70px; */
     content: "Remove Channel Icon";
-    color:blue;
+    color:rgb(201 29 32);
     display: inline-block;
     /* background: #065fd4; */
     border-radius: 3px;

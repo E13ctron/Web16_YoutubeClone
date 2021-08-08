@@ -1,9 +1,12 @@
 .liked_video_section{
     display: flex;
 }
+.liked_video_body:hover{
+    background-color: rgb(250, 250, 250);
+}
 .liked_video_body{
     flex: 0.83;
-    background-color: rgb(250, 250, 250);
+    /* background-color: rgb(250, 250, 250); */
     min-height: 100vh;
 }
 .likedVideo{
