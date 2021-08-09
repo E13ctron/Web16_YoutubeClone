@@ -64,7 +64,7 @@ export default function Signup() {
                 style={{ margin: "10px" }}
               >
                 <Form.Control
-                  classname="particular-input"
+                  className="particular-input"
                   placeholder="Name"
                   type="text"
                   ref={nameRef}
@@ -77,7 +77,7 @@ export default function Signup() {
                 style={{ margin: "10px" }}
               >
                 <Form.Control
-                  classname="particular-input"
+                  className="particular-input"
                   placeholder="Email"
                   type="email"
                   ref={emailRef}
@@ -90,7 +90,7 @@ export default function Signup() {
                 style={{ margin: "10px" }}
               >
                 <Form.Control
-                  classname="particular-input"
+                  className="particular-input"
                   placeholder="Password"
                   type="password"
                   ref={passwordRef}
@@ -103,7 +103,7 @@ export default function Signup() {
                 style={{ margin: "10px" }}
               >
                 <Form.Control
-                  classname="particular-input"
+                  className="particular-input"
                   placeholder="Confirm Password"
                   type="password"
                   ref={confirmPasswordRef}

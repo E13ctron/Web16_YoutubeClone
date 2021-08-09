@@ -45,7 +45,7 @@ export default function Login() {
                 style={{ margin: "10px" }}
               >
                 <Form.Control
-                  classname="particular-input"
+                  className="particular-input"
                   placeholder="Email"
                   type="email"
                   ref={emailRef}
