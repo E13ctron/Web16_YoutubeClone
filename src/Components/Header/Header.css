@@ -94,3 +94,7 @@
   margin: 45px auto;
   background-color: rgb(201, 201, 201);
 }
+.app-name-heading{
+  margin-left: 20px;
+  padding-left: 5px;
+}

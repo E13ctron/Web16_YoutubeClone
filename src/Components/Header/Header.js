@@ -80,9 +80,10 @@ export default function Header() {
     <div className="hp-header">
       <div className="hp-left-header">
         <MenuIcon onClick={window["toggleSidebar"]} />
+        <h5 className="app-name-heading">YouWatch</h5>
         <img onClick={handleLogoClick}
           className="yt-logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/9/90/Logo_of_YouTube_%282013-2015%29.svg"
+          src="https://cdn.logojoy.com/wp-content/uploads/20200406092725/youtube-icon.png"
           alt=""
         />
       </div>
