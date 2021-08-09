@@ -9,15 +9,19 @@ function CommentSection({ videoId }) {
   const { currentUser } = useAuth();
   const messageRef = useRef();
   const [messages, setMessages] = useState();
+  const [ messageSend, setMessageSend] = useState(false)
   useEffect(() => {
-    db.collection("comments")
+    if(messageSend){
+      db.collection("comments")
       .doc(videoId.toString())
       .collection("comments")
       .orderBy("createdAt", "desc")
       .onSnapshot((snaps) => {
         setMessages(snaps.docs.map((doc) => doc.data()));
       });
-  });
+    }
+    setMessageSend(false)
+  },[ messageSend, setMessageSend, videoId]);
   function sendMessage() {
     const { uid, photoURL } = currentUser;
     const messagesRef = db
@@ -33,6 +37,7 @@ function CommentSection({ videoId }) {
       Name: currentUser.displayName,
     });
     messageRef.current.value = "";
+    setMessageSend(true)
   }
 
   return (

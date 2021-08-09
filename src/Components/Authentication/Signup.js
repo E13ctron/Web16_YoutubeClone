@@ -3,7 +3,7 @@ import { Card, Form, Button, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import "./styles.css";
-import youtube_logo_png from "../../assets/youtube-logo-png.jpg";
+import youtube_logo_png from "../../assets/youtube-icon.png";
 
 export default function Signup() {
   const emailRef = useRef();

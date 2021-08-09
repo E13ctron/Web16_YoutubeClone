@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import youtube_logo_png from "../../assets/youtube-logo-png.jpg";
+import youtube_logo_png from "../../assets/youtube-icon.png";
 import "./styles.css";
 
 export default function ForgotPassword() {
