@@ -83,10 +83,10 @@ export default function Header() {
         <img id="headerImg" onClick={handleLogoClick}
           className="yt-logo"
           src="https://cdn.logojoy.com/wp-content/uploads/20200406092725/youtube-icon.png"
-          alt=""
+          alt="webicon"
           href="/"
         />
-        <h5 onClick={handleLogoClick} className="app-name-heading">YouWatch</h5>
+        <h5 style={{fontWeight:"bold"}} onClick={handleLogoClick} className="app-name-heading">YouWatch</h5>
       </div>
       <div className="hp-mid-header">
         <input type="text" ref={searchQueryRef} placeholder=" Search" />
