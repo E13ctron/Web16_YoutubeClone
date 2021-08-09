@@ -251,6 +251,7 @@ const Watch = ({video}) => {
             setlg(snap.data().iconURL)
         }
     })},[ChannelUSERid])
+
     return (
         <>
             
@@ -325,8 +326,11 @@ const Watch = ({video}) => {
 
                                     </div>
                                 </div>
+                                {(video.email!==currentUser.email) && <>
                                 {subscribeBtnState ?  <Button onClick={handleUnSubscribeClick} className="watch__subBtn_subbed channel_subBtn"
-                                 color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>}
+                                 color="primary" variant="contained">{subscribe}</Button> : <Button onClick={handleSubscribeClick} className= "watch__subBtn channel_subBtn" color="primary" variant="contained">{subscribe}</Button>
+                                }</>
+                                }
                             </div>
                             <div className="watch__description">
                                 <p style={{ maxHeight: showDesc && "100%" }}>
