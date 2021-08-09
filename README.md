@@ -41,6 +41,6 @@ The web app is Deployed [Here](https://determined-shockley-5a064d.netlify.app/).
  - [Komal Kumari](https://github.com/komalsah003)
 
  ## Mentors
- Kushan Gowda
- Gaurav Dhalla
+- Kushan Gowda
+- Gaurav Dhalla
  
