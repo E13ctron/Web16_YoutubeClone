@@ -7,6 +7,7 @@ import { useAuth } from "../../../contexts/AuthContext"
 import { database, db, storage } from '../../../firebase'
 import { Avatar, TextField } from '@material-ui/core'
 import { v4 as uuidv4 } from "uuid"
+import { useHistory } from 'react-router'
 
 function Profile() {
     const { currentUser, currentUserData, videos, likedVideos, deletePrevLogo } = useAuth()
@@ -17,6 +18,10 @@ function Profile() {
     const [uploadCount, setUploadCount] = useState()
     const [likeCount, setLikeCount] = useState()
     const [subscriptionCount, setSubscriptionCount] = useState()
+    const history = useHistory();
+
+    const handlePreviewChannel = () =>
+    history.push(`/PreviewChannel?name=${currentUser.email}`);
     useEffect(() => {
         var count = 0;
         for (var i = 0; i < videos.length; i++) {
@@ -232,7 +237,7 @@ function Profile() {
                 </div>
                 <div className="profile-video-data">
                     <div className="profile-display">
-                        <img alt="profileImage" src={lg} />
+                        <img onClick={handlePreviewChannel} alt="profileImage" src={lg} />
                         <p>Uploads: {uploadCount} </p>
                         <p>Likes: {likeCount} </p>
                         <p>Subscriptions: {subscriptionCount} </p>
