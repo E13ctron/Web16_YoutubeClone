@@ -80,13 +80,13 @@ export default function Header() {
     <div className="hp-header">
       <div className="hp-left-header">
         <MenuIcon onClick={window["toggleSidebar"]} />
-        <h5 onClick={handleLogoClick} className="app-name-heading">YouWatch</h5>
-        <img onClick={handleLogoClick}
+        <img id="headerImg" onClick={handleLogoClick}
           className="yt-logo"
           src="https://cdn.logojoy.com/wp-content/uploads/20200406092725/youtube-icon.png"
           alt=""
           href="/"
         />
+        <h5 onClick={handleLogoClick} className="app-name-heading">YouWatch</h5>
       </div>
       <div className="hp-mid-header">
         <input type="text" ref={searchQueryRef} placeholder=" Search" />
