@@ -44,5 +44,87 @@
 .videocard_text {
     font-size: 14px;
     line-height: 5px;
-    color: #aaaaaa !important;
+    color: #606060 !important
 }
+
+
+
+.closeIcon{
+    cursor: pointer;
+    margin-right: 10px;;
+}
+
+
+
+/* imported from selectvideo.css */
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+.close_icon{
+    cursor: pointer;
+    margin-right: 10px;;
+}
+.dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.publishWrap{
+    background-color: seashell;
+    border-radius: 50%;
+    padding: 20px;
+    width: 100px;
+    width: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.publishIcon{
+    font-size: 4rem;
+    color: black;
+}
+.text_div{
+    margin-top: 20px;
+}
+.input_div{
+    align-items: center;
+}
+.custom-file-input{
+    outline: none;
+}
+.custom-file-input::-webkit-file-upload-button{
+    visibility: hidden;
+    outline: none;
+}
+.custom-file-input::before{
+    margin-left: 90px;
+    margin-top: 20px;
+    margin-right: 70px;
+    content: "Select Files";
+    color:white;
+    display: inline-block;
+    background: #065fd4;
+    border-radius: 3px;
+    padding: 10px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.custom-file-input:active{
+    outline: 0;
+}
+
+.add-thumbanil::before {
+    content: "Select thumbanil";
+    margin: 0;
+    margin-top: 10px;
+  }

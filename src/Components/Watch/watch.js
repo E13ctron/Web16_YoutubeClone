@@ -303,7 +303,7 @@ const Watch = ({video}) => {
                                         <p>SHARE</p>
                                     </div>
                                     <div  className="watch__likeBtnContainer color--gray">
-                                        <PlaylistAdd className="watch__icon play-addicon" />
+                                        <PlaylistAdd onClick={() => setPlaylistVideoAdderOpen(true)} className="watch__icon play-addicon" />
                                         <p onClick={() => setPlaylistVideoAdderOpen(true)} >SAVE</p>
                                     </div>
                                     <div className="watch__likeBtnContainer color--gray">
@@ -318,7 +318,7 @@ const Watch = ({video}) => {
                                 <div className="videothumb__details watch_avatarWrap">
                                     <Avatar style={{cursor:"pointer"}} src={lg} onClick={handlePreviewChannel} />
                                     <div className="videothumb__channel">
-                                        <h1 className="videothumb_title">
+                                        <h1 onClick={handlePreviewChannel} style={{cursor:"pointer"}} className="videothumb_title">
                                             {video.channelName}
                                         </h1>
                                         <p id="subId" className="videothumb__text watch__subCount">{subscribersCount} subscribers</p>

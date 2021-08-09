@@ -63,6 +63,7 @@
     /* margin-right: 300px; */
     margin-top: 20px;
     justify-content: space-between;
+    /* justify-content: center; */
     position: sticky;
     top: 0px;
   }

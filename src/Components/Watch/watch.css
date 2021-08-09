@@ -43,7 +43,8 @@
 }
 .autoplay-paragraph{
     margin: 10px;
-    color: #aaa;
+    /* color: #aaa; */
+    color: #909090;
 }
 .next-video-icon{
     margin: 10px;
@@ -72,7 +73,8 @@
 }
 
 .watch__likeBtnContainer > p{
-    color: #aaa;
+    /* color: #aaa; */
+    color: #909090;
     font-weight: 500;
     font-size: 14px;
 
@@ -82,7 +84,9 @@
 
 .watch__likeDislikes{
    display: flex;   
-   background-color: #606060;
+   /* background-color: #606060; */
+   background-color: #909090;
+
    height: 2px;
    overflow: hidden;
    margin-top: 10px;
@@ -158,7 +162,8 @@
 }
 
 .watch__showMore{
-    color: #aaa;
+    /* color: #aaa; */
+    color: #909090;
     margin-top: 10px;
     font-weight: 500;
     cursor: pointer;
@@ -185,7 +190,8 @@
 
 .videothumb__text {
     font-size: 14px;
-    color: #aaaaaa !important;
+    /* color: #aaaaaa !important; */
+    
 }
 /* centralising */
 .videothumb__channel > h1 {
@@ -200,7 +206,8 @@
 
 .videothumb__text {
     font-size: 14px;
-    color: #aaaaaa !important;
+    /* color: #aaaaaa !important; */
+    color: #909090 !important;
     margin-bottom: 0;
 }
 

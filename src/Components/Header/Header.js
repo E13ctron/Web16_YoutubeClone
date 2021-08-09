@@ -4,12 +4,13 @@ import VideoCallIcon from "@material-ui/icons/VideoCall";
 import SearchIcon from "@material-ui/icons/Search";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import Avatar from "@material-ui/core/Avatar";
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+// import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import "./Header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button, Popover } from "@material-ui/core";
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import { db } from "../../firebase";
 // import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
@@ -63,6 +64,18 @@ export default function Header() {
     setPlaylistCreatorOpen(true)
   }
 
+ 
+  const [lg,setlg]= useState(AvatarUrl)
+  useEffect(()=>{
+  db.collection("ChannelCreators").doc(currentUser.uid.toString()).onSnapshot((snap)=>{
+      if(snap.exists){
+          setlg(snap.data().iconURL)
+      }
+      else{
+        setlg(currentUser.photoURL)
+      }
+  })},[currentUser])
+
   return (
     <div className="hp-header">
       <div className="hp-left-header">
@@ -78,12 +91,12 @@ export default function Header() {
         <SearchIcon onClick={search} className="searchicon" />
       </div>
       <div className="hp-right-header">
-        <PlaylistAddIcon onClick={openPlaylistCreator} className="hp-right-header-icon" />
         <VideoCallIcon onClick={openUploadVideo} className="hp-right-header-icon" />
+        <PlaylistAddIcon onClick={openPlaylistCreator} className="hp-right-header-icon" />
         <MeetingRoomIcon onClick={signOut} className="hp-right-header-icon" />
         <Avatar
           alt=""
-          src={AvatarUrl}
+          src={lg}
           onClick={handleClick}
         />
         <Popover
@@ -104,7 +117,10 @@ export default function Header() {
             <div className="po-top">
             <div className="po-left">
               <div className="po-avatar">
-                <Avatar src={AvatarUrl}/>
+                <Avatar src=
+                // {AvatarUrl}
+                {lg}
+                />
               </div>
               <div className="po-empty"></div>
             </div>
@@ -120,12 +136,12 @@ export default function Header() {
             </div>
             <div className="po-down">
               <div className="add-account">
-                <div className="add-account-icon">
+                {/* <div className="add-account-icon">
                 <PersonAddIcon/>
                 </div>
                 <div className="add-another-account">
                   Add another account
-                </div>
+                </div> */}
               </div>
               <div className="signout-button">
               <Button onClick={signOut} >Sign Out</Button>
@@ -137,3 +153,5 @@ export default function Header() {
     </div>
   );
 }
+
+
