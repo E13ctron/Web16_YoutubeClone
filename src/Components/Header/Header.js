@@ -85,6 +85,7 @@ export default function Header() {
           className="yt-logo"
           src="https://cdn.logojoy.com/wp-content/uploads/20200406092725/youtube-icon.png"
           alt=""
+          href="/"
         />
       </div>
       <div className="hp-mid-header">
