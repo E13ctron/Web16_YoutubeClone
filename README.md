@@ -39,4 +39,8 @@ The web app is Deployed [Here](https://determined-shockley-5a064d.netlify.app/).
  - [Manisha Devi](https://github.com/mani-sahu)
  - [Devansh Agrawal](https://github.com/Devansh-A)
  - [Komal Kumari](https://github.com/komalsah003)
+
+ ## Mentors
+ Kushan Gowda
+ Gaurav Dhalla
  
