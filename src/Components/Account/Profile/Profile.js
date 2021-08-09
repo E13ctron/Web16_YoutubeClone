@@ -219,7 +219,7 @@ function Profile() {
 
                             {descState ? <Button style={{ backgroundColor: "rgb(201 29 32)", border: "none", marginTop: "20px" }} disabled={loading}
                                 onClick={handleAboutSubmit}
-                            >Update Description</Button> :
+                            >Update Profile</Button> :
                                 <Button style={{ backgroundColor: "rgb(201 29 32)", border: "none", marginTop: "20px" }} disabled={loading}
                                     onClick={iconState ? handleSubmit : updateProfile}
                                 >Update Profile</Button>

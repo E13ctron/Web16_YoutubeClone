@@ -11,7 +11,7 @@ function VideoSection(){
     return (
         <div className="whole-video-section">
             <div className="hp-heading">
-            <div className="recommended-heading">Recommended</div>
+            {/* <div className="recommended-heading">Recommended</div> */}
             </div>
             
 
