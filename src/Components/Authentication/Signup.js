@@ -54,7 +54,7 @@ export default function Signup() {
             </div>
 
             <h2 className="text-center mb-4 white-color">
-              Sign Up for Youtube
+              Sign Up for YouWatch
             </h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form className="form-body" onSubmit={handleSubmit}>
